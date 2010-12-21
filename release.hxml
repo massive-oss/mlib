@@ -1,4 +1,4 @@
 -cmd haxe build.hxml
 #-cmd haxe test.hxml
--cmd neko mlib.n incrementVersion build
+-cmd neko mlib.n incrementVersion
 -cmd neko mlib.n submit	

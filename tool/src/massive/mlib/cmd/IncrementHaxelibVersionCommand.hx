@@ -36,6 +36,7 @@ import massive.haxe.log.Log;
 class IncrementHaxelibVersionCommand extends MlibCommand
 {
 	private var comment:String;
+	private var type:String;
 	
 	public function new():Void
 	{
@@ -45,8 +46,10 @@ class IncrementHaxelibVersionCommand extends MlibCommand
 	override public function initialise():Void
 	{
 		
+		type = console.getNextArg("increment version [none,build,patch,minor,major] (press enter to keep same version)");
+		if(type == null || type == "") type = "none";
 		
-		var comment = console.getOption("m", "version comment (enter to skip)");
+		comment = console.getOption("m", "version comment (enter to skip)");
 		
 		
 	}
@@ -54,8 +57,7 @@ class IncrementHaxelibVersionCommand extends MlibCommand
 	override public function execute():Void
 	{
 		
-		var type:String = console.getNextArg();
-		if(type == null) type = "build";
+		
 	
 		
 		haxelib.incrementVersion(type, comment);
