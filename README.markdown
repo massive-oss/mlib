@@ -99,17 +99,19 @@ The settings file has the following xml format:
 	</mlib>
 
 
-mlib *bin* is a mandatory attribute specifying the the relative path to the bin directory (defaults to 'bin'). This is the location where the haxelib project and zip package will be generated.
+mlib **bin** is a mandatory attribute specifying the the relative path to the bin directory (defaults to 'bin'). This is the location where the haxelib project and zip package will be generated.
 
 **Resources** a list of resources to include in the haxelib package
 
-resource *path* is a mandatory attribute specifying the relative or absolute path to a file or directory.
-resource *dest* is an optional attribute to specify a specific path within the package
-resource *type* is an optional attribute to indicate a special type of resource:
+resource **path** is a mandatory attribute specifying the relative or absolute path to a file or directory.
 
-*	src: a src path to copy to the top level directory of the haxelib package (as recommended in the haxexlib documentation). This type is also used as default locations by the 'license' and 'allClasses' commands  
-*	run: a neko binary to use as the 'run.n' file within the haxelib package
-*	license: a text file to use to generate copyright/license info across all classes in src packages. This type is used as the default location by the 'license' command  
+resource **dest** is an optional attribute to specify a specific path within the package
+
+resource **type** is an optional attribute to indicate a special type of resource:
+
+*	**src**: a src path to copy to the top level directory of the haxelib package (as recommended in the haxexlib documentation). This type is also used as default locations by the 'license' and 'allClasses' commands  
+*	**run**: a neko binary to use as the 'run.n' file within the haxelib package
+*	**license**: a text file to use to generate copyright/license info across all classes in src packages. This type is used as the default location by the 'license' command  
 
 
 
