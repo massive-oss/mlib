@@ -60,6 +60,7 @@ To see a full list of available commands run mlib from the command line:
 	haxelib run mlib
 	
 It provides utility functions for the following:
+
 *	Incrementing haxelib lib version
 *	Packaging and installing to local haxelib library
 *	Packaging and submitting project to haxelib server
