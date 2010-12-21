@@ -1,4 +1,4 @@
-<project name="mlib" url="http://massive.com.au" license="GPL">
+<project name="mlib" url="http://massive.com.au" license="BSD">
 	<user name="massive"/>
 	<tag v="cross" />
 	<tag v="neko" />
