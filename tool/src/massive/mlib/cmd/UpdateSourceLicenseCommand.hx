@@ -133,12 +133,22 @@ class UpdateSourceLicenseCommand extends MlibCommand
 			
 			}
 
-			file.writeString(codeLicense + "\n\n" + contents);	
+			var newContents:String = codeLicense + "\n\n" + contents;
+			
+			if(newContents != contents)
+			{
+				file.writeString(newContents);					
+			}
+
 		}
 		
 
 		var file:File = console.dir.resolveFile("LICENSE.txt");
-		file.writeString(licenseStr);
+		if(file.readString() != licenseStr)
+		{
+			file.writeString(licenseStr);
+		}
+		
 	}
 	
 	private function formatLicenseForCodeFiles(original:String):String
