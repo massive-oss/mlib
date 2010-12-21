@@ -144,7 +144,7 @@ class Haxelib
 			case "build":
 				versionBuild ++;
 			default:
-				versionBuild ++;
+				//do nothing;
 		}
 		
 		if(newVersionDescription != null)

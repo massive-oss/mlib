@@ -57,10 +57,13 @@ class IncrementHaxelibVersionCommand extends MlibCommand
 	override public function execute():Void
 	{
 		
-		
+		if(type != "none")
+		{
+			haxelib.incrementVersion(type, comment);		
+		}
 	
 		
-		haxelib.incrementVersion(type, comment);
+	
 		
 		
 		haxelib.save();	
