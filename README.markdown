@@ -22,9 +22,10 @@ Mlib includes several haxe and neko src packages:
 *	massive.mlib (command line tool (mlib) for managing development and deployment of haxelib projects)
 
 
-### Some features
+### Feature highlights
 
-**expanded File APIs**
+**Expanded File APIs**
+
 See [massive.neko.io.File](https://github.com/massiveinteractive/MassiveLib/blob/master/neko/src/massive/neko/io/File.hx)
 
 *	recursive dir copy/move/delete
@@ -59,10 +60,10 @@ To see a full list of available commands run mlib from the command line:
 	haxelib run mlib
 	
 It provides utility functions for the following:
-* Incrementing haxelib lib version
-* Packaging and installing to local haxelib library
-* Packaging and submitting project to haxelib server
-* Updating copyright/license information across all code files
+*	Incrementing haxelib lib version
+*	Packaging and installing to local haxelib library
+*	Packaging and submitting project to haxelib server
+*	Updating copyright/license information across all code files
 
 
 More documentation to come...
