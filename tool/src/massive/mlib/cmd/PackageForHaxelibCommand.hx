@@ -56,7 +56,7 @@ class PackageForHaxelibCommand extends MlibCommand
 		
 		if(zipPath == null) zipPath = haxelib.name + ".zip";
 		
-		zip = bin.resolveFile(zipPath);
+		zip = settings.bin.resolveFile(zipPath);
 	
 	}
 

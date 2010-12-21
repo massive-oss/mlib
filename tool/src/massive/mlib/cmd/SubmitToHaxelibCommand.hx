@@ -52,7 +52,7 @@ class SubmitToHaxelibCommand extends MlibCommand
 		
 		if(zipPath == null) zipPath = haxelib.name + ".zip";
 		
-		zip = bin.resolveFile(zipPath);
+		zip = settings.bin.resolveFile(zipPath);
 	
 	}
 
@@ -64,8 +64,8 @@ class SubmitToHaxelibCommand extends MlibCommand
 			error("Zipped haxelib package doesn't exist " + zip);
 		}
 		
-		error("Not submitting - still testing functionality");
-		return;
+	//	error("Not submitting - still testing functionality");
+	//	return;
 		
 		try
 		{	
