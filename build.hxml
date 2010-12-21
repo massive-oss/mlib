@@ -3,6 +3,8 @@
 -cmd haxe build.hxml
 -cmd cd ../
 
+-cmd neko mlib.n license
+
 #update allClasses imports
 #-cmd neko mlib.n allClasses haxe/src
 #-cmd neko mlib.n allClasses neko/src
