@@ -1,0 +1,3 @@
+-cmd haxe build.hxml
+-cmd haxe test.hxml
+-cmd neko mlib.n incrementVersion build

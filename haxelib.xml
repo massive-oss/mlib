@@ -1,0 +1,7 @@
+<project name="mlib" url="http://massive.com.au" license="GPL">
+	<user name="massive"/>
+	<tag v="cross" />
+	<tag v="neko" />
+	<description>Massive Interactive public haXe libraries containing utilities and tools for developing simple command line driven neko and haxelib tools.</description>
+	<version name="0.2.0.1">Initial release to haxelib</version>
+</project>

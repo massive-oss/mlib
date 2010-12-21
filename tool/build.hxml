@@ -1,0 +1,5 @@
+-main massive.mlib.Mlib
+-cp src
+-cp ../neko/src
+-cp ../haxe/src
+-neko ../mlib.n
