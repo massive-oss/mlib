@@ -1,4 +1,4 @@
-Massive Lib
+MassiveLib
 ====================
 
 Summary
@@ -6,7 +6,7 @@ Summary
 
 Massive Interactive public haXe libraries containing utilities and tools for developing simple command line driven neko and haxelib tools.
 
-mlib provides a lightweight command based structure for rapidly developing command line tools in neko. It's used to to develop and deploy various haxelib projects including mlib.
+mlib provides a lightweight command based structure for rapidly developing command line tools in neko. It's used to to develop and deploy various haxelib projects including mlib itself!
 
 
 ### Installing
@@ -65,6 +65,53 @@ It provides utility functions for the following:
 *	Packaging and installing to local haxelib library
 *	Packaging and submitting project to haxelib server
 *	Updating copyright/license information across all code files
+
+### Available commands
+
+	config (c) : Creates a .mlib config and haxelib.xml file in the current directory
+	license (l) : Replaces the license text in the header of all hx files within a src directory
+	allClasses (all) : Imports all classes within a src package into a central 'AllClasses.hx' class"
+	incrementVersion (v) : Increments the version number in the haxeib manifest (haxelib.xml)
+	package (p) : Packages and zips up the current project for haxelib
+	install (i) : Installs local version of project to haxelib
+	submit : Submits project to haxelib server
+   
+
+### Creating a mlib project.
+
+	haxelib run mlib config
+	
+This command generates a stub *.mlib* settings file in the current directory (and a haxelib.xml file if it doesn't exist already).
+
+To see an example of the settings file is in this repository [.mlib](https://github.com/massiveinteractive/MassiveLib/blob/master/.mlib) 
+
+The settings file has the following xml format:
+
+	<mlib bin="bin">
+		<resources>
+			<resource type="src" path="haxe/src" />
+			<resource type="src" path="neko/src" />
+			<resource type="src" path="tool/src" dest=""/>
+			<resource type="run" path="mlib.n" />
+			<resource type="license" path="resource/license.mtt" />
+			<resource path="file.txt" dest="dir/foo.bar" />
+		</resources>	
+	</mlib>
+
+
+mlib *bin* is a mandatory attribute specifying the the relative path to the bin directory (defaults to 'bin'). This is the location where the haxelib project and zip package will be generated.
+
+**Resources** a list of resources to include in the haxelib package
+
+resource *path* is a mandatory attribute specifying the relative or absolute path to a file or directory.
+resource *dest* is an optional attribute to specify a specific path within the package
+resource *type* is an optional attribute to indicate a special type of resource:
+
+*	src: a src path to copy to the top level directory of the haxelib package (as recommended in the haxexlib documentation). This type is also used as default locations by the 'license' and 'allClasses' commands  
+*	run: a neko binary to use as the 'run.n' file within the haxelib package
+*	license: a text file to use to generate copyright/license info across all classes in src packages. This type is used as the default location by the 'license' command  
+
+
 
 
 More documentation to come...

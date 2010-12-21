@@ -70,11 +70,11 @@ class Mlib extends CommandLineRunner
 	
 		mapCommand(ConfigMlibCommand, "config", ["c"], "Creates a .mlib config and haxelib.xml file in the current directory");
 		
-		mapCommand(UpdateSourceLicenseCommand, "license", ["l"], "Replaces license text in hx files within a source directory");
-		mapCommand(GenerateAllClassesCommand, "allClasses", ["all"], "Generates 'AllClasses.hx' importing all classes in a src package");
-		mapCommand(IncrementHaxelibVersionCommand, "incrementVersion", ["v"], "Increments the version number in the haxeib manifest");
+		mapCommand(UpdateSourceLicenseCommand, "license", ["l"], "Replaces the license text in the header of all hx files within a src directory");
+		mapCommand(GenerateAllClassesCommand, "allClasses", ["all"], "Imports all classes within a src package into a central 'AllClasses.hx' class");
+		mapCommand(IncrementHaxelibVersionCommand, "incrementVersion", ["v"], "Increments the version number in the haxeib manifest (haxelib.xml)");
 		
-		mapCommand(PackageForHaxelibCommand, "package", ["p"], "Packages up the current project for haxelib");
+		mapCommand(PackageForHaxelibCommand, "package", ["p"], "Packages and zips up the current project for haxelib");
 		
 		mapCommand(InstallToHaxelibCommand, "install", ["i"], "Installs local version of project to haxelib");
 		mapCommand(SubmitToHaxelibCommand, "submit", [], "Submits project to haxelib server");
