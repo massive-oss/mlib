@@ -45,6 +45,7 @@ class PackageForHaxelibCommand extends MlibCommand
 	public function new():Void
 	{
 		super();
+		beforeCommands.push(UpdateSourceLicenseCommand);
 	}
 	
 	override public function initialise():Void
@@ -65,6 +66,12 @@ class PackageForHaxelibCommand extends MlibCommand
 		
 		haxelib.file.copyTo(bin);
 		
+		var licenseFile:File = haxelib.file.parent.resolveFile("LICENSE.txt");
+		if(licenseFile.exists)
+		{
+			licenseFile.copyTo(bin);
+		}
+		
 		for(resource in settings.resources)
 		{
 			if(!resource.file.exists)
@@ -83,7 +90,7 @@ class PackageForHaxelibCommand extends MlibCommand
 			}
 			else if(resource.type == "license")
 			{
-				
+				//covered by updateSourceLicenseCommand
 			}
 			else
 			{
