@@ -84,17 +84,31 @@ class UpdateSourceLicenseCommand extends MlibCommand
 				directories.push(resource.file);
 			}	
 		}
-
-
-		var licenses:Array<Resource> = settings.getResourcesByType("license");
-		if(licenses == null)
+		
+		
+		var customLicensePath:String = console.getNextArg();
+		
+		if(customLicensePath != null)
 		{
-			print("WARNING: No resources of type 'license' found in .mlib");
-			exit(0);
+			license = File.create(customLicensePath, console.dir);
+			
+			if(license == null || !license.exists)
+			{
+				throw "Invalid license path " + customLicensePath;
+			}
 		}
-		
-		license = licenses[0].file;
-		
+		else
+		{
+			var licenses:Array<Resource> = settings.getResourcesByType("license");
+			if(licenses == null)
+			{
+				print("WARNING: No resources of type 'license' found in .mlib");
+				exit(0);
+			}
+
+			license = licenses[0].file;
+		}
+
 		if(!license.exists)
 		{
 			throw "License file doesn't exist " + license;	

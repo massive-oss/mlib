@@ -85,9 +85,9 @@ class CommandLineRunner
 	}
 
 
-	public function mapCommand(command:Class<ICommand>, name:String, ?alt:Array<String>=null, ?description:String="", ?help:String=null)
+	public function mapCommand(command:Class<ICommand>, name:String, ?alt:Array<String>=null, ?description:String="", ?help:String=null, ?visible:Bool=true)
 	{
-		commands.push({command:command, name:name, alt:alt, description:description, help:help});	
+		commands.push({command:command, name:name, alt:alt, description:description, help:help, visible:visible});	
 	}
 	
 	public function run():Void
@@ -178,6 +178,8 @@ class CommandLineRunner
 		print("Available commands:");
 		for(cmd in commands)
 		{
+			if(cmd.visible == false && Log.logLevel == LogLevel.console) continue;
+			
 			var alt:String = "";
 			
 			if(cmd.alt != null && cmd.alt.length > 0)
@@ -299,5 +301,6 @@ typedef CommandDef =
 	var alt:Array<String>;
 	var description:String;
 	var help:String;
+	var visible:Bool;
 	
 }

@@ -136,6 +136,7 @@ class MlibSettings
 	
 	public function getResourcesByType(type:String):Array<Resource>
 	{
+		type = Std.string(type);
 		if(resourcesByType.exists(type))
 		{
 			return resourcesByType.get(type);
@@ -148,12 +149,14 @@ class MlibSettings
 	{
 		resources.push(resource);
 		
-		if(!resourcesByType.exists(resource.type))
+		var type = Std.string(resource.type);
+		
+		if(!resourcesByType.exists(type))
 		{
-			resourcesByType.set(resource.type, []);
+			resourcesByType.set(type, []);
 		}
 		
-		var a:Array<Resource> = resourcesByType.get(resource.type);
+		var a:Array<Resource> = resourcesByType.get(type);
 		a.push(resource);
 		
 	}

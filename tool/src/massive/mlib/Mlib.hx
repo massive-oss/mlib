@@ -30,6 +30,7 @@
 package massive.mlib;
 
 import massive.haxe.log.Log;
+import massive.haxe.util.TemplateUtil;
 import massive.neko.cmd.CommandLineRunner;
 import massive.neko.cmd.Console;
 import massive.neko.cmd.ICommand;
@@ -44,6 +45,7 @@ import massive.mlib.cmd.IncrementHaxelibVersionCommand;
 import massive.mlib.cmd.PackageForHaxelibCommand;
 import massive.mlib.cmd.InstallToHaxelibCommand;
 import massive.mlib.cmd.SubmitToHaxelibCommand;
+import massive.mlib.cmd.PreProcessHxmlCommand;
 
 
 
@@ -68,17 +70,20 @@ class Mlib extends CommandLineRunner
 			Log.debug(settings);
 		}
 	
-		mapCommand(ConfigMlibCommand, "config", ["c"], "Creates a .mlib config and haxelib.xml file in the current directory");
+		mapCommand(ConfigMlibCommand, "config", ["c"], "Creates a .mlib config and haxelib.xml file in the current directory", TemplateUtil.getTemplate("help_config"));
+		mapCommand(GenerateAllClassesCommand, "allClasses", ["all"], "Imports all classes within a src package into a central 'AllClasses.hx' class", TemplateUtil.getTemplate("help_allClasses"));
 		
-		mapCommand(UpdateSourceLicenseCommand, "license", ["l"], "Replaces the license text in the header of all hx files within a src directory");
-		mapCommand(GenerateAllClassesCommand, "allClasses", ["all"], "Imports all classes within a src package into a central 'AllClasses.hx' class");
-		mapCommand(IncrementHaxelibVersionCommand, "incrementVersion", ["v"], "Increments the version number in the haxeib manifest (haxelib.xml)");
+		mapCommand(UpdateSourceLicenseCommand, "license", ["l"], "Replaces the license text in the header of all hx files within a src directory", TemplateUtil.getTemplate("help_license"));
+		mapCommand(IncrementHaxelibVersionCommand, "incrementVersion", ["v"], "Increments the version number in the haxleib manifest (haxelib.xml)", TemplateUtil.getTemplate("help_version"));
 		
-		mapCommand(PackageForHaxelibCommand, "package", ["p"], "Packages and zips up the current project for haxelib");
+		mapCommand(PackageForHaxelibCommand, "package", ["p"], "Packages and zips up the current project for haxelib", TemplateUtil.getTemplate("help_package"));
 		
-		mapCommand(InstallToHaxelibCommand, "install", ["i"], "Installs local version of project to haxelib");
-		mapCommand(SubmitToHaxelibCommand, "submit", [], "Submits project to haxelib server");
-
+		mapCommand(InstallToHaxelibCommand, "install", ["i"], "Installs local version of project to haxelib", TemplateUtil.getTemplate("help_install"));
+		mapCommand(SubmitToHaxelibCommand, "submit", [], "Submits project to haxelib server", TemplateUtil.getTemplate("help_submit"));
+		
+		
+		mapCommand(PreProcessHxmlCommand, "hxml", ["h"], "Convenience command for injecting multiple -resources into an hxml file", TemplateUtil.getTemplate("help_hxml"), false);
+		
 		run();
 	}
 	

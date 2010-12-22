@@ -57,6 +57,7 @@ class HaxeWrapper
 	*/
 	static public function compile(hxml:String):Int
 	{
+		
 		var path:String = "tmp_build.hxml";
 		var out = neko.io.File.write(path, false);
 		out.writeString(hxml);
@@ -109,6 +110,5 @@ class HaxeWrapper
 			}
 		}
 	}
-	
 	
 }

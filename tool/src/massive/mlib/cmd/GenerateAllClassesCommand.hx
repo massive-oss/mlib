@@ -114,6 +114,7 @@ class GenerateAllClassesCommand extends MlibCommand
 	{
 		var contents:String = "";
 		
+		
 		var classes:Array<File> = cls.parent.getRecursiveDirectoryListing(~/\.hx$/);
 	
 		contents += "package " + pckge + ";\n\n";
@@ -144,7 +145,11 @@ class GenerateAllClassesCommand extends MlibCommand
 		contents += "\n}\n\n";
 		
 		//Log.debug(contents);
-		cls.writeString(contents, true);
-	
+		
+		if(!cls.exists || cls.readString() != contents)
+		{
+			cls.writeString(contents, true);
+		}
+		
 	}
 }

@@ -46,8 +46,12 @@ class ConfigMlibCommand extends MlibCommand
 	
 	override public function initialise():Void
 	{
-		replaceSettings = (console.getOption("-settings") == "true");
-		replaceHaxelib = (console.getOption("-haxelib") == "true");
+		var overrideValue = console.getOption("override");
+		
+		if(overrideValue == "true") overrideValue = "all";
+		
+		replaceSettings = overrideValue == "all" || overrideValue == "settings";
+		replaceHaxelib = overrideValue == "all" || overrideValue == "haxelib";
 	}
 
 	override public function execute():Void
