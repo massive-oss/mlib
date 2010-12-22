@@ -69,12 +69,13 @@ It provides utility functions for the following:
 ### Available commands
 
 	config (c) : Creates a .mlib config and haxelib.xml file in the current directory
+	allClasses (all) : Imports all classes within a src package into a central 'AllClasses.hx' class
 	license (l) : Replaces the license text in the header of all hx files within a src directory
-	allClasses (all) : Imports all classes within a src package into a central 'AllClasses.hx' class"
-	incrementVersion (v) : Increments the version number in the haxeib manifest (haxelib.xml)
+	incrementVersion (v) : Increments the version number in the haxleib manifest (haxelib.xml)
 	package (p) : Packages and zips up the current project for haxelib
 	install (i) : Installs local version of project to haxelib
 	submit : Submits project to haxelib server
+
    
 
 ### Creating a mlib project.
