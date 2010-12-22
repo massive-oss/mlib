@@ -60,15 +60,16 @@ class IncrementHaxelibVersionCommand extends MlibCommand
 		if(type != "none")
 		{
 			haxelib.incrementVersion(type, comment);		
+			haxelib.save();	
+
+			Log.console("Updating " + haxelib.name + " haxelib.xml version to " + haxelib.version);
 		}
 	
 		
+		Log.console("Not updating " + haxelib.name + " haxelib.xml. Current version is " + haxelib.version);
+		
+		
 	
-		
-		
-		haxelib.save();	
-
-		Log.console("Updating " + haxelib.name + " haxelib.xml version to " + haxelib.version);
 	}
 	
 
