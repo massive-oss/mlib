@@ -11,7 +11,7 @@
  *       of conditions and the following disclaimer in the documentation and/or other materials
  *       provided with the distribution.
  * 
- * THIS SOFTWARE IS PROVIDED BY MASSIVE INTERACTIVE ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * THIS SOFTWARE IS PROVIDED BY MASSIVE INTERACTIVE "AS IS" AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL MASSIVE INTERACTIVE OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
@@ -166,13 +166,7 @@ class UpdateSourceLicenseCommand extends MlibCommand
 		license = license.split("\r\n").join("\n"); // make sure we're using unix line endings
 		license = StringTools.trim(license);
 		license = StringTools.replace(license, "::year::", Std.string(Date.now().getFullYear()));
-		var lines:Array<String> = license.split("\n");
-		
-		var formattedLicense = COMMENT_OPEN;
-		for (line in lines)	formattedLicense += "\n * " + line;
-		formattedLicense += "\n" + COMMENT_CLOSE;
-		
-		return formattedLicense;
+		return COMMENT_OPEN + "\n * " + license.split("\n").join("\n * ") + "\n" + COMMENT_CLOSE;		
 	}
 	
 	private function trimBody(body:String):String
