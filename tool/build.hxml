@@ -4,11 +4,11 @@
 -cp ../haxe/src
 -neko ../mlib.n
 
--resource /Users/dominic/Documents/Workspace/MassiveLib/tool/templates/help_allClasses.txt@help_allClasses
--resource /Users/dominic/Documents/Workspace/MassiveLib/tool/templates/help_config.txt@help_config
--resource /Users/dominic/Documents/Workspace/MassiveLib/tool/templates/help_hxml.txt@help_hxml
--resource /Users/dominic/Documents/Workspace/MassiveLib/tool/templates/help_install.txt@help_install
--resource /Users/dominic/Documents/Workspace/MassiveLib/tool/templates/help_license.txt@help_license
--resource /Users/dominic/Documents/Workspace/MassiveLib/tool/templates/help_package.txt@help_package
--resource /Users/dominic/Documents/Workspace/MassiveLib/tool/templates/help_submit.txt@help_submit
--resource /Users/dominic/Documents/Workspace/MassiveLib/tool/templates/help_version.txt@help_version
+-resource templates/help_allClasses.txt@help_allClasses
+-resource templates/help_config.txt@help_config
+-resource templates/help_hxml.txt@help_hxml
+-resource templates/help_install.txt@help_install
+-resource templates/help_license.txt@help_license
+-resource templates/help_package.txt@help_package
+-resource templates/help_submit.txt@help_submit
+-resource templates/help_version.txt@help_version

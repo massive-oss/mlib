@@ -195,7 +195,7 @@ class PreProcessHxmlCommand extends MlibCommand
 		{
 			if(!file.isDirectory)
 			{
-				resources.push("-resource " + file.nativePath + "@" + file.name);	
+				resources.push("-resource " + hxml.parent.getRelativePath(file) + "@" + file.name);	
 			}
 		}
 
