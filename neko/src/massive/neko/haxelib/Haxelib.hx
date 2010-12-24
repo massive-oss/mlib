@@ -254,7 +254,7 @@ class Haxelib
 		{
 			for(node in project.nodes.depends)
 			{
-				setDependency(node.att.name, node.att.version);
+				setDependency(node.att.name, node.has.version ? node.att.version : null);
 			}
 		}
 
