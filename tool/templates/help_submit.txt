@@ -1,0 +1,6 @@
+usage: submit
+
+	Submits the working version to the official Haxelib
+	server using the current version in the haxelib.xml
+	
+	See official Haxelib documentation for more details.

@@ -65,7 +65,7 @@ class InstallToHaxelibCommand extends MlibCommand
 		
 		try
 		{	
-			HaxelibTools.install(zip);
+			HaxelibTools.installZip(zip);
 		}
 		catch(e:Dynamic)
 		{

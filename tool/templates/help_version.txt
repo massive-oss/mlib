@@ -1,0 +1,18 @@
+usage: version [type]
+
+	Increments the version number in the haxelib manifest (haxelib.xml)
+	
+	Versions follow the following format: MAJOR.MINOR.PATCH.BUILD.
+    Valid options are 'major', 'minor', 'patch', 'build', and 'none'.
+	
+Parameters:
+
+    [type]  Accepts one of the following values:
+
+        major  -  Increments the major version number and resets others
+                  to zero (e.g. x.0.0.0)
+        minor  -  Increments the minor version number and resets patch 
+                  and build (e.g. 1.x.0.0)
+        patch  -  Increments patch & build version (e.g. 1.0.x.y)
+        build  -  Only increments build number (e.g. 1.0.0.x)
+        none   -  Doesn't increment the build number at all.

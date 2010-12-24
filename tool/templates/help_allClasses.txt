@@ -1,0 +1,16 @@
+usage: allClasses [src]
+
+	Generates a main application class containing imports for all classes
+	within a src directory (called 'AllClasses.hx').
+	
+	This command traverses the packages within the src directory to find the
+	deepest unique package to generate the file in.
+	
+	If no src directory path is specified, this command will run against
+	the 'src' resource types within the project's .mlib settings file.
+	(see 'mlib help config' for more details)
+	
+Optional parameters:
+
+   [src]   : Relative or absolute path to a src directory. If not set will use defaults
+             specified within the project's .mlib settings.

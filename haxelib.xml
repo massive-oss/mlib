@@ -3,5 +3,5 @@
 	<tag v="cross" />
 	<tag v="neko" />
 	<description>Massive Interactive public haXe libraries containing utilities and tools for developing simple command line driven neko and haxelib tools.</description>
-	<version name="0.2.0.6">Updated inline help. Use mlib help [command] to get detailed usage information</version>
+	<version name="0.2.0.7">Bug fixes, improved commandline help</version>
 </project>

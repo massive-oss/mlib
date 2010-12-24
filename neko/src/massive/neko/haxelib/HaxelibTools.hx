@@ -78,44 +78,29 @@ class HaxelibTools
 		
 
 	}
-	/*
-	public static function installFromDirectory(dir:File):Void
+	public static function install(name:String, ?minVersion:String=null):Bool
 	{
-		if(!dir.exists)
-		{
-			throw "Directory doens't exist";
-		}
+		if(isLibraryInstalled(name, minVersion)) return true;
+		
+		
+		var params:Array<String> = [];
+		
+		params.push("install " + name);
+		if(minVersion != null) params.push(minVersion);
+		
+		
+		var process:Process = new Process('haxelib', params);
+		var path:String = process.stdout.readLine();
 
-		var file:File = dir.resolvePath("haxelib.xml");
-		if(!file.exists)
-		{
-			throw "Directory doens't contain haxelib.xml";
-		}
+		var exitCode:Int = process.exitCode();
 		
-		var zip:File = File.current.resolvePath("temp_haxelib.zip");
+		if(exitCode > 0) return false;
 		
-	
-		
-		
-		neko.Lib.println("Zipping up directory...");
-		ZipUtil.zipDirectory(zip, dir, RegExpUtil.HIDDEN_FILES, true);
-		
-		try
-		{
-			install(zip);
-		}
-		catch(e:Dynamic)
-		{
-			//zip.deleteFile();
-			throw e;
-		}
-		
-		zip.deleteFile();
+		return true;
 		
 	}
-*/
 	
-	public static function install(zip:File):Void
+	public static function installZip(zip:File):Void
 	{
 		neko.Lib.println("Installing to haxelib...");
 		

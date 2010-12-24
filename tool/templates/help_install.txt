@@ -1,0 +1,6 @@
+usage: install
+
+	Installs the working version to the local Haxelib library 
+	using the current version in the haxelib.xml
+
+	See official Haxelib documentation for more details.

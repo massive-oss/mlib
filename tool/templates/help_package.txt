@@ -1,0 +1,11 @@
+usage: package
+
+	Packages and zips up the current project for haxelib.
+	
+	Uses the resource mappings within the .mlib settings file to 
+	generate a haxelib package within the bin directory.
+	
+	It also zips up a copy of the package for use by the install
+	and submit commands.
+	
+	See 'config' command for more details.

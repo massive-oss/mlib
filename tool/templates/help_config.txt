@@ -1,0 +1,31 @@
+usage: config
+
+	Configures the working directory for working with mlib.
+	This command creates a stub '.mlib' settings file and 'haxelib.xml'
+    in the current directory.
+
+Optional flags:
+
+   -override <value>   : Override existing files (allowed values are 'all',
+                         'settings' and 'haxelib'. Defaults to 'all' if set
+
+Settings File
+    
+    The settings file allows the user to specify which resources should
+    be included in the haxelib package (and where they should be located
+    within it).
+
+	A settings file has the following xml format:
+
+	<mlib bin="path/to/bin">
+		<resources>
+			<resource type="src" path="haxe/src" />
+			<resource type="src" path="neko/src" />
+			<resource type="src" path="tool/src" dest=""/>
+			<resource type="run" path="mlib.n" />
+			<resource type="license" path="resource/license.mtt" />
+			<resource path="file.txt" dest="dir/foo.bar" />
+		</resources>	
+	</mlib>
+	
+	See https://github.com/massiveinteractive/MassiveLib for more details

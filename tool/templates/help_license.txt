@@ -1,0 +1,20 @@
+usage: license [src] [file]
+
+	Appends a copyright or license message to the top of each class within
+	a source directory. Also generates a global 'LICENSE.txt' file in the
+	working directory.
+	
+	If no src directory and text file paths are specified, this command
+	will run against the 'src' and 'license' resource types within the
+	project's .mlib settings file (see 'mlib help config' for more details).
+		
+	The license text file can include some basic tokens that will be generated
+	at run time. For example: '::year::' will be replaced with the current year
+	
+Optional parameters:
+
+  [src]   : Relative or absolute path to a src directory. If not set will use defaults
+            specified within the project's .mlib settings.
+
+  [file]   : Relative or absolute path to a text file. If not set will use defaults
+            specified within the project's .mlib settings.

@@ -1,0 +1,28 @@
+usage: hxml [file] [-target type] [... options]
+
+	A utility for preprocessing a hxml file prior to compilation.
+	
+	Unless a specific target type is set, actions will run against
+	all compilation targets in the file (as separated via '--next' flags);
+	
+Required Parameters:
+
+  [file]            : Relative or absolute path to a hxml file
+
+
+Processing Options:
+
+  -resource [path] : Recursively add all files within the specified directory
+                     as -resource statements in the hxml. Supports relative and
+                     absolute path to a directory of haxe resources. 
+
+                     Each resource uses the file name as the identifier.
+                     E.g. 'path/example.txt' will map to 
+                          '-resource path/example.txt@example'
+
+Other options
+
+    -target [type] : Limit the processing to one or more target types
+                     through a comma delimited string
+
+                     e.g. '-target neko' or '-target swf,wf9'
