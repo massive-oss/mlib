@@ -28,6 +28,7 @@
 package massive.haxe;
 
 import massive.haxe.AllClasses;
+import massive.haxe.Exception;
 import massive.haxe.log.ILogClient;
 import massive.haxe.log.Log;
 import massive.haxe.log.LogClient;
