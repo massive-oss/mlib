@@ -1,5 +1,5 @@
 /****
-* Copyright 2010 Massive Interactive. All rights reserved.
+* Copyright 2011 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -473,7 +473,7 @@ class File
 	*  @returns true if directory is created
 	* @returns false if directory already exists or if file isn't a directory
 	*/
-	public function createDirectory(?force:Bool = false):Bool
+	public function createDirectory(?force:Bool = false, ?posInfos:PosInfos):Bool
 	{
 		if(isFile)
 		{
@@ -496,7 +496,7 @@ class File
 			}
 			catch(e:Dynamic)
 			{
-				Log.error("Error creating directory \n" + here + "\n" + toDebugString() + "\n" + e);
+				Log.error("Error creating directory \n" + posInfos + "\n" + toDebugString() + "\n" + e);
 				return false;
 			}	
 				
@@ -516,7 +516,7 @@ class File
 	*  @returns false if directory couldn't be removed because it contains files
 	*/
 	
-	public function deleteDirectory(?deleteContents:Bool=true):Bool
+	public function deleteDirectory(?deleteContents:Bool=true, ?posInfos:PosInfos):Bool
 	{
 		if(!exists) return false;
 		
@@ -540,7 +540,7 @@ class File
 			}
 			catch(e:Dynamic)
 			{
-				Log.error("Error deleting directory \n" + here + "\n" + toDebugString() + "\n" + e + "\n   " + FileSys.readDirectory(nativePath).join("\n   "));			
+				Log.error("Error deleting directory \n" + posInfos + "\n" + toDebugString() + "\n" + e + "\n   " + FileSys.readDirectory(nativePath).join("\n   "));			
 				return false;
 			}
 			
