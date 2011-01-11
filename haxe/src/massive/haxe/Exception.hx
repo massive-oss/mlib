@@ -1,6 +1,8 @@
 package massive.haxe;
 import haxe.PosInfos;
 
+import massive.haxe.util.ReflectUtil;
+
 /**
  * Instances of the class Exception and its subclasses, when thrown, provide information about
  * the type and location of erroneous behavior.
@@ -36,7 +38,7 @@ class Exception
 	{
 		this.message = message;
 		this.info = info;
-		type = here.className;
+		type = ReflectUtil.here().className;
 	}
 	
 	/**
