@@ -27,83 +27,14 @@
 * 
 ****/
 
-package massive.neko.util;
+package massive.neko.io;
+import massive.haxe.Exception;
+import haxe.PosInfos;
 
-class PathUtil
+class FileException extends Exception
 {
-	public static var DIRECTORY_NAME:EReg = ~/\.?[a-zA-Z0-9\-_ ]*$/;
-	public static var HAXE_CLASS_NAME:EReg = ~/[A-Z]([a-zA-Z0-9]+)\.hx/;
-	
-	public function new():Void
+	public function new(message:String, ?posInfos:PosInfos)
 	{
-		
+		super(message, posInfos);
 	}
-	
-	public static function isAbsolutePath(path:String):Bool
-	{
-		if(path.indexOf("/")==0)
-		{
-			//absolute osx path
-			return true;
-		}
-		else if(path.indexOf("\\") > 0 && path.indexOf(":") == 1)// && path.indexOf("\\") < path.indexOf("/")
-		{
-			//absolute win path
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
-	static public function cleanUpPath(path:String):String
-	{
-		var seperator:String = neko.Sys.getCwd().indexOf("\\") > 0 ? "\\" : "/";
-			
-		if(seperator == "/")
-		{
-			path = path.split("\\").join(seperator);
-		}
-		else
-		{
-			if(isAbsolutePath(path))
-			{
-				path = path.split("/").join(seperator);
-			}
-			else
-			{
-				path = path.split("\\").join(seperator);
-			}
-		}
-		
-		return path;
-	}
-	
-	
-	static public function lastCharIsSlash(path:String):Bool
-	{
-		var l:Int = path.length-1;
-		return path.lastIndexOf("/") == l || path.lastIndexOf("\\") == l;
-	}
-	
-	
-	public static function isRelativePath(path:String):Bool
-	{
-		return isAbsolutePath(path) == false;
-	}
-	
-	public static function isValidDirectoryName(path:String):Bool
-	{
-		return DIRECTORY_NAME.match(path) && DIRECTORY_NAME.matched(0) == path;
-	}
-	
-	public static function isValidHaxeClassName(path:String):Bool
-	{
-		return HAXE_CLASS_NAME.match(path) && HAXE_CLASS_NAME.matched(0) == path;
-	}
-	
-
-	
-
 }

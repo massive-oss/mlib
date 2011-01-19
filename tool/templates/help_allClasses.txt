@@ -10,6 +10,9 @@ usage: allClasses [src]
 	the 'src' resource types within the project's .mlib settings file.
 	(see 'mlib help config' for more details)
 	
+	If the last character in a src path is a slash "/" then mlib will assume each
+	child directory of the path should be used instead.
+	
 Optional parameters:
 
    [src]   : Relative or absolute path to a src directory. If not set will use defaults

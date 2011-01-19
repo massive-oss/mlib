@@ -32,10 +32,12 @@ package massive.mlib.cmd;
 import massive.neko.haxelib.Haxelib;
 import massive.neko.io.File;
 import massive.haxe.log.Log;
+import massive.haxe.Exception;
 
 import massive.neko.util.ZipUtil;
 import massive.neko.haxelib.HaxelibTools;
 import massive.haxe.util.RegExpUtil;
+import massive.neko.util.PathUtil;
 
 class PackageForHaxelibCommand extends MlibCommand
 {
@@ -72,6 +74,8 @@ class PackageForHaxelibCommand extends MlibCommand
 			licenseFile.copyTo(bin);
 		}
 		
+		var files:Array<File>;
+		
 		for(resource in settings.resources)
 		{
 			if(!resource.file.exists)
@@ -80,9 +84,22 @@ class PackageForHaxelibCommand extends MlibCommand
 				continue;
 			}
 			
-			if(resource.type == "src")
+			if(resource.useChildren)
 			{
-				resource.file.copyTo(bin);
+				files = resource.children.concat([]);
+			}
+			else
+			{
+				files = [resource.file];
+			}
+			
+			
+			if(resource.type == "src" && resource.dest == null)
+			{
+				for(file in files)
+				{
+					if(file.isDirectory) file.copyTo(bin);
+				}	
 			}
 			else if(resource.type == "run")
 			{
@@ -99,13 +116,25 @@ class PackageForHaxelibCommand extends MlibCommand
 				if(resource.dest != null && resource.dest != "")
 				{
 					dest = bin.resolvePath(resource.dest);
+					
 				}
 				else
 				{
 					dest = bin;
 				}
 				
-				resource.file.copyTo(dest);
+				for(file in files)
+				{
+					if(resource.useChildren && PathUtil.lastCharIsSlash(resource.dest))
+					{
+						file.copyTo(dest.resolvePath(file.name));
+					}
+					else 
+					{
+						file.copyTo(dest);
+					}
+					
+				}
 			}
 			
 		}

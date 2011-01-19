@@ -29,3 +29,6 @@ Settings File
 	</mlib>
 	
 	See https://github.com/massiveinteractive/MassiveLib for more details
+	
+	Note: If the last character in a path is a slash "/" then mlib will use
+	each child directory of the path instead.

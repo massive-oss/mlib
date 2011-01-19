@@ -31,6 +31,9 @@ package massive.mlib;
 
 import massive.neko.io.File;
 import haxe.xml.Fast;
+import massive.neko.util.PathUtil;
+import massive.haxe.util.RegExpUtil;
+import massive.haxe.Exception;
 
 class MlibSettings
 {
@@ -121,14 +124,14 @@ class MlibSettings
 			{
 				if(r.has.path)
 				{
-					var path:String = r.att.path;
+					var path:String = PathUtil.cleanUpPath(r.att.path);
 					
 					var type:String = r.has.type ? r.att.type : null;
 					
 					var dest:String = r.has.dest ? r.att.dest : null;
 					
 					var resourceFile:File = File.create(path, file.parent);
-					addResource(new Resource(resourceFile, dest, type));	
+					addResource(new Resource(resourceFile, dest, type, path));	
 				}
 			}
 		}
@@ -194,12 +197,33 @@ class Resource
 	public var file(default, null):File;
 	public var dest(default, null):String;
 	public var type:String;
+	public var originalPath:String;
+	public var useChildren(default, null):Bool;
+	public var children(default, null):Array<File>;
 	
-	public function new(file:File, dest:String, type:String):Void
+	public function new(file:File, dest:String, type:String, originalPath:String):Void
 	{
 		this.file = file;
 		this.dest = dest;
 		this.type = type;
+		this.originalPath = originalPath;
+		
+		
+		children = [];
+		
+		if(PathUtil.lastCharIsSlash(originalPath))
+		{
+			useChildren = true;
+			
+			if(!file.isDirectory) throw new Exception("Path is not a directory");
+			
+			//if path has a ending slash then target the sub files instead
+			children = file.getDirectoryListing(RegExpUtil.HIDDEN_FILES, true);	
+		}
+		else
+		{
+			useChildren = false;
+		}
 	}
 	
 	public function toString():String

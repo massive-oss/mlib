@@ -32,6 +32,7 @@ package massive.mlib.cmd;
 import massive.haxe.util.RegExpUtil;
 import massive.neko.io.File;
 import massive.haxe.log.Log;
+import massive.neko.util.PathUtil;
 import massive.mlib.MlibSettings;
 
 class GenerateAllClassesCommand extends MlibCommand
@@ -77,8 +78,22 @@ class GenerateAllClassesCommand extends MlibCommand
 				if(!resource.file.exists)
 				{
 					throw "Resource path doesn't exist " + resource.file;
-				}	
-				directories.push(resource.file);
+				}
+				
+				
+				if(resource.useChildren)
+				{
+					for (child in resource.children)
+					{
+						if(child.isDirectory) directories.push(child);
+					}
+				
+				}
+				else
+				{
+					directories.push(resource.file);
+				}
+				
 			}	
 		}
 
@@ -96,12 +111,21 @@ class GenerateAllClassesCommand extends MlibCommand
 			{
 				files = files[0].getDirectoryListing(RegExpUtil.HIDDEN_FILES, true);
 			}
-
+			
+			if(files.length == 0) continue;
+			
 			var packagePath = dir.getRelativePath(files[0].parent);
 			var packageStr = packagePath.split("/").join(".");
 
-			var cls:File = dir.resolveFile(packagePath + "/AllClasses.hx");
-
+		
+			var clsPath:String = packagePath;
+			
+			if(clsPath != "") clsPath += "/";
+			
+			clsPath += "AllClasses.hx";
+			
+			var cls:File = dir.resolveFile(clsPath);
+			
 			Log.debug("cls: " + cls);
 			//2. create AllClasses
 			createAllClasses(cls, packageStr, dir);
@@ -128,9 +152,11 @@ class GenerateAllClassesCommand extends MlibCommand
 
 			s = dir.getRelativePath(classFile);
 			
+			if(classFile.nativePath == cls.nativePath) continue;
+			
 		//	trace(s);
 			a = s.split("/");
-		
+			
 			s = a.join(".").substr(0, -3);
 		//	trace("   " + s);
 			

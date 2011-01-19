@@ -29,7 +29,6 @@
 
 package massive.mlib;
 
-import massive.mlib.AllClasses;
 import massive.mlib.cmd.ConfigMlibCommand;
 import massive.mlib.cmd.GenerateAllClassesCommand;
 import massive.mlib.cmd.IncrementHaxelibVersionCommand;
