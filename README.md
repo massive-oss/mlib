@@ -104,7 +104,7 @@ mlib **bin** is a mandatory attribute specifying the the relative path to the bi
 
 **Resources** a list of resources to include in the haxelib package
 
-resource **path** is a mandatory attribute specifying the relative or absolute path to a file or directory.
+resource **path** is a mandatory attribute specifying the relative or absolute path to a file or directory. Use a trailing slash '/' to target directories within a path (e.g. 'haxe/src/')
 
 resource **dest** is an optional attribute to specify a specific path within the package
 
