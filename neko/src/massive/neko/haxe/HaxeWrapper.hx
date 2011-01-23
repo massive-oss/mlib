@@ -111,4 +111,23 @@ class HaxeWrapper
 		}
 	}
 	
+	static public function convertHXMLStringToParams(hxml:String):String
+	{
+		var lines:Array<String> = hxml.split("\n");
+		var result:String = "";
+		
+		for(line in lines)
+		{
+			line = StringTools.trim(line);
+			
+			if(line != "" && line.indexOf("#") != 0)
+			{
+				if(result != "") result += " ";
+				result += line;
+			}
+			
+		}
+		return result;
+	}
+	
 }
