@@ -111,7 +111,8 @@ class HaxeWrapper
 		}
 	}
 	
-	static public function convertHXMLStringToParams(hxml:String):String
+	
+	static public function convertHXMLStringToArgs(hxml:String):String
 	{
 		var lines:Array<String> = hxml.split("\n");
 		var result:String = "";
@@ -128,6 +129,22 @@ class HaxeWrapper
 			
 		}
 		return result;
+	}
+	
+	static public function convertHxmlStringToArray(hxml:String):Array<String>
+	{
+		var lines = hxml.split("\n");
+		var params:Array<String> = [];
+
+		for (line in lines)
+		{
+			if (line.length > 0 && line.indexOf("#") != 0)
+			{
+				params.push(line);
+			} 
+		}
+		
+		return params;
 	}
 	
 }
