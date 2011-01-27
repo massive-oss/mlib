@@ -3,5 +3,5 @@
 	<tag v="cross" />
 	<tag v="neko" />
 	<description>Massive Interactive public haXe libraries containing utilities and tools for developing simple command line driven neko and haxelib tools.</description>
-	<version name="0.2.0.8">removed references to 'here' to work with nightly builds of haxe</version>
+	<version name="0.2.0.9">Added base Exception class. Added ReflectUtil class with replacement to native 'here' which has been removed. Added util methods around the parsing of hxml files.</version>
 </project>
