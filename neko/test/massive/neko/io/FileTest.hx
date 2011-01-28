@@ -160,10 +160,24 @@ class FileTest
 		}
 		
 	
+	
 		
 		//double arg
 		
 		file = File.create("../", current);
+		Assert.isNotNull(file);
+		Assert.areEqual(current.parent.nativePath, file.nativePath);
+		
+		
+		file = File.create(".");
+		Assert.isNotNull(file);
+		Assert.areEqual(File.current.nativePath, file.nativePath);
+		
+		
+		file = File.create(".", current);
+		Assert.isNotNull(file);
+		Assert.areEqual(current.nativePath, file.nativePath);
+		
 		
 
 		file = File.create("tmp", current);
@@ -441,6 +455,13 @@ class FileTest
 
 		newDir = dir.resolvePath("../");
 		Assert.areEqual(current.nativePath, newDir.nativePath);
+		
+		
+		newDir = dir.resolvePath(".");
+		Assert.areEqual(dir.nativePath, newDir.nativePath);
+		
+		newDir = dir.resolvePath("./../");
+		Assert.areEqual(current.nativePath, newDir.nativePath);
 
 		newDir = current.resolvePath("tmp/");
 		Assert.isTrue(newDir.isDirectory);	
@@ -452,6 +473,9 @@ class FileTest
 
 		newDir = current.resolvePath("tmp\\sub");
 		Assert.isTrue(newDir.isDirectory);
+		
+		
+	
 
 		
 	}
@@ -526,7 +550,11 @@ class FileTest
 		Assert.isTrue(result.exists);
 		Assert.isTrue(result.isFile);
 		
-	
+		result = dir1.resolvePath("./file.txt");
+		Assert.areEqual(file1.nativePath, result.nativePath);
+		
+		result = dir2.resolvePath("./../tmp1/file.txt");
+		Assert.areEqual(file1.nativePath, result.nativePath);
 	}
 	
 	@Test

@@ -95,7 +95,7 @@ class File
 		{
 			path = path.substr(0, -1) + "\\";
 		}
-
+		
 		if(PathUtil.isAbsolutePath(path))
 		{
 			return new File(path);
@@ -104,6 +104,10 @@ class File
 		{
 			return file.resolvePath(path);	
 		}
+		else if(path == ".")
+		{
+			return File.current;
+		}	
 		else
 		{
 			throw new FileError("Path isn't absolute and no reference path provided", null, path, posInfos);	
@@ -327,8 +331,16 @@ class File
 		{
 			file =  new File(value, fileType);
 		}
+		else if(value == ".")
+		{
+			return this;
+		}
 		else
 		{
+			if(value.indexOf("./") == 0)
+			{
+				value = value.substr(2);
+			}
 			var p:File = this;
 			
 			while(value.indexOf("../") == 0)
