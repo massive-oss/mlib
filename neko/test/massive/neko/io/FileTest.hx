@@ -462,7 +462,18 @@ class FileTest
 		
 		newDir = dir.resolvePath("./../");
 		Assert.areEqual(current.nativePath, newDir.nativePath);
-
+		
+		
+		newDir = file.resolvePath(".");
+		Assert.areEqual(current.nativePath, newDir.nativePath);
+		
+		
+		var file2:File = current.resolvePath("tmp2.txt");
+		
+		var newFile = file.resolvePath("./tmp2.txt");
+		Assert.areEqual(file2.nativePath, newFile.nativePath);
+		
+		
 		newDir = current.resolvePath("tmp/");
 		Assert.isTrue(newDir.isDirectory);	
 		Assert.areEqual(dir.nativePath, newDir.nativePath);

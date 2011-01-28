@@ -333,7 +333,15 @@ class File
 		}
 		else if(value == ".")
 		{
-			return this;
+			if(isFile)
+			{
+				return this.parent;
+			}
+			else
+			{
+				return this;
+			}
+			
 		}
 		else
 		{
