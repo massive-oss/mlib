@@ -125,15 +125,7 @@ class PackageForHaxelibCommand extends MlibCommand
 				
 				for(file in files)
 				{
-					if(resource.useChildren && PathUtil.lastCharIsSlash(resource.dest))
-					{
-						file.copyTo(dest.resolvePath(file.name));
-					}
-					else 
-					{
-						file.copyTo(dest);
-					}
-					
+					file.copyTo(dest);
 				}
 			}
 			
