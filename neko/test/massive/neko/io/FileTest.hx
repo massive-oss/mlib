@@ -579,9 +579,9 @@ class FileTest
 		Assert.areEqual("tmp", current.getRelativePath(dir));
 		Assert.areEqual(".tmp", current.getRelativePath(unknown));
 		
-		Assert.areEqual(".", file.getRelativePath(current));
+		Assert.areEqual("./", file.getRelativePath(current));
 		Assert.areEqual("../", dir.getRelativePath(current));
-		Assert.areEqual(".", unknown.getRelativePath(current));
+		Assert.areEqual("./", unknown.getRelativePath(current));
 		
 		var temp1:File;
 		var temp2:File;

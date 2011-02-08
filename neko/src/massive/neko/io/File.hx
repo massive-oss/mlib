@@ -120,9 +120,9 @@ class File
 	/**
 	*  creates a temporary file in the current directory.
 	*/
-	public static function createTempFile(?content:String = ""):File
+	public static function createTempFile(?content:String = "", ?extension:String = ".tmp"):File
 	{
-		var name:String = ".tmp_" + Std.string(tempCount++) + ".tmp";
+		var name:String = ".tmp_" + Std.string(tempCount++) + extension;
 		var file:File = current.resolvePath(name);
 		file.writeString(content);
 
@@ -437,7 +437,7 @@ class File
 		
 		if(!isDirectory)
 		{
-			pathBefore = ".";
+			pathBefore = "./";
 		}
 
 

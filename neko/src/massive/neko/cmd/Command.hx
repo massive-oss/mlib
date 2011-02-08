@@ -31,7 +31,7 @@ package massive.neko.cmd;
 
 import massive.neko.cmd.Console;
 import massive.haxe.log.Log;
-
+import massive.neko.cmd.ICommand;
 /**
 *  An abstract base class for Commands
 *  Includes utility me
@@ -39,14 +39,20 @@ import massive.haxe.log.Log;
 *  */
 class Command implements ICommand
 {
-	public var beforeCommands:Array<Class<ICommand>>;
-	public var afterCommands:Array<Class<ICommand>>;
+	public var preRequisites:Array<CommandInstance>;
+	public var postRequisites:Array<CommandInstance>;
 	public var console:Console;
+	public var data:Dynamic;
 
 	public function new():Void
 	{
-		beforeCommands = [];
-		afterCommands = [];
+		preRequisites = [];
+		postRequisites = [];
+	}
+	
+	public function setData(?data:Dynamic = null):Void
+	{
+		this.data = data;
 	}
 	
 	/**
@@ -66,6 +72,17 @@ class Command implements ICommand
 	public function execute():Void
 	{
 	
+	}
+	
+	
+	public function addPreRequisite(commandClass:Class<ICommand>, ?data:Dynamic=null):Void
+	{
+		preRequisites.push(new CommandInstance(commandClass, data));
+	}
+	
+	public function addPostRequisite(commandClass:Class<ICommand>, ?data:Dynamic=null):Void
+	{
+		postRequisites.push(new CommandInstance(commandClass, data));
 	}
 
 	private function print(message:Dynamic):Void
@@ -87,3 +104,4 @@ class Command implements ICommand
 	}
 
 }
+

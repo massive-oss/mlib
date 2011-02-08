@@ -35,22 +35,32 @@ import massive.neko.cmd.Console;
 */
 interface ICommand
 {
+	
 	/**
 	* An array of prerequisite commands required to be executred prior to the current one
 	*/
-	var beforeCommands:Array<Class<ICommand>>;
+	var preRequisites:Array<CommandInstance>;
 	
 	/**
 	* An array of commands to execute after the current command
 	*/
-	var afterCommands:Array<Class<ICommand>>;
+	var postRequisites:Array<CommandInstance>;
+	
+	
+	/*
+	* Generic data object for commands. Set via setData()
+	*/
+	var data:Dynamic;
 	
 	/**
 	*  rerefence to the command line console. Used to access arguments passed through from the command line and to prompt
 	*  the user for properties 
 	*/
 	var console:Console;
-
+	
+	
+	function setData(?data:Dynamic=null):Void;
+	
 	/**
 	*  Called prior to running any dependency tasks.
 	*  An opportunity to check/prompt for command line parameters
@@ -65,4 +75,18 @@ interface ICommand
 	**/
 	function execute():Void;
 
+}
+
+
+class CommandInstance
+{
+	public var commandClass:Class<ICommand>;
+	public var data:Dynamic;
+	
+	public function new(cmdClass:Class<ICommand>, ?data:Dynamic = null):Void
+	{
+		commandClass = cmdClass;
+		this.data = data;
+		
+	}
 }

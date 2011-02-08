@@ -17,7 +17,7 @@ class CommandMock extends Command
 		isExecuted = false;
 		instance = this;
 	}
-
+	
 	override public function initialise():Void
 	{
 		isInitialised = true;

@@ -85,10 +85,16 @@ class CommandLineRunner
 	}
 
 
-	public function mapCommand(command:Class<ICommand>, name:String, ?alt:Array<String>=null, ?description:String="", ?help:String=null, ?visible:Bool=true)
+	public function mapCommand(command:Class<ICommand>, name:String, ?alt:Array<String>=null, ?description:String="", ?help:String=null, ?hidden:Bool=false)
 	{
-		commands.push({command:command, name:name, alt:alt, description:description, help:help, visible:visible});	
+		commands.push({command:command, name:name, alt:alt, description:description, help:help, hidden:hidden});	
 	}
+	
+	public function mapHiddenCommand(command:Class<ICommand>):Void
+	{
+		mapCommand(command, null, null, null, null, true);
+	}
+	
 	
 	public function run():Void
 	{
@@ -178,7 +184,7 @@ class CommandLineRunner
 		print("Available commands:");
 		for(cmd in commands)
 		{
-			if(cmd.visible == false && Log.logLevel == LogLevel.console) continue;
+			if(cmd.hidden == true && Log.logLevel == LogLevel.console) continue;
 			
 			var alt:String = "";
 			
@@ -228,7 +234,7 @@ class CommandLineRunner
 	/**
 	* Note - will ignore recursive dependencies to avoid recursion loops!
 	*/
-	private function runCommand(commandClass:Class<ICommand>, ?hash:Hash<Dynamic>=null):Void
+	private function runCommand(commandClass:Class<ICommand>, ?data:Dynamic=null, ?hash:Hash<Dynamic>=null):Void
 	{
 		if(hash == null) hash = new Hash();
 	
@@ -240,19 +246,20 @@ class CommandLineRunner
 		
 		var cmd:ICommand = createCommandInstance(commandClass);
 		
+		cmd.setData(data);
 		cmd.initialise();
 		
-		for(subCmd in cmd.beforeCommands)
+		for(pre in cmd.preRequisites)
 		{
-			runCommand(subCmd, hash);
+			runCommand(pre.commandClass, pre.data, hash);
 		}
 		Log.debug(className);
 		
 		cmd.execute();
 
-		for(subCmd in cmd.afterCommands)
+		for(post in cmd.postRequisites)
 		{
-			runCommand(subCmd, hash);
+			runCommand(post.commandClass, post.data, hash);
 		}
 	}
 	
@@ -301,6 +308,6 @@ typedef CommandDef =
 	var alt:Array<String>;
 	var description:String;
 	var help:String;
-	var visible:Bool;
+	var hidden:Bool;
 	
 }

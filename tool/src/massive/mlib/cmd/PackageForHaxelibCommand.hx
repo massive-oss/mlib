@@ -47,7 +47,7 @@ class PackageForHaxelibCommand extends MlibCommand
 	public function new():Void
 	{
 		super();
-		beforeCommands.push(UpdateSourceLicenseCommand);
+		addPreRequisite(UpdateSourceLicenseCommand);
 	}
 	
 	override public function initialise():Void

@@ -44,14 +44,14 @@ class ExampleTest
 	{
 		Assert.isTrue(true);
 	}
-	
+	/*
 	@Test("Async")
 	public function testAsyncExample(asyncFactory:AsyncFactory):Void
 	{
 		var handler:Dynamic = asyncFactory.createHandler(this, onTestAsyncExampleComplete, 300);
 		timer = Timer.delay(handler, 200);
 	}
-	
+	*/
 	private function onTestAsyncExampleComplete():Void
 	{
 		Assert.isFalse(false);

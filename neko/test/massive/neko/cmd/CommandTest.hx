@@ -39,11 +39,21 @@ class CommandTest
 	{
 		var cmd:Command = new CommandMock();
 		
-		Assert.isNotNull(cmd.beforeCommands);
-		Assert.isNotNull(cmd.afterCommands);
+		Assert.isNotNull(cmd.preRequisites);
+		Assert.isNotNull(cmd.postRequisites);
 		
 		
 	}
+	
+	
+	@Test
+	public function testSetData():Void
+	{
+		var cmd:CommandMock = new CommandMock();
+		cmd.setData("hello");
+		Assert.areEqual("hello", Std.string(cmd.data));	
+	}
+	
 	
 	
 	@Test
@@ -61,4 +71,44 @@ class CommandTest
 		cmd.execute();
 		Assert.isTrue(cmd.isExecuted);	
 	}
+	
+	
+	@Test
+	public function testAddPreRequisite():Void
+	{
+		var cmd:CommandMock = new CommandMock();
+		Assert.areEqual(0, cmd.preRequisites.length);
+	
+		cmd.addPreRequisite(CommandMock);
+		Assert.areEqual(1, cmd.preRequisites.length);
+		Assert.areEqual(CommandMock, cmd.preRequisites[0].commandClass);
+		Assert.areEqual(null, cmd.preRequisites[0].data);
+		
+		cmd.addPreRequisite(CommandMock, "foo");
+		Assert.areEqual(2, cmd.preRequisites.length);
+		
+		Assert.areEqual(CommandMock, cmd.preRequisites[1].commandClass);
+		Assert.areEqual("foo", cmd.preRequisites[1].data);
+	
+	}
+	
+	@Test
+	public function testAddPostRequisite():Void
+	{
+		var cmd:CommandMock = new CommandMock();
+		Assert.areEqual(0, cmd.postRequisites.length);
+	
+		cmd.addPostRequisite(CommandMock);
+		Assert.areEqual(1, cmd.postRequisites.length);
+		Assert.areEqual(CommandMock, cmd.postRequisites[0].commandClass);
+		Assert.areEqual(null, cmd.postRequisites[0].data);
+		
+		cmd.addPostRequisite(CommandMock, "foo");
+		Assert.areEqual(2, cmd.postRequisites.length);
+		
+		Assert.areEqual(CommandMock, cmd.postRequisites[1].commandClass);
+		Assert.areEqual("foo", cmd.postRequisites[1].data);
+	
+	}
+	
 }

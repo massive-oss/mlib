@@ -85,10 +85,11 @@ class CommandLineRunnerTest
 		Assert.isNull(cmdDef.alt);
 		Assert.areEqual("", cmdDef.description);
 		Assert.isNull(cmdDef.help);
-		
+		Assert.isFalse(cmdDef.hidden);
+
 	
 		var app:CommandLineRunner = new CommandLineRunnerMock();
-		app.mapCommand(CommandMock, "mock", ["m"], "description", "help");
+		app.mapCommand(CommandMock, "mock", ["m"], "description", "help", true);
 
 		Assert.areEqual(1, app.commands.length);
 
@@ -99,9 +100,31 @@ class CommandLineRunnerTest
 		Assert.areEqual(1, cmdDef.alt.length);
 		Assert.areEqual("description", cmdDef.description);
 		Assert.areEqual("help", cmdDef.help);
-
+		Assert.isTrue(cmdDef.hidden);
 
 	}
+	
+	
+	@Test
+	public function testMapHiddenCommand():Void
+	{
+		var app:CommandLineRunner = new CommandLineRunnerMock();
+		
+		app.mapHiddenCommand(CommandMock);
+		
+		Assert.areEqual(1, app.commands.length);
+		
+		var cmdDef:CommandDef = app.commands[0];
+		
+		Assert.areEqual(CommandMock, cmdDef.command);
+		Assert.isNull(cmdDef.name);
+		Assert.isNull(cmdDef.alt);
+		Assert.areEqual("", cmdDef.description);
+		Assert.isNull(cmdDef.help);
+		Assert.isTrue(cmdDef.hidden);
+	
+	}
+	
 	
 	@Test
 	public function testGetCommandFromString():Void
@@ -124,7 +147,7 @@ class CommandLineRunnerTest
 
 		var console:Console = new ConsoleMock();
 		var app:CommandLineRunnerMock = new CommandLineRunnerMock(console);
-		app.mapCommand(CommandMock, "mock", ["m"], "description", "help");
+		app.mapCommand(CommandMock, "mock", ["m"], "description", "help", false);
 
 		app.run();
 
@@ -138,7 +161,7 @@ class CommandLineRunnerTest
 		
 		var console:Console = new ConsoleMock("mock");
 		var app:CommandLineRunnerMock = new CommandLineRunnerMock(console);
-		app.mapCommand(CommandMock, "mock", ["m"], "description", "help");
+		app.mapCommand(CommandMock, "mock", ["m"], "description", "help", false);
 		
 		app.run();
 		
@@ -152,7 +175,7 @@ class CommandLineRunnerTest
 	
 		var console:Console = new ConsoleMock("m");
 		var app:CommandLineRunnerMock = new CommandLineRunnerMock(console);
-		app.mapCommand(CommandMock, "mock", ["m"], "description", "help");
+		app.mapCommand(CommandMock, "mock", ["m"], "description", "help", false);
 
 		app.run();
 
@@ -167,7 +190,7 @@ class CommandLineRunnerTest
 		CommandMock.instance = null;
 		var console:Console = new ConsoleMock("foo");
 		var app:CommandLineRunnerMock = new CommandLineRunnerMock(console);
-		app.mapCommand(CommandMock, "mock", ["m"], "description", "help");
+		app.mapCommand(CommandMock, "mock", ["m"], "description", "help", false);
 
 		app.run();
 		Assert.isNull(CommandMock.instance);
@@ -182,7 +205,7 @@ class CommandLineRunnerTest
 		CommandMock.instance = null;
 		var console:Console = new ConsoleMock("help");
 		var app:CommandLineRunnerMock = new CommandLineRunnerMock(console);
-		app.mapCommand(CommandMock, "mock", ["m"], "description", "help");
+		app.mapCommand(CommandMock, "mock", ["m"], "description", "help", false);
 
 		app.run();
 		
@@ -194,7 +217,7 @@ class CommandLineRunnerTest
 		CommandMock.instance = null;
 		var console:Console = new ConsoleMock("help mock");
 		var app:CommandLineRunnerMock = new CommandLineRunnerMock(console);
-		app.mapCommand(CommandMock, "mock", ["m"], "description", "help");
+		app.mapCommand(CommandMock, "mock", ["m"], "description", "help", false);
 
 		app.run();
 		
@@ -207,12 +230,26 @@ class CommandLineRunnerTest
 		CommandMock.instance = null;
 		var console:Console = new ConsoleMock("help foo");
 		var app:CommandLineRunnerMock = new CommandLineRunnerMock(console);
-		app.mapCommand(CommandMock, "mock", ["m"], "description", "help");
+		app.mapCommand(CommandMock, "mock", ["m"], "description", "help", false);
 
 		app.run();
 		Assert.isTrue(app.printedHelp);
 		Assert.isNull(app.printedCommandDef);
 		Assert.areEqual(1, app.exitCode);
+		
+		
+		//hidden command help
+		//command help
+		CommandMock.instance = null;
+		var console:Console = new ConsoleMock("help");
+		var app:CommandLineRunnerMock = new CommandLineRunnerMock(console);
+		app.mapCommand(CommandMock, "mock", ["m"], "description", "help", true);
+
+		app.run();
+
+		Assert.isTrue(app.printedHelp);
+		Assert.isNull(app.printedCommandDef);
+		Assert.areEqual(0, app.exitCode);
 	}
 	
 

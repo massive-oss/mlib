@@ -41,7 +41,8 @@ class InstallToHaxelibCommand extends MlibCommand
 	public function new():Void
 	{
 		super();
-		beforeCommands.push(PackageForHaxelibCommand);
+		addPreRequisite(PackageForHaxelibCommand);
+	
 	}
 	
 	override public function initialise():Void
