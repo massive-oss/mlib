@@ -140,7 +140,7 @@ class CommandLineRunnerTest
 	}
 	
 	@Test
-	public function testRun():Void
+	public function runShouldPrintHelpAndSafeExitWhenNoCommandArg():Void
 	{
 		//no command
 		CommandMock.instance = null;
@@ -154,7 +154,11 @@ class CommandLineRunnerTest
 		Assert.isNull(CommandMock.instance);
 		Assert.isTrue(app.printedHelp);
 		Assert.areEqual(0, app.exitCode);
+	}
 	
+	@Test
+	public function runShouldExecuteCommandOnValidCommandNameArg():Void
+	{
 		
 		//valid command
 		CommandMock.instance = null;
@@ -168,8 +172,11 @@ class CommandLineRunnerTest
 		Assert.isTrue(CommandMock.instance.isInitialised);
 		Assert.isTrue(CommandMock.instance.isExecuted);
 		Assert.areEqual(0, app.exitCode);
+	}
 		
-		
+	@Test
+	public function runShouldExecuteCommandOnValidCommandShortKeyArg():Void
+	{
 		//command shortkey
 		CommandMock.instance = null;
 	
@@ -182,8 +189,11 @@ class CommandLineRunnerTest
 		Assert.isTrue(CommandMock.instance.isInitialised);
 		Assert.isTrue(CommandMock.instance.isExecuted);
 		Assert.areEqual(0, app.exitCode);
+	}
 		
-	
+	@Test
+	public function runShouldPrintHelpAndExitOnInvalidCommandNameArg():Void
+	{
 		
 		
 		//invalid command
@@ -199,7 +209,7 @@ class CommandLineRunnerTest
 	}
 	
 	@Test
-	public function testRunHelp():Void
+	public function runShouldPrintHelpOnHelpArg():Void
 	{	
 		//general help
 		CommandMock.instance = null;
@@ -211,7 +221,11 @@ class CommandLineRunnerTest
 		
 		Assert.isTrue(app.printedHelp);
 		Assert.areEqual(0, app.exitCode);
-		
+	}
+	
+	@Test
+	public function runShouldPrintCommandHelpOnHelpCommandArg():Void
+	{
 
 		//command help
 		CommandMock.instance = null;
@@ -225,7 +239,12 @@ class CommandLineRunnerTest
 		Assert.isNotNull(app.printedCommandDef);
 		Assert.areEqual(app.getCommandDefFromString("mock"), app.printedCommandDef);
 		Assert.areEqual(0, app.exitCode);
-
+	}
+		
+	@Test
+	public function runShouldPrintHelpAndExitOnInvalidHelpCommandArg():Void
+	{
+		
 		//invalid command help
 		CommandMock.instance = null;
 		var console:Console = new ConsoleMock("help foo");
@@ -237,20 +256,50 @@ class CommandLineRunnerTest
 		Assert.isNull(app.printedCommandDef);
 		Assert.areEqual(1, app.exitCode);
 		
-		
+	}
+	@Test
+	public function runShouldPrintCommandHelpOnHiddenHelpCommandArg():Void
+	{	
 		//hidden command help
 		//command help
 		CommandMock.instance = null;
-		var console:Console = new ConsoleMock("help");
+		var console:Console = new ConsoleMock("help m");
 		var app:CommandLineRunnerMock = new CommandLineRunnerMock(console);
 		app.mapCommand(CommandMock, "mock", ["m"], "description", "help", true);
 
 		app.run();
+		
+		
+		Assert.isFalse(app.printedHelp);
+		Assert.isNotNull(app.printedCommandDef);
+		Assert.areEqual(app.getCommandDefFromString("mock"), app.printedCommandDef);
+		Assert.areEqual(0, app.exitCode);
 
-		Assert.isTrue(app.printedHelp);
-		Assert.isNull(app.printedCommandDef);
+	
+	}
+	
+	
+	@Test
+	public function runShouldSkipCommandOnValidCommandNameArg():Void
+	{
+		
+		//valid command
+		CommandMock.instance = null;
+		
+		var console:Console = new ConsoleMock("mock");
+		var app:CommandLineRunnerMock = new CommandLineRunnerMock(console);
+		app.mapCommand(SkippableCommandMock, "mock", ["m"], "description", "help", false);
+		
+		app.run();
+		
+		Assert.isTrue(SkippableCommandMock.instance.isInitialised);
+		Assert.isTrue(SkippableCommandMock.instance.skip);
+		
+		Assert.isFalse(SkippableCommandMock.instance.isExecuted);
+		
 		Assert.areEqual(0, app.exitCode);
 	}
+	
 	
 
 	

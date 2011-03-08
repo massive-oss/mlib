@@ -33,8 +33,23 @@ import haxe.PosInfos;
 
 class FileException extends Exception
 {
-	public function new(message:String, ?posInfos:PosInfos)
+	public var file:File;
+	public function new(message:String, ?file:File=null, ?posInfos:PosInfos)
 	{
+		this.file = file;
 		super(message, posInfos);
+	}
+	
+	override public function toString():String
+	{
+		var str:String = super.toString();
+		
+		if(file != null)
+		{
+			str += "[File=" + file.nativePath + "]";
+		}
+		
+	
+		return str;
 	}
 }

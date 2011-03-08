@@ -37,7 +37,6 @@ import massive.neko.haxe.HaxeWrapper;
 import massive.neko.haxelib.Haxelib;
 import massive.neko.haxelib.HaxelibTools;
 import massive.neko.io.File;
-import massive.neko.io.FileError;
 import massive.neko.io.FileException;
 import massive.neko.io.FileSys;
 import massive.neko.util.PathUtil;

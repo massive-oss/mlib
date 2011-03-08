@@ -107,8 +107,8 @@ class CommandLineRunner
 
 		if(commandClass != null)
 		{
-			var hash:Hash<Dynamic> = new Hash();
-			runCommand(commandClass, hash);
+		
+			runCommand(commandClass);
 			exit(0);
 		}
 		else if(commandArg == null)
@@ -234,32 +234,34 @@ class CommandLineRunner
 	/**
 	* Note - will ignore recursive dependencies to avoid recursion loops!
 	*/
-	private function runCommand(commandClass:Class<ICommand>, ?data:Dynamic=null, ?hash:Hash<Dynamic>=null):Void
+	private function runCommand(commandClass:Class<ICommand>, ?data:Dynamic=null):Void
 	{
-		if(hash == null) hash = new Hash();
-	
 		
 		var className:String = Type.getClassName(commandClass);	
-		if(hash.exists(className)) return;
-		
-		hash.set(className, commandClass);
+
 		
 		var cmd:ICommand = createCommandInstance(commandClass);
 		
 		cmd.setData(data);
 		cmd.initialise();
 		
+		if(cmd.skip) 
+		{
+			Log.debug("skip " + className);
+			return;
+		}
+		
 		for(pre in cmd.preRequisites)
 		{
-			runCommand(pre.commandClass, pre.data, hash);
+			runCommand(pre.commandClass, pre.data);
 		}
-		Log.debug(className);
+		Log.debug("execute " + className);
 		
 		cmd.execute();
-
+		
 		for(post in cmd.postRequisites)
 		{
-			runCommand(post.commandClass, post.data, hash);
+			runCommand(post.commandClass, post.data);
 		}
 	}
 	

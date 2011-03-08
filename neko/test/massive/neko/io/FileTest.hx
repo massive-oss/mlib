@@ -7,7 +7,7 @@ import massive.munit.async.AsyncFactory;
 
 import massive.neko.cmd.Console;
 import massive.neko.io.File;
-import massive.neko.io.FileError;
+import massive.neko.io.FileException;
 
 /**
 * Auto generated ExampleTest for MassiveUnit. 
@@ -148,15 +148,15 @@ class FileTest
 		try
 		{
 			file = File.create("tmp");
-			Assert.fail("File.create should throw FileError for a relative path without a reference file");
+			Assert.fail("File.create should throw FileException for a relative path without a reference file");
 		}
-		catch(e:FileError)
+		catch(e:FileException)
 		{
 			Assert.isTrue(true);
 		}
 		catch(e:Dynamic)
 		{
-			Assert.fail("File.create should throw FileError but throw different exception " + e);
+			Assert.fail("File.create should throw FileException but throw different exception " + e);
 		}
 		
 	
@@ -634,15 +634,15 @@ class FileTest
 		try
 		{
 			file.createDirectory();
-			Assert.fail("file.createDirectory should throw FileError.");
+			Assert.fail("file.createDirectory should throw FileException.");
 		}
-		catch(e:FileError)
+		catch(e:FileException)
 		{
 			Assert.isTrue(true);
 		}
 		catch(e:Dynamic)
 		{
-			Assert.fail("file.createDirectory should throw FileError.");
+			Assert.fail("file.createDirectory should throw FileException.");
 		}
 		
 		dir.createDirectory();
@@ -710,15 +710,15 @@ class FileTest
 		try
 		{
 			file.deleteDirectory();
-			Assert.fail("deleteDirectory on a file file should throw a FileError " + file.toDebugString());
+			Assert.fail("deleteDirectory on a file file should throw a FileException " + file.toDebugString());
 		}
-		catch(e:FileError)
+		catch(e:FileException)
 		{
 			Assert.isTrue(true);
 		}
 		catch(e:Dynamic)
 		{
-			Assert.fail("deleteDirectory on a file file should throw a FileError, not a " + e);
+			Assert.fail("deleteDirectory on a file file should throw a FileException, not a " + e);
 		}
 		
 	
@@ -782,15 +782,15 @@ class FileTest
 		try
 		{
 			file.createFile("foo");
-			Assert.fail("Expected FileError because file already existed");
+			Assert.fail("Expected FileException because file already existed");
 		}
-		catch(e:FileError)
+		catch(e:FileException)
 		{
 			Assert.isTrue(true);
 		}
 		catch(e:Dynamic)
 		{
-			Assert.fail("Expected FileError but threw " + e);	
+			Assert.fail("Expected FileException but threw " + e);	
 		}
 		
 		
@@ -799,15 +799,15 @@ class FileTest
 		try
 		{
 			dir.createFile("foo");
-			Assert.fail("Expected FileError because cannot createFile on a directory");
+			Assert.fail("Expected FileException because cannot createFile on a directory");
 		}
-		catch(e:FileError)
+		catch(e:FileException)
 		{
 			Assert.isTrue(true);
 		}
 		catch(e:Dynamic)
 		{
-			Assert.fail("Expected FileError but threw " + e);	
+			Assert.fail("Expected FileException but threw " + e);	
 		}
 		
 	}
@@ -831,15 +831,15 @@ class FileTest
 		try
 		{
 			file.createFile("foo");
-			Assert.fail("Expected FileError because file already existed");
+			Assert.fail("Expected FileException because file already existed");
 		}
-		catch(e:FileError)
+		catch(e:FileException)
 		{
 			Assert.isTrue(true);
 		}
 		catch(e:Dynamic)
 		{
-			Assert.fail("Expected FileError but threw " + e);	
+			Assert.fail("Expected FileException but threw " + e);	
 		}
 		
 	}
@@ -906,15 +906,15 @@ class FileTest
 		try
 		{
 			dir2.copyTo(file2);
-			Assert.fail("Expected FileError for copying dir to a file");
+			Assert.fail("Expected FileException for copying dir to a file");
 		}
-		catch(e:FileError)
+		catch(e:FileException)
 		{
 			Assert.isTrue(true);
 		}
 		catch(e:Dynamic)
 		{
-			Assert.fail("Expected FileError but got " + e);
+			Assert.fail("Expected FileException but got " + e);
 		}
 		
 		dir2.deleteDirectoryContents();
@@ -1012,15 +1012,15 @@ class FileTest
 		try
 		{
 			dir.writeString("bad");
-			Assert.fail("Expected FileError writing string to a directory");
+			Assert.fail("Expected FileException writing string to a directory");
 		}
-		catch(e:FileError)
+		catch(e:FileException)
 		{
 			Assert.isTrue(true);
 		}
 		catch(e:Dynamic)
 		{
-			Assert.fail("Expected FileError but got " + e);
+			Assert.fail("Expected FileException but got " + e);
 		}
 	}
 	
@@ -1036,15 +1036,15 @@ class FileTest
 		try
 		{
 			dir.readString();
-			Assert.fail("Expected FileError reading string to a directory");
+			Assert.fail("Expected FileException reading string to a directory");
 		}
-		catch(e:FileError)
+		catch(e:FileException)
 		{
 			Assert.isTrue(true);
 		}
 		catch(e:Dynamic)
 		{
-			Assert.fail("Expected FileError but got " + e);
+			Assert.fail("Expected FileException but got " + e);
 		}
 	}
 	

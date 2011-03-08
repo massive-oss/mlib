@@ -59,6 +59,9 @@ interface ICommand
 	var console:Console;
 	
 	
+	var skip(default, null):Bool;
+	
+	
 	function setData(?data:Dynamic=null):Void;
 	
 	/**

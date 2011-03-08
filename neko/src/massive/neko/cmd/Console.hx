@@ -30,7 +30,7 @@
 package massive.neko.cmd;
 
 import massive.neko.io.File;
-import massive.neko.io.FileError;
+import massive.neko.io.FileException;
 import massive.neko.io.FileSys;
 import neko.FileSystem;
 import neko.vm.Thread;
@@ -211,7 +211,7 @@ class Console
 		{
 			file = File.create(path);
 		}
-		catch(e:FileError)
+		catch(e:FileException)
 		{
 			//Log.info(e + "\n" + a);
 		}

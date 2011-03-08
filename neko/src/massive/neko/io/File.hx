@@ -91,6 +91,8 @@ class File
 	
 	public static function create(path:String, ?file:File=null, ?posInfos:PosInfos):File
 	{
+			
+		
 		if(FileSys.isWindows && path.indexOf(":") == 1 && path.lastIndexOf("/") == path.length-1)
 		{
 			path = path.substr(0, -1) + "\\";
@@ -102,7 +104,15 @@ class File
 		}
 		else if(file != null)
 		{
-			return file.resolvePath(path);	
+			try
+			{
+				return file.resolvePath(path);	
+			}
+			catch(e:Dynamic)
+			{
+				throw new FileException("Unable to resolve path ( " + path + " ) aginst file ( " + file.nativePath + " ) " + e); 
+			}
+			
 		}
 		else if(path == ".")
 		{
@@ -110,7 +120,7 @@ class File
 		}	
 		else
 		{
-			throw new FileError("Path isn't absolute and no reference path provided", null, path, posInfos);	
+			throw new FileException("Path isn't absolute and no reference file provided: " + path);	
 		}
 		return null;
 	}
@@ -260,7 +270,7 @@ class File
 			}
 			else if(type != existingType)
 			{
-				throw new FileError("Specified type doesn't match file/dir in system.", this, [type, existingType]);
+				throw new FileException("Specified type doesn't match file/dir in system: " + [type, existingType], this);
 		
 			}
 
@@ -345,11 +355,15 @@ class File
 		}
 		else
 		{
+			var p:File = this;
+			
+			if(isFile) p = this.parent;
+			
 			if(value.indexOf("./") == 0)
 			{
-				value = value.substr(2);
+				value = value.substr(2);	
 			}
-			var p:File = this;
+			
 			
 			while(value.indexOf("../") == 0)
 			{
@@ -357,7 +371,7 @@ class File
 				
 				if(p == null)
 				{
-					throw new FileError("Invalid path.", this, value, posInfos);
+					throw new FileException("Invalid path: " + value, this);
 				}
 				value = value.substr(3);
 			}
@@ -524,7 +538,7 @@ class File
 	{
 		if(isFile)
 		{
-			throw new FileError("Cannot call createDirectory for a file.", this, nativePath);
+			throw new FileException("Cannot call createDirectory for a file ", this);
 		}
 		if(parent != null && !parent.exists) parent.createDirectory(true);
 	
@@ -569,7 +583,7 @@ class File
 		
 		if(!isDirectory)
 		{
-			throw new FileError("cannot deleteDirectory for type " + type, this);
+			throw new FileException("cannot deleteDirectory for type: " + type, this);
 		}
 	
 		if(deleteContents == false && !isEmpty)
@@ -627,11 +641,11 @@ class File
 	{
 		if(isDirectory)
 		{
-			throw new FileError("Cannot call createFile for a directory object.", this);
+			throw new FileException("Cannot call createFile for a directory object.", this);
 		}
 		else if(isFile && exists)
 		{
-			throw new FileError("File already exists", this);
+			throw new FileException("File already exists", this);
 		}
 		
 		if(isUnknown)
@@ -659,7 +673,7 @@ class File
 		}
 		catch(e:Dynamic)
 		{
-			throw new FileError("Error deleting directory", this, e);
+			throw new FileException("Error deleting directory (" + e + ")", this);
 		}
 	}
 	
@@ -675,11 +689,11 @@ class File
 	{
 		if(!exists)
 		{
-			throw new FileError("Cannot copy a file or directory that doesn't exist.", this);
+			throw new FileException("Cannot copy a file or directory that doesn't exist.", this);
 		}
 		if(isDirectory && !dst.isDirectory)
 		{
-			throw new FileError("Cannot copy a directory to a file.", this, dst.toDebugString());
+			throw new FileException("Cannot copy a directory to a file (" + dst + ")", this);
 		}
 		
 		
@@ -750,7 +764,7 @@ class File
 	{
 		if(!dst.isDirectory)
 		{
-			throw new FileError("Cannot copy a directory to a file.", this, dst.toDebugString());
+			throw new FileException("Cannot copy a directory to a file (" + dst +")", this);
 		}
 		
 		if(isDirectory)
@@ -792,7 +806,7 @@ class File
 	{
 		if(!dst.isDirectory)
 		{
-			throw new FileError("Cannot move a directory to a file.", this, dst.toDebugString());
+			throw new FileException("Cannot move a directory to a file (" + dst + ")", this);
 			return;
 		}
 
@@ -815,7 +829,7 @@ class File
 	{
 		if(isDirectory)
 		{
-			throw new FileError("Cannot write string to a file object.", this);
+			throw new FileException("Cannot write string to a file object.", this);
 		}
 		
 		if(!parent.exists) parent.createDirectory(true);
@@ -840,12 +854,12 @@ class File
 		if(!exists && isFile)
 		{
 			return null;
-			//throw new FileError("File doesn't exist.", this);
+			//throw new FileException("File doesn't exist.", this);
 		}
 		
 		if(!exists || !isFile)
 		{
-			throw new FileError("File isn't of type file. Cannot load string content.", this);
+			throw new FileException("File isn't of type file. Cannot load string content.", this);
 		}
 		
 
@@ -855,7 +869,7 @@ class File
 		}
 		catch(e:Dynamic)
 		{
-			throw new FileError("Unknown", this, e);
+			throw new FileException("Unknown error (" + e + ")", this);
 		}
 		
 	
@@ -869,7 +883,7 @@ class File
 	{
 		if(!isDirectory)
 		{
-			throw new FileError("Cannot get directory listing for a file object.", this);
+			throw new FileException("Cannot get directory listing for a file object.", this);
 		}
 		if(!exists)
 		{

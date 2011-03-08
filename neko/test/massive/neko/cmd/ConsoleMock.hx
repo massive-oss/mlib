@@ -18,6 +18,7 @@ class ConsoleMock extends Console
 	
 	}
 	
+	
 	override private function parseArguments(a:Array<String>):Void
 	{
 		if(mockArgs != null)

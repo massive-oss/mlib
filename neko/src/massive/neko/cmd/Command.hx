@@ -43,11 +43,14 @@ class Command implements ICommand
 	public var postRequisites:Array<CommandInstance>;
 	public var console:Console;
 	public var data:Dynamic;
+	
+	public var skip(default, null):Bool;
 
 	public function new():Void
 	{
 		preRequisites = [];
 		postRequisites = [];
+		skip = false;
 	}
 	
 	public function setData(?data:Dynamic = null):Void

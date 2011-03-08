@@ -22,7 +22,7 @@
 
 
 #run tests
-#-cmd haxe test.hxml
+-cmd haxe test.hxml
 
 -cmd neko mlib.n install
 #-cmd neko mlib.n submit
