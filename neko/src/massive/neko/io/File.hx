@@ -89,7 +89,7 @@ class File
 
 
 	
-	public static function create(path:String, ?file:File=null, ?posInfos:PosInfos):File
+	public static function create(path:String, ?file:File=null, ?createImmediately:Bool = false, ?posInfos:PosInfos):File
 	{
 			
 		
@@ -100,13 +100,13 @@ class File
 		
 		if(PathUtil.isAbsolutePath(path))
 		{
-			return new File(path);
+			return new File(path, createImmediately);
 		}
 		else if(file != null)
 		{
 			try
 			{
-				return file.resolvePath(path);	
+				return file.resolvePath(path, createImmediately);	
 			}
 			catch(e:Dynamic)
 			{
@@ -247,10 +247,15 @@ class File
 	private var type:FileType;
 	
 
-	private function new(filePath:String, ?fileType:FileType=null)
+	private function new(filePath:String, ?fileType:FileType=null, ?createImmediately:Bool=false)
 	{
 		seperator = get_seperator();
 		setInternalPath(filePath, fileType);
+		if(createImmediately) 
+		{
+			if(isDirectory) createDirectory();
+			else if(isFile) createFile();
+		}
 	}
 
 	private function setInternalPath(filePath:String, ?fileType:FileType=null)
