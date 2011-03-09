@@ -3,5 +3,5 @@
 	<tag v="cross" />
 	<tag v="neko" />
 	<description>Massive Interactive public haXe libraries containing utilities and tools for developing simple command line driven neko and haxelib tools.</description>
-	<version name="0.2.0.11">neko.cmd.* Added option to set a data property when adding a pre or post requisite command inside a command. </version>
+	<version name="0.3.0.0">Minor bug fixes and tweaks to File class.</version>
 </project>
