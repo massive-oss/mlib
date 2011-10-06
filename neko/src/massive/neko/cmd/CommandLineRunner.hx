@@ -67,14 +67,12 @@ class CommandLineRunner
 	{
 		console = value;
 	
-		var log = console.getOption("-debug");
-		if(log != null)
-		{
-			if(log == "true") log = "debug";
-			Log.setLogLevelFromString(log);
+		var logLevel = console.getOption("-mlib-log");
+		if(logLevel != null)
+ 		{
+			Log.setLogLevelFromString(logLevel);
 			
-			Log.debug("systemArgs: " + console.systemArgs);
-			
+			Log.debug("systemArgs: " + console.systemArgs);			
 		}
 		else
 		{
