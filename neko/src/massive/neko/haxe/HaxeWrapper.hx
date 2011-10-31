@@ -39,15 +39,12 @@ import neko.Lib;
 import neko.Sys;
 import neko.io.Process;
 
-
-
 /**
 *  This is a simple wrapper for running haxe from within neko
 * 
 */
 class HaxeWrapper
 {
-
 	/*
 		Compiles a hxml string using haxe.
 		Errors are printed the console.
@@ -67,24 +64,19 @@ class HaxeWrapper
 		
 		var stderr:Thread = Thread.create(readError);
 		stderr.sendMessage(process.stderr);
-		
+
 		var exitCode:Int = 0;
 		exitCode = process.exitCode();
-	
+
+		printIndented(process.stdout.readAll().toString(), "      ");
+		printIndented(process.stderr.readAll().toString(), "   ");
+
 		if(exitCode > 0)
 		{
 			Sys.sleep(.1);
 			stderr.sendMessage("stop");
-		}
-		else
-		{
-			//neko.Lib.println("Build Success!");
-		}
-		
-		
+		}	
 		neko.FileSystem.deleteFile(path);
-
-
 		return exitCode;
 	}
 		
@@ -100,9 +92,9 @@ class HaxeWrapper
 			try
 			{
 				var str:String = "";
-				str = stderr.readLine();
+				//str = stderr.readLine();
 				message = Thread.readMessage(false);
-				neko.Lib.println(str);
+				//neko.Lib.println("   " + str);
 			}
 			catch(e:haxe.io.Eof)
 			{
@@ -110,7 +102,20 @@ class HaxeWrapper
 			}
 		}
 	}
-	
+
+	static function printIndented(str:String, indent:String="   ")
+	{
+		str = StringTools.trim(str); 
+
+		if(str != "")
+		{
+			var lines = str.split("\n");
+			for(line in lines)
+			{
+				neko.Lib.println(indent + line);	
+			}
+		}
+	}
 	
 	static public function convertHXMLStringToArgs(hxml:String):String
 	{
