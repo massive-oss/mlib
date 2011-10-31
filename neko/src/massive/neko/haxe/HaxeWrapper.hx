@@ -48,19 +48,29 @@ class HaxeWrapper
 	/*
 		Compiles a hxml string using haxe.
 		Errors are printed the console.
-		
 		@return exit code from haxe compiler - 0 is success, >0 is a fail.
 		
 	*/
-	static public function compile(hxml:String):Int
+	static public function compile(hxml:String, ?silent:Bool=false):Int
 	{
-		
-		var path:String = "tmp_build.hxml";
-		var out = neko.io.File.write(path, false);
-		out.writeString(hxml);
-		out.close();
-		
-		var process:Process = new Process("haxe", [path]);
+		var targets = splitHxmlIntoTargets(hxml);
+		var exitCode = 0;
+
+		for(target in targets)
+		{
+			exitCode = compileTarget(target,silent);
+			if(exitCode != 0) break;
+		}
+		return exitCode;
+	}
+
+	static function compileTarget(hxml:String, ?silent:Bool=false):Int
+	{
+		var args = convertHXMLStringToArgs(hxml);
+
+		printIndented("haxe " + StringTools.replace(args, "\\ ", " "));
+
+		var process:Process = new Process("haxe", encodeArgsArray(args));
 		
 		var stderr:Thread = Thread.create(readError);
 		stderr.sendMessage(process.stderr);
@@ -68,15 +78,18 @@ class HaxeWrapper
 		var exitCode:Int = 0;
 		exitCode = process.exitCode();
 
-		printIndented(process.stdout.readAll().toString(), "      ");
-		printIndented(process.stderr.readAll().toString(), "   ");
-
+		if(!silent)
+		{
+			printIndented(process.stdout.readAll().toString(), "      ");
+			printIndented(process.stderr.readAll().toString(), "   ");
+		}
+		
 		if(exitCode > 0)
 		{
 			Sys.sleep(.1);
 			stderr.sendMessage("stop");
 		}	
-		neko.FileSystem.deleteFile(path);
+		
 		return exitCode;
 	}
 		
@@ -84,9 +97,7 @@ class HaxeWrapper
 	static private function readError():Void
 	{
 		var stderr:haxe.io.Input = Thread.readMessage(true);
-		
 		var message:String = null;
-		
 		while(message == null)
 		{
 			try
@@ -101,6 +112,24 @@ class HaxeWrapper
 
 			}
 		}
+	}
+
+	/**
+	* ensures arguments with space characters aren't split incorrectly
+	*/
+	static function encodeArgsArray(argsString:String)
+	{
+		var args:Array<String> = [];
+	
+		argsString = StringTools.replace(argsString, "\\ ", "\n");
+		
+		var parts = argsString.split(" ");
+	
+		for(part in parts)
+		{
+			args.push(StringTools.replace(part, "\n", " "));
+		}
+		return args;
 	}
 
 	static function printIndented(str:String, indent:String="   ")
@@ -129,9 +158,19 @@ class HaxeWrapper
 			if(line != "" && line.indexOf("#") != 0)
 			{
 				if(result != "") result += " ";
-				result += line;
-			}
-			
+
+				if(line.lastIndexOf(" ") != line.indexOf(" "))
+				{
+					var parts = line.split(" ");
+					result += parts.shift() + " ";
+					result += parts.join("\\ ");
+				}
+				else
+				{
+					result += line;
+				}
+				
+			}	
 		}
 		return result;
 	}
@@ -150,6 +189,11 @@ class HaxeWrapper
 		}
 		
 		return params;
+	}
+
+	static public function splitHxmlIntoTargets(hxml:String):Array<String>
+	{
+		return hxml.split("\n--next");
 	}
 	
 }
