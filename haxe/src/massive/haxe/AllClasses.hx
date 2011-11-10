@@ -37,9 +37,12 @@ import massive.haxe.util.ReflectUtil;
 import massive.haxe.util.RegExpUtil;
 import massive.haxe.util.TemplateUtil;
 
+@IgnoreCover
 class AllClasses
 {
+@IgnoreCover
 	public static function main():AllClasses {return new AllClasses();}
+@IgnoreCover
 	public function new(){trace('This is a generated main class');}
 }
 

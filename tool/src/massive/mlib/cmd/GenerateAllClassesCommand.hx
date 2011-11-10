@@ -164,9 +164,12 @@ class GenerateAllClassesCommand extends MlibCommand
 			contents += s + "\n";
 		}
 		
+		contents += "\n@IgnoreCover";
 		contents += "\nclass "+ cls.name;
 		contents += "\n{";
+		contents += "\n@IgnoreCover";
 		contents += "\n	public static function main():" + cls.name + " {return new " + cls.name + "();}";
+		contents += "\n@IgnoreCover";
 		contents += "\n	public function new(){trace('This is a generated main class');}";
 		contents += "\n}\n\n";
 		

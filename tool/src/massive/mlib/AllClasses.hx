@@ -41,9 +41,12 @@ import massive.mlib.cmd.UpdateSourceLicenseCommand;
 import massive.mlib.Mlib;
 import massive.mlib.MlibSettings;
 
+@IgnoreCover
 class AllClasses
 {
+@IgnoreCover
 	public static function main():AllClasses {return new AllClasses();}
+@IgnoreCover
 	public function new(){trace('This is a generated main class');}
 }
 

@@ -42,9 +42,12 @@ import massive.neko.io.FileSys;
 import massive.neko.util.PathUtil;
 import massive.neko.util.ZipUtil;
 
+@IgnoreCover
 class AllClasses
 {
+@IgnoreCover
 	public static function main():AllClasses {return new AllClasses();}
+@IgnoreCover
 	public function new(){trace('This is a generated main class');}
 }
 
