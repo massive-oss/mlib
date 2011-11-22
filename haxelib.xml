@@ -3,5 +3,5 @@
 	<tag v="cross" />
 	<tag v="neko" />
 	<description>Massive Interactive public haXe libraries containing utilities and tools for developing simple command line driven neko and haxelib tools.</description>
-	<version name="0.3.0.1">Small change to enable logging using the -mlib-log [optional-level] option in place of -debug.</version>
+	<version name="0.3.0.2">Small internal change to HaxeWrapper to compile targets individually</version>
 </project>
