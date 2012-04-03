@@ -1,5 +1,5 @@
 /****
-* Copyright 2011 Massive Interactive. All rights reserved.
+* Copyright 2012 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -33,6 +33,8 @@ import neko.FileSystem;
 class FileSys
 {
 	public static var isWindows(get_isWindows, null):Bool;
+	public static var isMac(get_isMac, null):Bool;
+	public static var isLinux(get_isLinux, null):Bool;
 	
 	private static function get_isWindows():Bool
 	{
@@ -41,6 +43,24 @@ class FileSys
 			isWindows = neko.Sys.systemName().indexOf("Win") == 0;
 		}
 		return isWindows;
+	}
+	
+	private static function get_isMac():Bool
+	{
+		if(isMac == null)
+		{
+			isMac = neko.Sys.systemName().indexOf("Mac") == 0;
+		}
+		return isMac;
+	}
+	
+	private static function get_isLinux():Bool
+	{
+		if(isLinux == null)
+		{
+			isLinux = neko.Sys.systemName().indexOf("Linux") == 0;
+		}
+		return isLinux;
 	}
 	
 	
