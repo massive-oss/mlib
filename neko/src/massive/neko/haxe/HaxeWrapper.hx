@@ -1,5 +1,5 @@
 /****
-* Copyright 2011 Massive Interactive. All rights reserved.
+* Copyright 2012 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -31,9 +31,7 @@ package massive.neko.haxe;
 
 import neko.FileSystem;
 import neko.io.File;
-
 import massive.neko.io.File;
-
 import neko.vm.Thread;
 import neko.Lib;
 import neko.Sys;
@@ -70,27 +68,36 @@ class HaxeWrapper
 
 		printIndented("haxe " + StringTools.replace(args, "\\ ", " "));
 
-		var process:Process = new Process("haxe", encodeArgsArray(args));
-		
-		var stderr:Thread = Thread.create(readError);
-		stderr.sendMessage(process.stderr);
-
-		var exitCode:Int = 0;
-		exitCode = process.exitCode();
-
-		if(!silent)
+		try
 		{
-			printIndented(process.stdout.readAll().toString(), "      ");
-			printIndented(process.stderr.readAll().toString(), "   ");
-		}
-		
-		if(exitCode > 0)
-		{
-			Sys.sleep(.1);
-			stderr.sendMessage("stop");
+
+			var process:Process = new Process("haxe", encodeArgsArray(args));
+			
+			var stderr:Thread = Thread.create(readError);
+			stderr.sendMessage(process.stderr);
+
+			var exitCode:Int = 0;
+			exitCode = process.exitCode();
+
+			if(!silent)
+			{
+				printIndented(process.stdout.readAll().toString(), "      ");
+				printIndented(process.stderr.readAll().toString(), "   ");
+			}
+			
+			if(exitCode > 0)
+			{
+				Sys.sleep(.1);
+				stderr.sendMessage("stop");
+			}	
+			
+			return exitCode;
 		}	
-		
-		return exitCode;
+		catch(e:Dynamic)
+		{
+			trace(e);
+		}
+		return 1;
 	}
 		
 	

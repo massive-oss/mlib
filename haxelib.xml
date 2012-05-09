@@ -2,6 +2,7 @@
 	<user name="massive"/>
 	<tag v="cross" />
 	<tag v="neko" />
+	<tag v="sys" />
 	<description>Massive Interactive public haXe libraries containing utilities and tools for developing simple command line driven neko and haxelib tools.</description>
-	<version name="0.3.0.2">Small internal change to HaxeWrapper to compile targets individually</version>
+	<version name="0.3.0.3">Added isMac() and isLinux() to neko.io.FileSys</version>
 </project>
