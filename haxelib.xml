@@ -4,5 +4,5 @@
 	<tag v="neko" />
 	<tag v="sys" />
 	<description>Massive Interactive public haXe libraries containing utilities and tools for developing simple command line driven neko and haxelib tools.</description>
-	<version name="0.3.0.3">Added isMac() and isLinux() to neko.io.FileSys</version>
+	<version name="0.3.0.4">Added support for haxe 209 (minor bugs)</version>
 </project>

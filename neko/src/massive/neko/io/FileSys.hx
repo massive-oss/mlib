@@ -201,7 +201,7 @@ class FileSys
 		}
 	}
 	
-	
+	#if haxe_208
 	public static function stat(path:String):FileStat
 	{
 		path = safePath(path);
@@ -214,6 +214,7 @@ class FileSys
 			throw Std.string(e) + "\n" + path;
 		}
 	}
+	#end
 	
 	public function new():Void
 	{
