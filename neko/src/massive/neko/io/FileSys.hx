@@ -28,7 +28,13 @@
 ****/
 
 package massive.neko.io;
+
+#if haxe_209
+import sys.FileSystem;
+import sys.FileStat;
+#else
 import neko.FileSystem;
+#end
 
 class FileSys
 {
