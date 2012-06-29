@@ -133,7 +133,6 @@ class GenerateAllClassesCommand extends MlibCommand
 		
 	}
 	
-	
 	private function createAllClasses(cls:File, pckge:String, dir:File):Void
 	{
 		var contents:String = "";
@@ -151,11 +150,26 @@ class GenerateAllClassesCommand extends MlibCommand
 			classFile = classes[i];
 
 			s = dir.getRelativePath(classFile);
-			
+
 			if(classFile.nativePath == cls.nativePath) continue;
 			
 		//	trace(s);
 			a = s.split("/");
+
+			var clsName = a.pop();
+
+			if(clsName.indexOf("_") > 0)
+			{
+				//support for ignoring MCore Partials
+				var partial = clsName.split("_");
+				partial.pop();
+
+				var partialFile = dir.resolveFile(a.join("/") + "/" + partial.join("_") + ".hx");
+
+				if(partialFile.exists) continue;
+			}
+			
+			a.push(clsName);
 			
 			s = a.join(".").substr(0, -3);
 		//	trace("   " + s);
