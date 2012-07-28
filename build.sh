@@ -1,6 +1,8 @@
 #!/bin/bash
+set -e
 
 #build tool
+echo ' build tool src'
 cd tool
 haxe build.hxml
 cd ../
@@ -11,9 +13,11 @@ cd ../
 neko mlib.n allClasses
 
 #compile libraries
+echo ' build haxe src'
 cd haxe
 haxe build.hxml
 
+echo ' build neko src'
 cd ../neko
 haxe build.hxml
 
