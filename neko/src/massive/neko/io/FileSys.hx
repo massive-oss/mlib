@@ -207,7 +207,7 @@ class FileSys
 		}
 	}
 	
-	#if haxe_208
+	#if (haxe_208 || haxe_210)
 	public static function stat(path:String):FileStat
 	{
 		path = safePath(path);
