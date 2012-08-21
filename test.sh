@@ -1,6 +1,7 @@
 #!/bin/bash
+set -e
+
 cd haxe
-haxelib run munit test -browser FireFox
+haxelib run munit test -coverage
 cd ../neko
-haxelib run munit test -neko -browser FireFox
-cd ../
+haxelib run munit test -neko -coverage

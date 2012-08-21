@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+mkdir -p bin
+
 #build tool
 echo ' build tool src'
 cd tool

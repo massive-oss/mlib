@@ -1,5 +1,6 @@
-version=0.2.0.116
+version=0.9.5.2
 src=test
 bin=../bin
 report=../report/haxe
 hxml=test.hxml
+classPaths=src

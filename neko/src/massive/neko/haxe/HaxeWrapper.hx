@@ -83,9 +83,10 @@ class HaxeWrapper
 			catch (e:haxe.io.Eof) {}
 
 			var exitCode = process.exitCode();
-			if (exitCode > 0)
+			var errString = process.stderr.readAll().toString();
+			if (exitCode > 0 || errString.length > 0)
 			{
-				printIndented(process.stderr.readAll().toString(), "   ");
+				printIndented(errString, "   ");
 			}
 			
 			return exitCode;

@@ -1,7 +1,7 @@
 # Neko
 -main TestMain
+-lib munit
 -cp test
 -cp src
 -cp ../haxe/src
--lib munit
 -neko ../bin/neko_test.n
