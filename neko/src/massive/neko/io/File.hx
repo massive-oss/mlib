@@ -1003,9 +1003,9 @@ class File
 	{
 		switch(type)
 		{
-			case FileType.DIRECTORY: return path.dir.split(seperator).pop();
-			case FileType.FILE: return path.file;
-			case FileType.UNKNOWN: return path.toString().split(seperator).pop();
+			case DIRECTORY: return path.dir.split(seperator).pop();
+			case FILE: return path.file;
+			case UNKNOWN: return path.toString().split(seperator).pop();
 		}
 		
 		return null;
@@ -1014,23 +1014,24 @@ class File
 	
 	private function get_fileName():String
 	{
-		switch(type)
+		var r = switch(type)
 		{
-			case FileType.DIRECTORY: return null;
-			case FileType.FILE: return name + (extension != null ? "." + extension : "");
-			case FileType.UNKNOWN: return name;
+			case DIRECTORY: null;
+			case FILE: name + (extension != null ? "." + extension : "");
+			case UNKNOWN: name;
 		}
+		return r;
 	}
 	
 	
 	private function get_extension():String
 	{
-		switch(type)
+		var r = switch(type)
 		{
-			
-			case FileType.FILE: return path.ext;
+			case FILE: return path.ext;
 			default: return null;
 		}
+		return r;
 	}
 	
 	private function get_nativePath():String

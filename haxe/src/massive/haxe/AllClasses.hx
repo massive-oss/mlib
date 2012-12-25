@@ -29,13 +29,13 @@
 
 package massive.haxe;
 
-import massive.haxe.Exception;
-import massive.haxe.log.ILogClient;
-import massive.haxe.log.Log;
-import massive.haxe.log.LogClient;
-import massive.haxe.util.ReflectUtil;
 import massive.haxe.util.RegExpUtil;
 import massive.haxe.util.TemplateUtil;
+import massive.haxe.util.ReflectUtil;
+import massive.haxe.Exception;
+import massive.haxe.log.Log;
+import massive.haxe.log.ILogClient;
+import massive.haxe.log.LogClient;
 
 @IgnoreCover
 class AllClasses
