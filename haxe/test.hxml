@@ -1,33 +1,33 @@
 # Flash 9+
 -main TestMain
+-lib munit
 -cp test
 -cp src
--lib munit
 -swf9 ../bin/haxe_test.swf
 
 --next
 
 #Flash 8
 -main TestMain
+-lib munit
 -cp test
 -cp src
--lib munit
 -swf ../bin/haxe8_test.swf
 
 --next
 
 # JavaScript
 -main TestMain
+-lib munit
 -cp test
 -cp src
--lib munit
 -js ../bin/haxe_test.js
 
 --next
 
 # Neko
 -main TestMain
+-lib munit
 -cp test
 -cp src
--lib munit
 -neko ../bin/haxe_test.n

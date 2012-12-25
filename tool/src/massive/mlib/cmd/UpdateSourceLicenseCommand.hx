@@ -1,5 +1,5 @@
 /****
-* Copyright 2011 Massive Interactive. All rights reserved.
+* Copyright 2012 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -38,6 +38,8 @@ class UpdateSourceLicenseCommand extends MlibCommand
 {
 	private var directories:Array<File>;
 	private var license:File;
+
+	private var noSourceLicense:Bool;
 	
 	private static var commentOpening:String = "/" + "****";//broken apart to prevent regex replace issues on comments above
 	private static var commentClosing:String = "****" + "/";
@@ -47,6 +49,7 @@ class UpdateSourceLicenseCommand extends MlibCommand
 	{
 		super();
 		directories = [];
+		noSourceLicense = false;
 	
 	}
 
@@ -113,14 +116,31 @@ class UpdateSourceLicenseCommand extends MlibCommand
 		{
 			throw "License file doesn't exist " + license;	
 		}
+
+
+		noSourceLicense = console.getOption("no-source-license") == "true";
 	}
 
 	override public function execute():Void
 	{
-		
 		var licenseStr:String = license.readString();
 		licenseStr = StringTools.replace(licenseStr, "::year::", Std.string(Date.now().getFullYear()));
-		
+
+		var file:File = console.dir.resolveFile("LICENSE.txt");
+		if(file.readString() != licenseStr)
+		{
+			file.writeString(licenseStr);
+		}
+
+		if(!noSourceLicense)
+		{
+			updateSourceCodeLicense(licenseStr);
+		}
+
+	}
+
+	function updateSourceCodeLicense(licenseStr:String)
+	{
 		var codeLicense:String = formatLicenseForCodeFiles(licenseStr);
 		
 		var files:Array<File> = [];
@@ -143,8 +163,6 @@ class UpdateSourceLicenseCommand extends MlibCommand
 			{
 				//strip out existing info
 				contents = reg.replace(contents, "");
-	
-			
 			}
 
 			var newContents:String = codeLicense + "\n\n" + contents;
@@ -153,16 +171,7 @@ class UpdateSourceLicenseCommand extends MlibCommand
 			{
 				file.writeString(newContents);					
 			}
-
 		}
-		
-
-		var file:File = console.dir.resolveFile("LICENSE.txt");
-		if(file.readString() != licenseStr)
-		{
-			file.writeString(licenseStr);
-		}
-		
 	}
 	
 	private function formatLicenseForCodeFiles(original:String):String

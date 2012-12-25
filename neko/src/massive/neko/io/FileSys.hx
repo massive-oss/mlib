@@ -28,7 +28,13 @@
 ****/
 
 package massive.neko.io;
+
+#if haxe_209
+import sys.FileSystem;
+import sys.FileStat;
+#else
 import neko.FileSystem;
+#end
 
 class FileSys
 {
@@ -201,7 +207,7 @@ class FileSys
 		}
 	}
 	
-	
+	#if (haxe_208 || haxe_210)
 	public static function stat(path:String):FileStat
 	{
 		path = safePath(path);
@@ -214,6 +220,7 @@ class FileSys
 			throw Std.string(e) + "\n" + path;
 		}
 	}
+	#end
 	
 	public function new():Void
 	{

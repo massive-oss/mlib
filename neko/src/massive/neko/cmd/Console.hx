@@ -1,5 +1,5 @@
 /****
-* Copyright 2011 Massive Interactive. All rights reserved.
+* Copyright 2012 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -188,7 +188,13 @@ class Console
 	public function prompt(promptMsg:String, rpad:Int=0):String
 	{
 		neko.Lib.print(StringTools.rpad(promptMsg + " ", " ", rpad) + ": ");
-		var str:String = neko.io.File.stdin().readLine();
+		
+		#if haxe_209
+			var str:String = Sys.stdin().readLine();
+		#else
+			var str:String = neko.io.File.stdin().readLine();
+		#end
+		
 		if(str.length == 0)
 		{
 			str = null;

@@ -51,13 +51,13 @@ class CommandLineRunnerTest
 		Assert.areEqual(Log.logLevel, LogLevel.console);
 		
 	
-		var console:Console = new ConsoleMock("mock -debug");	
+		var console:Console = new ConsoleMock("mock -mlib-log");	
 		var app:CommandLineRunner = new CommandLineRunnerMock(console);
 		
 		
 		Assert.areEqual(Log.logLevel, LogLevel.debug);
 		
-		var console:Console = new ConsoleMock("mock -debug info");	
+		var console:Console = new ConsoleMock("mock -mlib-log info");	
 		var app:CommandLineRunner = new CommandLineRunnerMock(console);
 		
 		Assert.areEqual(Log.logLevel, LogLevel.info);

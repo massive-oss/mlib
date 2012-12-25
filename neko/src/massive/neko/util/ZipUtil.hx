@@ -1,5 +1,5 @@
 /****
-* Copyright 2011 Massive Interactive. All rights reserved.
+* Copyright 2012 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -79,13 +79,14 @@ class ZipUtil
 		var files:Array<File> = dir.getRecursiveDirectoryListing(filter, exclude);
 
 		var entries:Array<Dynamic> = [];
+
+		var date = Date.now();
 			
 		for (file in files)
 		{
 			var bytes:Bytes = file.isDirectory ? null: neko.io.File.getBytes(file.nativePath);
-			var stat:FileStat = FileSys.stat(file.nativePath);
 			var name:String = dir.getRelativePath(file) + (file.isDirectory ? File.seperator : "");
-			var entry = { fileTime:stat.mtime, fileName:name, data:bytes };
+			var entry = { fileTime:date, fileName:name, data:bytes };
 			
 			//neko.Lib.print("Added " + entry.fileName + "\n");
 			entries.push(entry);

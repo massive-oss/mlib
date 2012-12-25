@@ -18,3 +18,6 @@ Optional parameters:
 
   [file]   : Relative or absolute path to a text file. If not set will use defaults
             specified within the project's .mlib settings.
+
+
+  -no-source-license    : disables source files (.hx) license text being updated

@@ -1,5 +1,5 @@
 /****
-* Copyright 2011 Massive Interactive. All rights reserved.
+* Copyright 2012 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -31,9 +31,7 @@ package massive.neko.haxe;
 
 import neko.FileSystem;
 import neko.io.File;
-
 import massive.neko.io.File;
-
 import neko.vm.Thread;
 import neko.Lib;
 import neko.Sys;
@@ -49,7 +47,6 @@ class HaxeWrapper
 		Compiles a hxml string using haxe.
 		Errors are printed the console.
 		@return exit code from haxe compiler - 0 is success, >0 is a fail.
-		
 	*/
 	static public function compile(hxml:String, ?silent:Bool=false):Int
 	{
@@ -70,27 +67,35 @@ class HaxeWrapper
 
 		printIndented("haxe " + StringTools.replace(args, "\\ ", " "));
 
-		var process:Process = new Process("haxe", encodeArgsArray(args));
-		
-		var stderr:Thread = Thread.create(readError);
-		stderr.sendMessage(process.stderr);
-
-		var exitCode:Int = 0;
-		exitCode = process.exitCode();
-
-		if(!silent)
+		try
 		{
-			printIndented(process.stdout.readAll().toString(), "      ");
-			printIndented(process.stderr.readAll().toString(), "   ");
-		}
-		
-		if(exitCode > 0)
-		{
-			Sys.sleep(.1);
-			stderr.sendMessage("stop");
+			var process:Process = new Process("haxe", encodeArgsArray(args));
+
+			try
+			{
+				while (true)
+				{
+					Sys.sleep(0.01);
+					var output = process.stdout.readLine();
+					if (!silent) printIndented(output, "      ");
+				}
+			}
+			catch (e:haxe.io.Eof) {}
+
+			var exitCode = process.exitCode();
+			var errString = process.stderr.readAll().toString();
+			if (exitCode > 0 || errString.length > 0)
+			{
+				printIndented(errString, "   ");
+			}
+			
+			return exitCode;
 		}	
-		
-		return exitCode;
+		catch(e:Dynamic)
+		{
+			trace(e);
+		}
+		return 1;
 	}
 		
 	
@@ -136,14 +141,9 @@ class HaxeWrapper
 	{
 		str = StringTools.trim(str); 
 
-		if(str != "")
-		{
-			var lines = str.split("\n");
-			for(line in lines)
-			{
-				neko.Lib.println(indent + line);	
-			}
-		}
+		neko.Lib.println(indent + str);	
+
+		neko.Sys.stdout().flush();
 	}
 	
 	static public function convertHXMLStringToArgs(hxml:String):String
