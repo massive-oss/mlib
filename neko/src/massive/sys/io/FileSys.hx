@@ -33,7 +33,7 @@ package massive.sys.io;
 import sys.FileSystem;
 import sys.FileStat;
 #else
-import neko.FileSystem;
+import sys.FileSystem;
 #end
 
 class FileSys
@@ -46,7 +46,7 @@ class FileSys
 	{
 		if(isWindows == null)
 		{
-			isWindows = neko.Sys.systemName().indexOf("Win") == 0;
+			isWindows = Sys.systemName().indexOf("Win") == 0;
 		}
 		return isWindows;
 	}
@@ -55,7 +55,7 @@ class FileSys
 	{
 		if(isMac == null)
 		{
-			isMac = neko.Sys.systemName().indexOf("Mac") == 0;
+			isMac = Sys.systemName().indexOf("Mac") == 0;
 		}
 		return isMac;
 	}
@@ -64,7 +64,7 @@ class FileSys
 	{
 		if(isLinux == null)
 		{
-			isLinux = neko.Sys.systemName().indexOf("Linux") == 0;
+			isLinux = Sys.systemName().indexOf("Linux") == 0;
 		}
 		return isLinux;
 	}
@@ -93,7 +93,7 @@ class FileSys
 	*/
 	public static function getCwd():String
 	{
-		var path:String = neko.Sys.getCwd();
+		var path:String = Sys.getCwd();
 		
 		if(isWindows)
 		{
@@ -113,7 +113,7 @@ class FileSys
 		path = safePath(path);
 		try
 		{
-			neko.Sys.setCwd(path);
+			Sys.setCwd(path);
 		}
 		catch(e:Dynamic)
 		{
@@ -126,7 +126,7 @@ class FileSys
 		path = safePath(path);
 		try
 		{
-			return neko.FileSystem.exists(path);
+			return sys.FileSystem.exists(path);
 		}
 		catch(e:Dynamic)
 		{
@@ -140,7 +140,7 @@ class FileSys
 		
 		try
 		{
-			return neko.FileSystem.isDirectory(path);
+			return sys.FileSystem.isDirectory(path);
 		}
 		catch(e:Dynamic)
 		{
@@ -155,7 +155,7 @@ class FileSys
 		
 		try
 		{
-			return neko.FileSystem.readDirectory(path);
+			return sys.FileSystem.readDirectory(path);
 		}
 		catch(e:Dynamic)
 		{
@@ -170,7 +170,7 @@ class FileSys
 		
 		try
 		{
-			neko.FileSystem.createDirectory(path);
+			sys.FileSystem.createDirectory(path);
 		}
 		catch(e:Dynamic)
 		{
@@ -185,7 +185,7 @@ class FileSys
 		
 		try
 		{
-			neko.FileSystem.deleteDirectory(path);
+			sys.FileSystem.deleteDirectory(path);
 		}
 		catch(e:Dynamic)
 		{
@@ -199,7 +199,7 @@ class FileSys
 		
 		try
 		{
-			neko.FileSystem.deleteFile(path);
+			sys.FileSystem.deleteFile(path);
 		}
 		catch(e:Dynamic)
 		{
@@ -213,7 +213,7 @@ class FileSys
 		path = safePath(path);
 		try
 		{
-			return neko.FileSystem.stat(path);
+			return sys.FileSystem.stat(path);
 		}
 		catch(e:Dynamic)
 		{

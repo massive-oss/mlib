@@ -56,8 +56,8 @@
  */
 package massive.sys.io;
 
-import neko.io.Path;
-import neko.Lib;
+import haxe.io.Path;
+import Sys;
 
 import massive.haxe.log.Log;
 import massive.sys.util.PathUtil;
@@ -190,7 +190,7 @@ class File
 	public var exists(get_exists, null):Bool;
 	
 	/**
-	*  @return true if it is a valid directory path. This is different from neko.FileSystem.isDirectory() that throws error if the path doesn't exist.
+	*  @return true if it is a valid directory path. This is different from sys.FileSystem.isDirectory() that throws error if the path doesn't exist.
 	*/
 	public var isDirectory(get_isDirectory, null):Bool;
 	
@@ -742,7 +742,7 @@ class File
 				{
 					if(!targetFile.exists || overwrite == true)
 					{
-						neko.io.File.copy(file.nativePath, targetFile.nativePath);
+						sys.io.File.copy(file.nativePath, targetFile.nativePath);
 					}
 				}
 			}
@@ -754,7 +754,7 @@ class File
 
 			if(!targetFile.exists || overwrite == true)
 			{
-				neko.io.File.copy(nativePath, targetFile.nativePath);
+				sys.io.File.copy(nativePath, targetFile.nativePath);
 			}
 		}	
 	}
@@ -845,7 +845,7 @@ class File
 			setInternalPath(raw, FileType.FILE);
 		}
 	
-		var out = neko.io.File.write(nativePath, binary);
+		var out = sys.io.File.write(nativePath, binary);
 		out.writeString(Std.string(value));
 		out.flush();
 		out.close();
@@ -870,7 +870,7 @@ class File
 
 		try
 		{
-			return neko.io.File.getContent(nativePath);
+			return sys.io.File.getContent(nativePath);
 		}
 		catch(e:Dynamic)
 		{

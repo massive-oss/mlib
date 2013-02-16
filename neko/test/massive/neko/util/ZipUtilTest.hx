@@ -77,8 +77,8 @@ class ZipUtilTest
 		try
 		{
 			var zipFile:File = current.resolvePath("tmp.zip");
-			var zip = neko.io.File.write(zipFile.nativePath, true);
-			neko.zip.Writer.writeZip(zip, files, -1);
+			var zip = sys.io.File.write(zipFile.nativePath, true);
+			haxe.zip.Writer.writeZip(zip, files, -1);
 			zip.close();
 			Assert.isTrue(zipFile.exists);
 		}

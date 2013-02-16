@@ -50,8 +50,8 @@ class LogClient implements ILogClient
 			msg = Std.string(level) + ": " + message;
 		}
 		
-		#if neko
-		neko.Lib.println(msg);
+		#if sys
+		Sys.println(msg);
 		#else
 		trace(msg);
 		#end

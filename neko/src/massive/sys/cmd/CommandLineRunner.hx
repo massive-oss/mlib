@@ -32,15 +32,15 @@ package massive.sys.cmd;
 import massive.sys.cmd.ICommand;
 import massive.sys.cmd.Command;
 
-import neko.FileSystem;
+import sys.FileSystem;
 import massive.haxe.log.Log;
 
 import massive.sys.io.File;
 import massive.sys.cmd.Console;
 import neko.vm.Thread;
-import neko.Lib;
-import neko.Sys;
-import neko.io.Process;
+import Sys;
+import Sys;
+import sys.io.Process;
 
 /**
 *  Base class for application
@@ -212,7 +212,7 @@ class CommandLineRunner
 	
 	private function print(message:Dynamic):Void
 	{
-		neko.Lib.println(Std.string(message));
+		Sys.println(Std.string(message));
 	}
 	
 	private function error(message:Dynamic, ?code:Int=1, ?posInfos:haxe.PosInfos):Void
@@ -226,7 +226,7 @@ class CommandLineRunner
 	private function exit(?code:Int=0):Void
 	{
 		
-		neko.Sys.exit(code);
+		Sys.exit(code);
 	}
 	
 	/**

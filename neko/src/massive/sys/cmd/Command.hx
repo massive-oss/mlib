@@ -90,7 +90,7 @@ class Command implements ICommand
 
 	private function print(message:Dynamic):Void
 	{
-		neko.Lib.println(Std.string(message));
+		Sys.println(Std.string(message));
 	}
 	
 	private function error(message:Dynamic, ?code:Int=1, ?posInfos:haxe.PosInfos):Void
@@ -103,7 +103,7 @@ class Command implements ICommand
 	
 	private function exit(?code:Int=0):Void
 	{
-		neko.Sys.exit(code);
+		Sys.exit(code);
 	}
 
 }

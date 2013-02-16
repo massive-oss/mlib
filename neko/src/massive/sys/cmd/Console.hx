@@ -32,11 +32,11 @@ package massive.sys.cmd;
 import massive.sys.io.File;
 import massive.sys.io.FileException;
 import massive.sys.io.FileSys;
-import neko.FileSystem;
+import sys.FileSystem;
 import neko.vm.Thread;
-import neko.Lib;
+import Sys;
 import massive.haxe.log.Log;
-import neko.io.Process;
+import sys.io.Process;
 
 /**
 *  Command Line Interface
@@ -88,7 +88,7 @@ class Console
 		this.isHaxelib = isHaxelib;
 		originalDir = File.current;
 		
-		systemArgs = neko.Sys.args().concat([]);
+		systemArgs = Sys.args().concat([]);
 		Log.debug("systemArgs: " + systemArgs);
 		
 		init();
@@ -115,7 +115,7 @@ class Console
 		return systemArgs.concat([]);
 	}
 	/**
-	*  Re-initialisises all arguments from the original neko.Sys.args()
+	*  Re-initialisises all arguments from the original Sys.args()
 	**/
 	public function flush(?isHaxelib:Bool = true):Void
 	{
@@ -187,12 +187,12 @@ class Console
 	*  */
 	public function prompt(promptMsg:String, rpad:Int=0):String
 	{
-		neko.Lib.print(StringTools.rpad(promptMsg + " ", " ", rpad) + ": ");
+		Sys.print(StringTools.rpad(promptMsg + " ", " ", rpad) + ": ");
 		
 		#if haxe_209
 			var str:String = Sys.stdin().readLine();
 		#else
-			var str:String = neko.io.File.stdin().readLine();
+			var str:String = sys.io.File.stdin().readLine();
 		#end
 		
 		if(str.length == 0)

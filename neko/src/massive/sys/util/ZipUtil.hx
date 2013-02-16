@@ -29,81 +29,69 @@
 
 package massive.sys.util;
 
-class PathUtil
+import Sys;
+import massive.sys.io.FileSys;
+import haxe.io.Path;
+
+import haxe.zip.Reader;
+import haxe.zip.Writer;
+import haxe.io.Bytes;
+
+import massive.sys.io.File;
+import sys.FileSystem;
+
+class ZipUtil
 {
-	public static var DIRECTORY_NAME:EReg = ~/\.?[a-zA-Z0-9\-_ ]*$/;
-	public static var HAXE_CLASS_NAME:EReg = ~/[A-Z]([a-zA-Z0-9]+)\.hx/;
-	
-	public function new():Void
+	public static function zipDirectory(file:File, sourceDir:File, ?filter:EReg, ?exclude:Bool=false):Void
 	{
+		if(!sourceDir.exists || !sourceDir.isDirectory) throw "Error: source isn't a valid directory";
 		
+		// set cwd to directory path
+		
+		var old:File = File.current;
+		
+		var pwd:String = FileSys.getCwd();
+		
+		FileSys.setCwd(sourceDir.nativePath);
+		
+		var cwd:String = FileSys.getCwd();
+
+		// get entries
+		var entries:Array<Dynamic> = convertDirectoryToZipEntries(sourceDir, filter, exclude);
+		// zip entries
+		
+		if(!file.exists)
+		{
+			file.writeString("");
+		}
+		
+		var zip = sys.io.File.write(file.nativePath, true);
+		haxe.zip.Writer.writeZip(zip, entries, -1);
+		zip.close();
+		
+		// return to previous working directory
+		FileSys.setCwd(pwd);
+
 	}
 	
-	public static function isAbsolutePath(path:String):Bool
+	public static function convertDirectoryToZipEntries(dir:File, ?filter:EReg, ?exclude:Bool=false):Array<Dynamic>
 	{
-		if(path.indexOf("/")==0)
-		{
-			//absolute osx path
-			return true;
-		}
-		else if(path.indexOf("\\") > 0 && path.indexOf(":") == 1)// && path.indexOf("\\") < path.indexOf("/")
-		{
-			//absolute win path
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
-	static public function cleanUpPath(path:String):String
-	{
-		var seperator:String = neko.Sys.getCwd().indexOf("\\") > 0 ? "\\" : "/";
+		var files:Array<File> = dir.getRecursiveDirectoryListing(filter, exclude);
+
+		var entries:Array<Dynamic> = [];
+
+		var date = Date.now();
 			
-		if(seperator == "/")
+		for (file in files)
 		{
-			path = path.split("\\").join(seperator);
-		}
-		else
-		{
-			if(isAbsolutePath(path))
-			{
-				path = path.split("/").join(seperator);
-			}
-			else
-			{
-				path = path.split("\\").join(seperator);
-			}
+			var bytes:Bytes = file.isDirectory ? null: sys.io.File.getBytes(file.nativePath);
+			var name:String = dir.getRelativePath(file) + (file.isDirectory ? File.seperator : "");
+			var entry = { fileTime:date, fileName:name, data:bytes };
+			
+			//Sys.print("Added " + entry.fileName + "\n");
+			entries.push(entry);
 		}
 		
-		return path;
+		return entries;
 	}
-	
-	
-	static public function lastCharIsSlash(path:String):Bool
-	{
-		var l:Int = path.length-1;
-		return path.lastIndexOf("/") == l || path.lastIndexOf("\\") == l;
-	}
-	
-	
-	public static function isRelativePath(path:String):Bool
-	{
-		return isAbsolutePath(path) == false;
-	}
-	
-	public static function isValidDirectoryName(path:String):Bool
-	{
-		return DIRECTORY_NAME.match(path) && DIRECTORY_NAME.matched(0) == path;
-	}
-	
-	public static function isValidHaxeClassName(path:String):Bool
-	{
-		return HAXE_CLASS_NAME.match(path) && HAXE_CLASS_NAME.matched(0) == path;
-	}
-	
-
-	
-
 }

@@ -29,13 +29,13 @@
 
 package massive.sys.haxe;
 
-import neko.FileSystem;
-import neko.io.File;
+import sys.FileSystem;
+import sys.io.File;
 import massive.sys.io.File;
 import neko.vm.Thread;
-import neko.Lib;
-import neko.Sys;
-import neko.io.Process;
+import Sys;
+import Sys;
+import sys.io.Process;
 
 /**
 *  This is a simple wrapper for running haxe from within neko
@@ -110,7 +110,7 @@ class HaxeWrapper
 				var str:String = "";
 				//str = stderr.readLine();
 				message = Thread.readMessage(false);
-				//neko.Lib.println("   " + str);
+				//Sys.println("   " + str);
 			}
 			catch(e:haxe.io.Eof)
 			{
@@ -141,9 +141,9 @@ class HaxeWrapper
 	{
 		str = StringTools.trim(str); 
 
-		neko.Lib.println(indent + str);	
+		Sys.println(indent + str);	
 
-		neko.Sys.stdout().flush();
+		Sys.stdout().flush();
 	}
 	
 	static public function convertHXMLStringToArgs(hxml:String):String

@@ -28,7 +28,7 @@
 ****/
 
 package massive.sys.haxelib;
-import neko.io.Process;
+import sys.io.Process;
 import massive.sys.io.File;
 import massive.sys.util.ZipUtil;
 import massive.haxe.util.RegExpUtil;
@@ -69,7 +69,7 @@ class HaxelibTools
 		
 		if(exitCode > 0) return null;
 		
-		if(neko.Sys.systemName() == "Windows")
+		if(Sys.systemName() == "Windows")
 		{
 			path = path.split("/").join("\\");
 		}
@@ -102,9 +102,9 @@ class HaxelibTools
 	
 	public static function installZip(zip:File):Void
 	{
-		neko.Lib.println("Installing to haxelib...");
+		Sys.println("Installing to haxelib...");
 		
-		if(neko.Sys.command("haxelib test " + zip) > 0)
+		if(Sys.command("haxelib test " + zip) > 0)
 		{
 			throw "Failed to install pacakge to haxelib " + zip;
 		}
@@ -112,9 +112,9 @@ class HaxelibTools
 	
 	public static function submit(zip:File):Void
 	{
-		neko.Lib.println("Submitting to haxelib...");
+		Sys.println("Submitting to haxelib...");
 		
-		if(neko.Sys.command("haxelib submit " + zip) > 0)
+		if(Sys.command("haxelib submit " + zip) > 0)
 		{
 			throw "Failed to submit package to haxelib " + zip;
 		}
