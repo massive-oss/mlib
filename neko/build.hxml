@@ -1,5 +1,5 @@
 # Neko
--main massive.neko.AllClasses
+-main massive.sys.AllClasses
 -cp src
 -cp ../haxe/src
 -neko ../bin/neko_all.n

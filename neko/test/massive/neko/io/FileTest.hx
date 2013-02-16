@@ -1,13 +1,13 @@
-package massive.neko.io;
+package massive.sys.io;
 
 import massive.munit.util.Timer;
 import massive.munit.Assert;
 import massive.munit.async.AsyncFactory;
 
 
-import massive.neko.cmd.Console;
-import massive.neko.io.File;
-import massive.neko.io.FileException;
+import massive.sys.cmd.Console;
+import massive.sys.io.File;
+import massive.sys.io.FileException;
 
 /**
 * Auto generated ExampleTest for MassiveUnit. 

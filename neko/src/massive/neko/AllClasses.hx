@@ -27,20 +27,20 @@
 * 
 ****/
 
-package massive.neko;
+package massive.sys;
 
-import massive.neko.util.ZipUtil;
-import massive.neko.util.PathUtil;
-import massive.neko.io.File;
-import massive.neko.io.FileException;
-import massive.neko.io.FileSys;
-import massive.neko.cmd.ICommand;
-import massive.neko.cmd.CommandLineRunner;
-import massive.neko.cmd.Command;
-import massive.neko.cmd.Console;
-import massive.neko.haxe.HaxeWrapper;
-import massive.neko.haxelib.Haxelib;
-import massive.neko.haxelib.HaxelibTools;
+import massive.sys.util.ZipUtil;
+import massive.sys.util.PathUtil;
+import massive.sys.io.File;
+import massive.sys.io.FileException;
+import massive.sys.io.FileSys;
+import massive.sys.cmd.ICommand;
+import massive.sys.cmd.CommandLineRunner;
+import massive.sys.cmd.Command;
+import massive.sys.cmd.Console;
+import massive.sys.haxe.HaxeWrapper;
+import massive.sys.haxelib.Haxelib;
+import massive.sys.haxelib.HaxelibTools;
 
 @IgnoreCover
 class AllClasses

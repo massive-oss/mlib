@@ -27,7 +27,7 @@
 * 
 ****/
 
-package massive.neko.io;
+package massive.sys.io;
 import massive.haxe.Exception;
 import haxe.PosInfos;
 

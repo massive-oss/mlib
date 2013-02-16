@@ -1,4 +1,4 @@
-package massive.neko.cmd;
+package massive.sys.cmd;
 
 import haxe.PosInfos;
 

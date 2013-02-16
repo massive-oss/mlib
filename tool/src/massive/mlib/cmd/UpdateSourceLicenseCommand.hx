@@ -29,8 +29,8 @@
 
 package massive.mlib.cmd;
 
-import massive.neko.haxelib.HaxelibTools;
-import massive.neko.io.File;
+import massive.sys.haxelib.HaxelibTools;
+import massive.sys.io.File;
 import massive.haxe.log.Log;
 import massive.mlib.MlibSettings;
 

@@ -27,10 +27,10 @@
 * 
 ****/
 
-package massive.neko.haxelib;
+package massive.sys.haxelib;
 import neko.io.Process;
-import massive.neko.io.File;
-import massive.neko.util.ZipUtil;
+import massive.sys.io.File;
+import massive.sys.util.ZipUtil;
 import massive.haxe.util.RegExpUtil;
 class HaxelibTools
 {

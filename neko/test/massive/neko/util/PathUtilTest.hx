@@ -1,4 +1,4 @@
-package massive.neko.util;
+package massive.sys.util;
 
 import massive.munit.util.Timer;
 import massive.munit.Assert;

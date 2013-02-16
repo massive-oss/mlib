@@ -1,12 +1,12 @@
-package massive.neko.cmd;
+package massive.sys.cmd;
 
 import massive.munit.Assert;
-import massive.neko.cmd.CommandLineRunner;
-import massive.neko.cmd.CommandMock;
+import massive.sys.cmd.CommandLineRunner;
+import massive.sys.cmd.CommandMock;
 import massive.haxe.log.Log;
 
-import massive.neko.cmd.Console;
-import massive.neko.cmd.ConsoleMock;
+import massive.sys.cmd.Console;
+import massive.sys.cmd.ConsoleMock;
 
 class CommandLineRunnerTest 
 {

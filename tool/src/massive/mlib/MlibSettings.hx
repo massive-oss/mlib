@@ -29,9 +29,9 @@
 
 package massive.mlib;
 
-import massive.neko.io.File;
+import massive.sys.io.File;
 import haxe.xml.Fast;
-import massive.neko.util.PathUtil;
+import massive.sys.util.PathUtil;
 import massive.haxe.util.RegExpUtil;
 import massive.haxe.Exception;
 

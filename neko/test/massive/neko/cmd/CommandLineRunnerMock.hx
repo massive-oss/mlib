@@ -1,8 +1,8 @@
-package massive.neko.cmd;
+package massive.sys.cmd;
 
 import haxe.PosInfos;
-import massive.neko.cmd.CommandLineRunner;
-import massive.neko.cmd.Console;
+import massive.sys.cmd.CommandLineRunner;
+import massive.sys.cmd.Console;
 
 class CommandLineRunnerMock extends CommandLineRunner
 {

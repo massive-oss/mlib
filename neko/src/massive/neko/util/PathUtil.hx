@@ -27,7 +27,7 @@
 * 
 ****/
 
-package massive.neko.util;
+package massive.sys.util;
 
 class PathUtil
 {

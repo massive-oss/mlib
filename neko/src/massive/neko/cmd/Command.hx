@@ -27,11 +27,11 @@
 * 
 ****/
 
-package massive.neko.cmd;
+package massive.sys.cmd;
 
-import massive.neko.cmd.Console;
+import massive.sys.cmd.Console;
 import massive.haxe.log.Log;
-import massive.neko.cmd.ICommand;
+import massive.sys.cmd.ICommand;
 /**
 *  An abstract base class for Commands
 *  Includes utility me

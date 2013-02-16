@@ -27,10 +27,10 @@
 * 
 ****/
 
-package massive.neko.haxelib;
+package massive.sys.haxelib;
 
 import haxe.xml.Fast;
-import massive.neko.io.File;
+import massive.sys.io.File;
 
 class Haxelib
 {	

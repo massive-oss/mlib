@@ -27,17 +27,17 @@
 * 
 ****/
 
-package massive.neko.util;
+package massive.sys.util;
 
 import neko.Lib;
-import massive.neko.io.FileSys;
+import massive.sys.io.FileSys;
 import neko.io.Path;
 
 import neko.zip.Reader;
 import neko.zip.Writer;
 import haxe.io.Bytes;
 
-import massive.neko.io.File;
+import massive.sys.io.File;
 import neko.FileSystem;
 
 class ZipUtil

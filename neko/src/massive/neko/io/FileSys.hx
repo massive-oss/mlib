@@ -27,7 +27,7 @@
 * 
 ****/
 
-package massive.neko.io;
+package massive.sys.io;
 
 #if haxe_209
 import sys.FileSystem;

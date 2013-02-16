@@ -28,8 +28,8 @@
 ****/
 
 package massive.mlib.cmd;
-import massive.neko.cmd.Command;
-import massive.neko.haxelib.Haxelib;
+import massive.sys.cmd.Command;
+import massive.sys.haxelib.Haxelib;
 import massive.mlib.MlibSettings;
 
 class MlibCommand extends Command

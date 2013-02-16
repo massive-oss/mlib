@@ -1,7 +1,7 @@
-package massive.neko.cmd;
+package massive.sys.cmd;
 
-import massive.neko.io.File;
-import massive.neko.io.FileSys;
+import massive.sys.io.File;
+import massive.sys.io.FileSys;
 import massive.munit.Assert;
 
 class ConsoleTest 

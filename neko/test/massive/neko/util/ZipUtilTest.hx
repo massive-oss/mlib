@@ -1,12 +1,12 @@
-package massive.neko.util;
+package massive.sys.util;
 
 import massive.munit.util.Timer;
 import massive.munit.Assert;
 import massive.munit.async.AsyncFactory;
 
-import massive.neko.io.File;
-import massive.neko.util.ZipUtil;
-import massive.neko.cmd.Console;
+import massive.sys.io.File;
+import massive.sys.util.ZipUtil;
+import massive.sys.cmd.Console;
 
 
 class ZipUtilTest 

@@ -30,9 +30,9 @@
 package massive.mlib.cmd;
 
 import massive.haxe.util.RegExpUtil;
-import massive.neko.io.File;
+import massive.sys.io.File;
 import massive.haxe.log.Log;
-import massive.neko.util.PathUtil;
+import massive.sys.util.PathUtil;
 import massive.mlib.MlibSettings;
 
 class GenerateAllClassesCommand extends MlibCommand

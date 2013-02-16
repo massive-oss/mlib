@@ -31,11 +31,11 @@ package massive.mlib;
 
 import massive.haxe.log.Log;
 import massive.haxe.util.TemplateUtil;
-import massive.neko.cmd.CommandLineRunner;
-import massive.neko.cmd.Console;
-import massive.neko.cmd.ICommand;
-import massive.neko.haxelib.Haxelib;
-import massive.neko.io.File;
+import massive.sys.cmd.CommandLineRunner;
+import massive.sys.cmd.Console;
+import massive.sys.cmd.ICommand;
+import massive.sys.haxelib.Haxelib;
+import massive.sys.io.File;
 
 import massive.mlib.cmd.MlibCommand;
 import massive.mlib.cmd.ConfigMlibCommand;

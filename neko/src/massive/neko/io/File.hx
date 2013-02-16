@@ -54,13 +54,13 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of Massive Interactive.
  */
-package massive.neko.io;
+package massive.sys.io;
 
 import neko.io.Path;
 import neko.Lib;
 
 import massive.haxe.log.Log;
-import massive.neko.util.PathUtil;
+import massive.sys.util.PathUtil;
 import haxe.PosInfos;
 
 class File

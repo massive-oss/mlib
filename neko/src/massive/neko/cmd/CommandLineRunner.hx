@@ -27,16 +27,16 @@
 * 
 ****/
 
-package massive.neko.cmd;
+package massive.sys.cmd;
 
-import massive.neko.cmd.ICommand;
-import massive.neko.cmd.Command;
+import massive.sys.cmd.ICommand;
+import massive.sys.cmd.Command;
 
 import neko.FileSystem;
 import massive.haxe.log.Log;
 
-import massive.neko.io.File;
-import massive.neko.cmd.Console;
+import massive.sys.io.File;
+import massive.sys.cmd.Console;
 import neko.vm.Thread;
 import neko.Lib;
 import neko.Sys;

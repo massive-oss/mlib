@@ -27,11 +27,11 @@
 * 
 ****/
 
-package massive.neko.haxe;
+package massive.sys.haxe;
 
 import neko.FileSystem;
 import neko.io.File;
-import massive.neko.io.File;
+import massive.sys.io.File;
 import neko.vm.Thread;
 import neko.Lib;
 import neko.Sys;

@@ -27,9 +27,9 @@
 * 
 ****/
 
-package massive.neko.cmd;
+package massive.sys.cmd;
 
-import massive.neko.cmd.Console;
+import massive.sys.cmd.Console;
 /**
 *  A command represents a single action or task in the system. 
 */

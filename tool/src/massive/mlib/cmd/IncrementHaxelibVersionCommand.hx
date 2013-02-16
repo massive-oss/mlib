@@ -29,8 +29,8 @@
 
 package massive.mlib.cmd;
 
-import massive.neko.haxelib.Haxelib;
-import massive.neko.io.File;
+import massive.sys.haxelib.Haxelib;
+import massive.sys.io.File;
 import massive.haxe.log.Log;
 
 class IncrementHaxelibVersionCommand extends MlibCommand

@@ -18,7 +18,7 @@ mlib provides a lightweight command based structure for rapidly developing comma
 Mlib includes several haxe and neko src packages:
 
 *	massive.haxe (cross platform haxe APIs)
-*	massive.neko (neko specific APIs for file access, command line, haxe and haxelib integration)
+*	massive.sys (neko specific APIs for file access, command line, haxe and haxelib integration)
 *	massive.mlib (command line tool (mlib) for managing development and deployment of haxelib projects)
 
 
@@ -26,7 +26,7 @@ Mlib includes several haxe and neko src packages:
 
 **Expanded File APIs**
 
-See [massive.neko.io.File](https://github.com/massiveinteractive/MassiveLib/blob/master/neko/src/massive/neko/io/File.hx)
+See [massive.sys.io.File](https://github.com/massiveinteractive/MassiveLib/blob/master/neko/src/massive/neko/io/File.hx)
 
 *	recursive dir copy/move/delete
 *	platform safe resolution of file paths
@@ -34,14 +34,14 @@ See [massive.neko.io.File](https://github.com/massiveinteractive/MassiveLib/blob
 
 **Simplified access to command line**
 
-See  [massive.neko.cmd.Console](https://github.com/massiveinteractive/MassiveLib/blob/master/neko/src/massive/neko/cmd/Console.hx)
+See  [massive.sys.cmd.Console](https://github.com/massiveinteractive/MassiveLib/blob/master/neko/src/massive/neko/cmd/Console.hx)
 
 *	separation of raw system arg into arguments ('foo') and options (-foo bar)
 *	automatic detection and updating of working directory when running in haxelib libraries
 *	convenience methods for prompting user input
 
 **Command line tool runner**
-See [massive.neko.cmd.CommandLineRunner](https://github.com/massiveinteractive/MassiveLib/blob/master/neko/src/massive/neko/cmd/CommandLineRunner.hx)
+See [massive.sys.cmd.CommandLineRunner](https://github.com/massiveinteractive/MassiveLib/blob/master/neko/src/massive/neko/cmd/CommandLineRunner.hx)
 
 *	lightweight interface for mapping command line arguments to Command classes
 *	automatic generation of command line *help* and command and  
