@@ -4,4 +4,4 @@
 -cp test
 -cp src
 -cp ../haxe/src
--neko ../bin/neko_test.n
+-neko ../bin/sys_test.n

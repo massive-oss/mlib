@@ -1,5 +1,5 @@
 /****
-* Copyright 2012 Massive Interactive. All rights reserved.
+* Copyright 2013 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -27,69 +27,29 @@
 * 
 ****/
 
-package massive.sys.cmd;
+package massive.sys.io;
+import massive.haxe.Exception;
+import haxe.PosInfos;
 
-import massive.sys.cmd.Console;
-/**
-*  A command represents a single action or task in the system. 
-*/
-interface ICommand
+class FileException extends Exception
 {
-	
-	/**
-	* An array of prerequisite commands required to be executred prior to the current one
-	*/
-	var preRequisites:Array<CommandInstance>;
-	
-	/**
-	* An array of commands to execute after the current command
-	*/
-	var postRequisites:Array<CommandInstance>;
-	
-	
-	/*
-	* Generic data object for commands. Set via setData()
-	*/
-	var data:Dynamic;
-	
-	/**
-	*  rerefence to the command line console. Used to access arguments passed through from the command line and to prompt
-	*  the user for properties 
-	*/
-	var console:Console;
-	
-	
-	var skip(default, null):Bool;
-	
-	
-	function setData(?data:Dynamic=null):Void;
-	
-	/**
-	*  Called prior to running any dependency tasks.
-	*  An opportunity to check/prompt for command line parameters
-	*  prior to execute and after console has been injected.
-	*/
-	function initialise():Void;
-
-
-	/**
-	* Called after any dependent tasks have completed.
-	* Location of command logic
-	**/
-	function execute():Void;
-
-}
-
-
-class CommandInstance
-{
-	public var commandClass:Class<ICommand>;
-	public var data:Dynamic;
-	
-	public function new(cmdClass:Class<ICommand>, ?data:Dynamic = null):Void
+	public var file:File;
+	public function new(message:String, ?file:File=null, ?posInfos:PosInfos)
 	{
-		commandClass = cmdClass;
-		this.data = data;
+		this.file = file;
+		super(message, posInfos);
+	}
+	
+	override public function toString():String
+	{
+		var str:String = super.toString();
 		
+		if(file != null)
+		{
+			str += "[File=" + file.nativePath + "]";
+		}
+		
+	
+		return str;
 	}
 }

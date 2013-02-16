@@ -2,4 +2,4 @@
 -main massive.sys.AllClasses
 -cp src
 -cp ../haxe/src
--neko ../bin/neko_all.n
+-neko ../bin/sys_all.n

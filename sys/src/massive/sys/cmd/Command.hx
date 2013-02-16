@@ -27,31 +27,84 @@
 * 
 ****/
 
-package massive.mlib.cmd;
-import massive.sys.cmd.Command;
-import massive.sys.haxelib.Haxelib;
-import massive.mlib.MlibSettings;
+package massive.sys.cmd;
 
-class MlibCommand extends Command
+import massive.sys.cmd.Console;
+import massive.haxe.log.Log;
+import massive.sys.cmd.ICommand;
+/**
+*  An abstract base class for Commands
+*  Includes utility me
+*  thods for printing, errors and exiting to the command line
+*  */
+class Command implements ICommand
 {
-	public var haxelib:Haxelib;
-	public var requiresHaxelib:Bool;
+	public var preRequisites:Array<CommandInstance>;
+	public var postRequisites:Array<CommandInstance>;
+	public var console:Console;
+	public var data:Dynamic;
 	
-	public var settings:MlibSettings;
-	
+	public var skip(default, null):Bool;
+
 	public function new():Void
 	{
-		super();
-		requiresHaxelib = true;
+		preRequisites = [];
+		postRequisites = [];
+		skip = false;
 	}
-
-	override public function initialise():Void
+	
+	public function setData(?data:Dynamic = null):Void
+	{
+		this.data = data;
+	}
+	
+	/**
+	* Called prior to running any dependency tasks.
+	*  An opportunity to check/prompt for command line parameters
+	*  prior to execute and after mCommand has been set. 
+	*/
+	public function initialise():Void
 	{
 		
 	}
 
-	override public function execute():Void
+	/**
+	* Called after any dependent tasks have completed.
+	* Location of command logic
+	**/
+	public function execute():Void
 	{
 	
 	}
+	
+	
+	public function addPreRequisite(commandClass:Class<ICommand>, ?data:Dynamic=null):Void
+	{
+		preRequisites.push(new CommandInstance(commandClass, data));
+	}
+	
+	public function addPostRequisite(commandClass:Class<ICommand>, ?data:Dynamic=null):Void
+	{
+		postRequisites.push(new CommandInstance(commandClass, data));
+	}
+
+	private function print(message:Dynamic):Void
+	{
+		Sys.println(Std.string(message));
+	}
+	
+	private function error(message:Dynamic, ?code:Int=1, ?posInfos:haxe.PosInfos):Void
+	{
+		print("Error: " + message);
+		Log.error(posInfos);
+		
+		exit(code);
+	}
+	
+	private function exit(?code:Int=0):Void
+	{
+		Sys.exit(code);
+	}
+
 }
+

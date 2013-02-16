@@ -20,7 +20,7 @@ cd haxe
 haxe build.hxml
 
 echo ' build neko src'
-cd ../neko
+cd ../sys
 haxe build.hxml
 
 cd ../

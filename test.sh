@@ -3,5 +3,5 @@ set -e
 
 cd haxe
 haxelib run munit test -coverage
-cd ../neko
+cd ../sys
 haxelib run munit test -neko -coverage

@@ -1,5 +1,5 @@
 /****
-* Copyright 2012 Massive Interactive. All rights reserved.
+* Copyright 2013 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -86,6 +86,7 @@ class ZipUtil
 		for (file in files)
 		{
 			var stat = sys.FileSystem.stat(file.nativePath);
+
 			var bytes:Bytes = file.isDirectory ? null: sys.io.File.getBytes(file.nativePath);
 			var name:String = dir.getRelativePath(file) + (file.isDirectory ? File.seperator : "");
 			var entry = {
@@ -93,9 +94,10 @@ class ZipUtil
 				fileName:name,
 				fileSize:stat.size,
 				data:bytes,
-				dataSize:bytes.length,
-				compressed:true,
-				crc32:1
+				dataSize:bytes != null ? bytes.length : 0,
+				compressed:false,
+				crc32:0,
+				extraFields:new List()
 			}
 			
 			//Sys.print("Added " + entry.fileName + "\n");

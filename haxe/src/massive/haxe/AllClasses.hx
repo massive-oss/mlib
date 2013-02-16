@@ -1,5 +1,5 @@
 /****
-* Copyright 2012 Massive Interactive. All rights reserved.
+* Copyright 2013 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -29,13 +29,13 @@
 
 package massive.haxe;
 
+import massive.haxe.Exception;
+import massive.haxe.log.ILogClient;
+import massive.haxe.log.Log;
+import massive.haxe.log.LogClient;
+import massive.haxe.util.ReflectUtil;
 import massive.haxe.util.RegExpUtil;
 import massive.haxe.util.TemplateUtil;
-import massive.haxe.util.ReflectUtil;
-import massive.haxe.Exception;
-import massive.haxe.log.Log;
-import massive.haxe.log.ILogClient;
-import massive.haxe.log.LogClient;
 
 @IgnoreCover
 class AllClasses

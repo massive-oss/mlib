@@ -1,5 +1,6 @@
 .svn
 haxe/tmp/
+sys/tmp/
 report/
 bin/
 .DS_Store

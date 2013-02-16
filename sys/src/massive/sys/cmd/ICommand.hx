@@ -1,5 +1,5 @@
 /****
-* Copyright 2012 Massive Interactive. All rights reserved.
+* Copyright 2013 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -30,81 +30,66 @@
 package massive.sys.cmd;
 
 import massive.sys.cmd.Console;
-import massive.haxe.log.Log;
-import massive.sys.cmd.ICommand;
 /**
-*  An abstract base class for Commands
-*  Includes utility me
-*  thods for printing, errors and exiting to the command line
-*  */
-class Command implements ICommand
+*  A command represents a single action or task in the system. 
+*/
+interface ICommand
 {
-	public var preRequisites:Array<CommandInstance>;
-	public var postRequisites:Array<CommandInstance>;
-	public var console:Console;
-	public var data:Dynamic;
-	
-	public var skip(default, null):Bool;
-
-	public function new():Void
-	{
-		preRequisites = [];
-		postRequisites = [];
-		skip = false;
-	}
-	
-	public function setData(?data:Dynamic = null):Void
-	{
-		this.data = data;
-	}
 	
 	/**
-	* Called prior to running any dependency tasks.
-	*  An opportunity to check/prompt for command line parameters
-	*  prior to execute and after mCommand has been set. 
+	* An array of prerequisite commands required to be executred prior to the current one
 	*/
-	public function initialise():Void
-	{
-		
-	}
+	var preRequisites:Array<CommandInstance>;
+	
+	/**
+	* An array of commands to execute after the current command
+	*/
+	var postRequisites:Array<CommandInstance>;
+	
+	
+	/*
+	* Generic data object for commands. Set via setData()
+	*/
+	var data:Dynamic;
+	
+	/**
+	*  rerefence to the command line console. Used to access arguments passed through from the command line and to prompt
+	*  the user for properties 
+	*/
+	var console:Console;
+	
+	
+	var skip(default, null):Bool;
+	
+	
+	function setData(?data:Dynamic=null):Void;
+	
+	/**
+	*  Called prior to running any dependency tasks.
+	*  An opportunity to check/prompt for command line parameters
+	*  prior to execute and after console has been injected.
+	*/
+	function initialise():Void;
+
 
 	/**
 	* Called after any dependent tasks have completed.
 	* Location of command logic
 	**/
-	public function execute():Void
-	{
-	
-	}
-	
-	
-	public function addPreRequisite(commandClass:Class<ICommand>, ?data:Dynamic=null):Void
-	{
-		preRequisites.push(new CommandInstance(commandClass, data));
-	}
-	
-	public function addPostRequisite(commandClass:Class<ICommand>, ?data:Dynamic=null):Void
-	{
-		postRequisites.push(new CommandInstance(commandClass, data));
-	}
-
-	private function print(message:Dynamic):Void
-	{
-		Sys.println(Std.string(message));
-	}
-	
-	private function error(message:Dynamic, ?code:Int=1, ?posInfos:haxe.PosInfos):Void
-	{
-		print("Error: " + message);
-		Log.error(posInfos);
-		
-		exit(code);
-	}
-	
-	private function exit(?code:Int=0):Void
-	{
-		Sys.exit(code);
-	}
+	function execute():Void;
 
 }
 
+
+class CommandInstance
+{
+	public var commandClass:Class<ICommand>;
+	public var data:Dynamic;
+	
+	public function new(cmdClass:Class<ICommand>, ?data:Dynamic = null):Void
+	{
+		commandClass = cmdClass;
+		this.data = data;
+		
+	}
+}
