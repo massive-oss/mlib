@@ -43,14 +43,14 @@ class MlibSettings
 	public var resources:Array<Resource>;
 	public var bin:File;
 	
-	private var resourcesByType:Hash<Array<Resource>>;
+	private var resourcesByType:Map<String,Array<Resource>>;
 	
 	public function new(?file:File):Void
 	{
 		this.file = file;
 		
 		resources = new Array();
-		resourcesByType = new Hash();
+		resourcesByType = new Map();
 		
 		if(file != null && file.exists)
 		{

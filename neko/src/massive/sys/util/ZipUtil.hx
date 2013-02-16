@@ -57,7 +57,7 @@ class ZipUtil
 		var cwd:String = FileSys.getCwd();
 
 		// get entries
-		var entries:Array<Dynamic> = convertDirectoryToZipEntries(sourceDir, filter, exclude);
+		var entries:List<haxe.zip.Entry> = convertDirectoryToZipEntries(sourceDir, filter, exclude);
 		// zip entries
 		
 		if(!file.exists)
@@ -66,7 +66,8 @@ class ZipUtil
 		}
 		
 		var zip = sys.io.File.write(file.nativePath, true);
-		haxe.zip.Writer.writeZip(zip, entries, -1);
+		var writer = new haxe.zip.Writer(zip);
+		writer.write(entries);
 		zip.close();
 		
 		// return to previous working directory
@@ -74,22 +75,31 @@ class ZipUtil
 
 	}
 	
-	public static function convertDirectoryToZipEntries(dir:File, ?filter:EReg, ?exclude:Bool=false):Array<Dynamic>
+	public static function convertDirectoryToZipEntries(dir:File, ?filter:EReg, ?exclude:Bool=false):List<haxe.zip.Entry>
 	{
 		var files:Array<File> = dir.getRecursiveDirectoryListing(filter, exclude);
 
-		var entries:Array<Dynamic> = [];
+		var entries:List<haxe.zip.Entry> = new List();
 
 		var date = Date.now();
 			
 		for (file in files)
 		{
+			var stat = sys.FileSystem.stat(file.nativePath);
 			var bytes:Bytes = file.isDirectory ? null: sys.io.File.getBytes(file.nativePath);
 			var name:String = dir.getRelativePath(file) + (file.isDirectory ? File.seperator : "");
-			var entry = { fileTime:date, fileName:name, data:bytes };
+			var entry = {
+				fileTime:date,
+				fileName:name,
+				fileSize:stat.size,
+				data:bytes,
+				dataSize:bytes.length,
+				compressed:true,
+				crc32:1
+			}
 			
 			//Sys.print("Added " + entry.fileName + "\n");
-			entries.push(entry);
+			entries.add(entry);
 		}
 		
 		return entries;

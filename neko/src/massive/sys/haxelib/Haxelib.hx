@@ -43,7 +43,7 @@ class Haxelib
 	public var user:String;
 	
 	public var tags:Array<String>;
-	public var dependencies:Hash<String>;
+	public var dependencies:Map<String,String>;
 	
 	public var description:String;
 	public var version(get_version, set_version):String;
@@ -64,7 +64,7 @@ class Haxelib
 		
 		user = "";
 		tags = [];
-		dependencies = new Hash();
+		dependencies = new Map();
 		description = "";
 		versionDescription = "";
 		

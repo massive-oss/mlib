@@ -69,7 +69,7 @@ class File
 	public static var current(get_current, null):File;
 
 	private static var tempCount:Int = 0;
-	private static var temp:Hash<File> = new Hash();
+	private static var temp:Map<String,File> = new Map();
 	
 	private static function get_current():File
 	{
@@ -181,7 +181,7 @@ class File
 				}
 			}
 		}
-		temp = new Hash();
+		temp = new Map();
 	}
 	
 	/**

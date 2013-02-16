@@ -67,8 +67,8 @@ class Console
 	
 	public var dir(default, null):File;
 	
-	/** Hash of all command line arguments starting with a dash (e.g. '-foo bar') **/
-	public var options:Hash<String>;
+	/** Map of all command line arguments starting with a dash (e.g. '-foo bar') **/
+	public var options:Map<String,String>;
 
 
 	/** Array of all command line arguments not starting with a dash **/
@@ -98,7 +98,7 @@ class Console
 	{
 		dir = null;
 		args = [];
-		options = new Hash();
+		options = new Map();
 		currentArg = 0;
 		
 		parseArguments(systemArgs);
@@ -192,7 +192,7 @@ class Console
 		#if haxe_209
 			var str:String = Sys.stdin().readLine();
 		#else
-			var str:String = sys.io.File.stdin().readLine();
+			var str:String = Sys.stdin().readLine();
 		#end
 		
 		if(str.length == 0)
@@ -262,7 +262,7 @@ class Console
 			dir = originalDir;
 		}
 		
-		options = new Hash();
+		options = new Map();
 	
 		
 		var option:String = null;
