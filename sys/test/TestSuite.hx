@@ -1,12 +1,12 @@
 import massive.munit.TestSuite;
 
 import ExampleTest;
-import massive.neko.cmd.CommandLineRunnerTest;
-import massive.neko.cmd.CommandTest;
-import massive.neko.cmd.ConsoleTest;
-import massive.neko.io.FileTest;
-import massive.neko.util.PathUtilTest;
-import massive.neko.util.ZipUtilTest;
+import massive.sys.cmd.CommandLineRunnerTest;
+import massive.sys.cmd.CommandTest;
+import massive.sys.cmd.ConsoleTest;
+import massive.sys.io.FileTest;
+import massive.sys.util.PathUtilTest;
+import massive.sys.util.ZipUtilTest;
 
 /**
  * Auto generated Test Suite for MassiveUnit.
@@ -21,11 +21,11 @@ class TestSuite extends massive.munit.TestSuite
 		super();
 
 		add(ExampleTest);
-		add(massive.neko.cmd.CommandLineRunnerTest);
-		add(massive.neko.cmd.CommandTest);
-		add(massive.neko.cmd.ConsoleTest);
-		add(massive.neko.io.FileTest);
-		add(massive.neko.util.PathUtilTest);
-		add(massive.neko.util.ZipUtilTest);
+		add(massive.sys.cmd.CommandLineRunnerTest);
+		add(massive.sys.cmd.CommandTest);
+		add(massive.sys.cmd.ConsoleTest);
+		add(massive.sys.io.FileTest);
+		add(massive.sys.util.PathUtilTest);
+		add(massive.sys.util.ZipUtilTest);
 	}
 }

@@ -3,11 +3,13 @@ package massive.sys.util;
 import massive.munit.util.Timer;
 import massive.munit.Assert;
 import massive.munit.async.AsyncFactory;
-
 import massive.sys.io.File;
 import massive.sys.util.ZipUtil;
 import massive.sys.cmd.Console;
 
+import haxe.zip.Writer;
+import haxe.zip.Reader;
+import haxe.zip.Entry;
 
 class ZipUtilTest 
 {
@@ -64,12 +66,12 @@ class ZipUtilTest
 		var dir:File = current.resolvePath("tmp1");
 		var file:File = dir.resolvePath("file.txt", true);
 		
-		var files:Array<Dynamic> = ZipUtil.convertDirectoryToZipEntries(dir);
+		var files:List<Entry> = ZipUtil.convertDirectoryToZipEntries(dir);
 		
 		Assert.isTrue(files.length == 1);
 		
-		var entry:Dynamic = files[0];
-
+		var entry:Entry = files.first();
+		
 		Assert.areEqual("file.txt", entry.fileName);
 		Assert.isNotNull(entry.data);
 		Assert.isNotNull(entry.fileTime);
@@ -78,7 +80,8 @@ class ZipUtilTest
 		{
 			var zipFile:File = current.resolvePath("tmp.zip");
 			var zip = sys.io.File.write(zipFile.nativePath, true);
-			haxe.zip.Writer.writeZip(zip, files, -1);
+			var writer = new Writer(zip);
+			writer.write(files);
 			zip.close();
 			Assert.isTrue(zipFile.exists);
 		}

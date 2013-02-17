@@ -6,3 +6,5 @@ bin/
 .DS_Store
 .mcover
 /mlib.sublime-workspace
+/sys/.temp/
+/haxe/.temp/
