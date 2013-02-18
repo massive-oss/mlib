@@ -29,7 +29,6 @@ import massive.munit.TestRunner;
 
 #if js
 import js.Lib;
-import js.Dom;
 #end
 
 /**
@@ -73,7 +72,7 @@ class TestMain
                 flash.external.ExternalInterface.call("testResult", successful);
             #elseif js
                 js.Lib.eval("testResult(" + successful + ");");
-            #elseif neko
+            #elseif sys
                 Sys.exit(0);
             #end
         }
