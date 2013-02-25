@@ -1,7 +1,7 @@
 # Flash 9+
 -main massive.haxe.AllClasses
 -cp src
--swf9 ../bin/haxe_all.swf
+-swf ../bin/haxe_all.swf
 
 --next
 
@@ -9,6 +9,7 @@
 -main massive.haxe.AllClasses
 -cp src
 -swf ../bin/haxe8_all.swf
+-swf-version 8
 
 --next
 
