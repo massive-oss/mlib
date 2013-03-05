@@ -29,16 +29,20 @@
 
 package massive.sys.util;
 
-import Sys;
 import massive.sys.io.FileSys;
 import haxe.io.Path;
-
-import haxe.zip.Reader;
-import haxe.zip.Writer;
 import haxe.io.Bytes;
-
 import massive.sys.io.File;
 import sys.FileSystem;
+
+#if haxe3
+import haxe.zip.Reader;
+import haxe.zip.Writer;
+#else
+import neko.zip.Reader;
+import neko.zip.Writer;
+private typedef Entry = neko.zip.Reader.ZipEntry;
+#end
 
 class ZipUtil
 {
@@ -57,7 +61,7 @@ class ZipUtil
 		var cwd:String = FileSys.getCwd();
 
 		// get entries
-		var entries:List<haxe.zip.Entry> = convertDirectoryToZipEntries(sourceDir, filter, exclude);
+		var entries:List<Entry> = convertDirectoryToZipEntries(sourceDir, filter, exclude);
 		// zip entries
 		
 		if(!file.exists)
@@ -66,8 +70,12 @@ class ZipUtil
 		}
 		
 		var zip = sys.io.File.write(file.nativePath, true);
-		var writer = new haxe.zip.Writer(zip);
+		#if haxe3
+		var writer = new Writer(zip);
 		writer.write(entries);
+		#else
+		Writer.writeZip(zip, entries, 1);
+		#end
 		zip.close();
 		
 		// return to previous working directory
@@ -75,11 +83,11 @@ class ZipUtil
 
 	}
 	
-	public static function convertDirectoryToZipEntries(dir:File, ?filter:EReg, ?exclude:Bool=false):List<haxe.zip.Entry>
+	public static function convertDirectoryToZipEntries(dir:File, ?filter:EReg, ?exclude:Bool=false):List<Entry>
 	{
 		var files:Array<File> = dir.getRecursiveDirectoryListing(filter, exclude);
 
-		var entries:List<haxe.zip.Entry> = new List();
+		var entries:List<Entry> = new List();
 
 		var date = Date.now();
 			
@@ -89,7 +97,9 @@ class ZipUtil
 
 			var bytes:Bytes = file.isDirectory ? null: sys.io.File.getBytes(file.nativePath);
 			var name:String = dir.getRelativePath(file) + (file.isDirectory ? File.seperator : "");
-			var entry = {
+			
+			#if haxe3
+			var entry:Entry = {
 				fileTime:date,
 				fileName:name,
 				fileSize:stat.size,
@@ -99,6 +109,19 @@ class ZipUtil
 				crc32:0,
 				extraFields:new List()
 			}
+
+			#else
+			var entry:Entry = {
+				fileName : name,
+				fileSize : stat.size,
+				fileTime : date,
+				compressed : false,
+				compressedSize : 0,
+				data : bytes,
+				crc32 : null
+			}
+			#end
+
 			
 			//Sys.print("Added " + entry.fileName + "\n");
 			entries.add(entry);

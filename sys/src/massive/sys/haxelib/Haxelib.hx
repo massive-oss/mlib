@@ -32,6 +32,12 @@ package massive.sys.haxelib;
 import haxe.xml.Fast;
 import massive.sys.io.File;
 
+#if haxe3
+import haxe.ds.StringMap;
+#else
+private typedef StringMap<T> = Hash<T>;
+#end
+
 class Haxelib
 {	
 	public var file(default, set_file):File;
@@ -43,7 +49,7 @@ class Haxelib
 	public var user:String;
 	
 	public var tags:Array<String>;
-	public var dependencies:Map<String,String>;
+	public var dependencies:StringMap<String>;
 	
 	public var description:String;
 	public var version(get_version, set_version):String;
@@ -64,7 +70,7 @@ class Haxelib
 		
 		user = "";
 		tags = [];
-		dependencies = new Map();
+		dependencies = new StringMap();
 		description = "";
 		versionDescription = "";
 		

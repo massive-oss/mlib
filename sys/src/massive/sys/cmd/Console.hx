@@ -38,6 +38,11 @@ import Sys;
 import massive.haxe.log.Log;
 import sys.io.Process;
 
+#if haxe3
+import haxe.ds.StringMap;
+#else
+private typedef StringMap<T> = Hash<T>;
+#end
 /**
 *  Command Line Interface
 *  
@@ -68,7 +73,7 @@ class Console
 	public var dir(default, null):File;
 	
 	/** Map of all command line arguments starting with a dash (e.g. '-foo bar') **/
-	public var options:Map<String,String>;
+	public var options:StringMap<String>;
 
 
 	/** Array of all command line arguments not starting with a dash **/
@@ -98,7 +103,7 @@ class Console
 	{
 		dir = null;
 		args = [];
-		options = new Map();
+		options = new StringMap();
 		currentArg = 0;
 		
 		parseArguments(systemArgs);
@@ -262,7 +267,7 @@ class Console
 			dir = originalDir;
 		}
 		
-		options = new Map();
+		options = new StringMap();
 	
 		
 		var option:String = null;

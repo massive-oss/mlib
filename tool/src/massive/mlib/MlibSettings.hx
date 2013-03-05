@@ -35,6 +35,12 @@ import massive.sys.util.PathUtil;
 import massive.haxe.util.RegExpUtil;
 import massive.haxe.Exception;
 
+#if haxe3
+import haxe.ds.StringMap;
+#else
+private typedef StringMap<T> = Hash<T>;
+#end
+
 class MlibSettings
 {
 	public var file(default, set_file):File;
@@ -43,14 +49,14 @@ class MlibSettings
 	public var resources:Array<Resource>;
 	public var bin:File;
 	
-	private var resourcesByType:Map<String,Array<Resource>>;
+	private var resourcesByType:StringMap<Array<Resource>>;
 	
 	public function new(?file:File):Void
 	{
 		this.file = file;
 		
 		resources = new Array();
-		resourcesByType = new Map();
+		resourcesByType = new StringMap();
 		
 		if(file != null && file.exists)
 		{

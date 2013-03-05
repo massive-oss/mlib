@@ -86,32 +86,30 @@ class Log
 	
 	public static function convertLogLevelToInt(type:LogLevel):Int
 	{
-		var r = switch(type)
+		return switch(type)
 		{
-			case all:0;
-			case debug:1;
-			case info:2;
-			case warn:3;
-			case error:4;
-			case fatal:5;
-			case console:100;
+			case LogLevel.all:0;
+			case LogLevel.debug:1;
+			case LogLevel.info:2;
+			case LogLevel.warn:3;
+			case LogLevel.error:4;
+			case LogLevel.fatal:5;
+			case LogLevel.console:100;
 		}
-		return r;
 	}
 	
 	public static function convertLogLevelToString(type:LogLevel):String
 	{
-		var r = switch(type)
+		return switch(type)
 		{
-			case all:"all";
-			case debug:"debug";
-			case info:"info";
-			case warn:"warn";
-			case error:"error";
-			case fatal:"fatal";
-			case console:"";
+			case LogLevel.all:"all";
+			case LogLevel.debug:"debug";
+			case LogLevel.info:"info";
+			case LogLevel.warn:"warn";
+			case LogLevel.error:"error";
+			case LogLevel.fatal:"fatal";
+			case LogLevel.console:"";
 		}
-		return r;
 	}
 	
 	public static function setLogLevelFromString(type:String):Void
