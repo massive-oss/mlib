@@ -4,6 +4,6 @@
 	<tag v="sys" />
 	<tag v="haxelib" />
 	<tag v="massive" />
-	<description>Lightwieght framework for implementing command line driven haxelib (and neko) tools, and for automating the packaging/management of Haxelib libraries.</description>
-	<version name="0.4.3">Fix for HaxeWrapper and hxcpp errors (bug in nekovm)</version>
+	<description>Lightweight framework for implementing command line driven haxelib (and neko) tools, and for automating the packaging/management of Haxelib libraries.</description>
+	<version name="2.0.0">Updated for Haxe 3.</version>
 </project>

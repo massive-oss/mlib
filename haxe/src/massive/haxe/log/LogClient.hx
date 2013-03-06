@@ -1,5 +1,5 @@
 /****
-* Copyright 2012 Massive Interactive. All rights reserved.
+* Copyright 2013 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -50,8 +50,8 @@ class LogClient implements ILogClient
 			msg = Std.string(level) + ": " + message;
 		}
 		
-		#if neko
-		neko.Lib.println(msg);
+		#if sys
+		Sys.println(msg);
 		#else
 		trace(msg);
 		#end

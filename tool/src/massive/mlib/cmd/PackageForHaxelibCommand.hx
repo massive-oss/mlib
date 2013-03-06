@@ -1,5 +1,5 @@
 /****
-* Copyright 2012 Massive Interactive. All rights reserved.
+* Copyright 2013 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -29,15 +29,15 @@
 
 package massive.mlib.cmd;
 
-import massive.neko.haxelib.Haxelib;
-import massive.neko.io.File;
+import massive.sys.haxelib.Haxelib;
+import massive.sys.io.File;
 import massive.haxe.log.Log;
 import massive.haxe.Exception;
 
-import massive.neko.util.ZipUtil;
-import massive.neko.haxelib.HaxelibTools;
+import massive.sys.util.ZipUtil;
+import massive.sys.haxelib.HaxelibTools;
 import massive.haxe.util.RegExpUtil;
-import massive.neko.util.PathUtil;
+import massive.sys.util.PathUtil;
 
 class PackageForHaxelibCommand extends MlibCommand
 {

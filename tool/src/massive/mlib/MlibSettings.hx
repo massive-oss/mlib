@@ -1,5 +1,5 @@
 /****
-* Copyright 2012 Massive Interactive. All rights reserved.
+* Copyright 2013 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -29,11 +29,17 @@
 
 package massive.mlib;
 
-import massive.neko.io.File;
+import massive.sys.io.File;
 import haxe.xml.Fast;
-import massive.neko.util.PathUtil;
+import massive.sys.util.PathUtil;
 import massive.haxe.util.RegExpUtil;
 import massive.haxe.Exception;
+
+#if haxe3
+import haxe.ds.StringMap;
+#else
+private typedef StringMap<T> = Hash<T>;
+#end
 
 class MlibSettings
 {
@@ -43,14 +49,14 @@ class MlibSettings
 	public var resources:Array<Resource>;
 	public var bin:File;
 	
-	private var resourcesByType:Hash<Array<Resource>>;
+	private var resourcesByType:StringMap<Array<Resource>>;
 	
 	public function new(?file:File):Void
 	{
 		this.file = file;
 		
 		resources = new Array();
-		resourcesByType = new Hash();
+		resourcesByType = new StringMap();
 		
 		if(file != null && file.exists)
 		{

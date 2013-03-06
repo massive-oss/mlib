@@ -1,5 +1,5 @@
 /****
-* Copyright 2012 Massive Interactive. All rights reserved.
+* Copyright 2013 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -28,8 +28,8 @@
 ****/
 
 package massive.mlib.cmd;
-import massive.neko.cmd.Command;
-import massive.neko.haxelib.Haxelib;
+import massive.sys.cmd.Command;
+import massive.sys.haxelib.Haxelib;
 import massive.mlib.MlibSettings;
 
 class MlibCommand extends Command

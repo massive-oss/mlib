@@ -1,5 +1,0 @@
-# Neko
--main massive.neko.AllClasses
--cp src
--cp ../haxe/src
--neko ../bin/neko_all.n

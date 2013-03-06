@@ -3,16 +3,8 @@
 -lib munit
 -cp test
 -cp src
--swf9 ../bin/haxe_test.swf
-
---next
-
-#Flash 8
--main TestMain
--lib munit
--cp test
--cp src
--swf ../bin/haxe8_test.swf
+-swf ../bin/haxe_test.swf
+-swf-version 11
 
 --next
 

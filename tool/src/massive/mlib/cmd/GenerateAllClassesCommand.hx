@@ -1,5 +1,5 @@
 /****
-* Copyright 2012 Massive Interactive. All rights reserved.
+* Copyright 2013 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -30,9 +30,9 @@
 package massive.mlib.cmd;
 
 import massive.haxe.util.RegExpUtil;
-import massive.neko.io.File;
+import massive.sys.io.File;
 import massive.haxe.log.Log;
-import massive.neko.util.PathUtil;
+import massive.sys.util.PathUtil;
 import massive.mlib.MlibSettings;
 
 class GenerateAllClassesCommand extends MlibCommand
