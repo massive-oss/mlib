@@ -309,7 +309,7 @@ class Haxelib
 	
 	private function set_license(value:String):String
 	{
-		var types:Array<String> = ["GPL", "LGPL", "BSD", "Public"];
+		var types:Array<String> = ["MIT","GPL", "LGPL", "BSD", "Public"];
 		
 		for(type in types)
 		{

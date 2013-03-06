@@ -1,8 +1,8 @@
+## builds the mlib neko tool
+
 -main massive.mlib.Mlib
 -cp src
--cp ../sys/src
--cp ../haxe/src
--neko ../mlib.n
+-neko mlib.n
 
 -resource templates/help_allClasses.txt@help_allClasses
 -resource templates/help_config.txt@help_config
@@ -12,3 +12,5 @@
 -resource templates/help_package.txt@help_package
 -resource templates/help_submit.txt@help_submit
 -resource templates/help_version.txt@help_version
+
+-cmd cp mlib.n src/run.n

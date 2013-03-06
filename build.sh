@@ -1,34 +1,23 @@
 #!/bin/bash
 set -e
 
+## clear bin directory
 mkdir -p bin
 
-#build tool
-echo ' build tool src'
-cd tool
-haxe build.hxml
-cd ../
-
-#neko mlib.n license
-
-#update allClasses imports
-neko mlib.n allClasses
-
-#compile libraries
-echo ' build haxe src'
-cd haxe
+## build tool
 haxe build.hxml
 
-echo ' build neko src'
-cd ../sys
-haxe build.hxml
+## copy runner into src directory
+cp mlib.n src/run.n
 
-cd ../
-
-#package up and install over current version
-neko mlib.n install
-
-#run tests
+## run tests
 bash test.sh
 
+## package up and install over current version
+neko mlib.n install
+
+
+haxelib run mlib help
+
+## submit to haxelib
 #neko mlib.n submit

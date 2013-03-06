@@ -1,7 +1,0 @@
-# Neko
--main TestMain
--lib munit
--cp test
--cp src
--cp ../haxe/src
--neko ../bin/sys_test.n

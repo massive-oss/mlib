@@ -1,6 +1,5 @@
-<project name="mlib" url="https://github.com/massiveinteractive/MassiveLib" license="BSD">
+<project name="mlib" url="https://github.com/massiveinteractive/MassiveLib" license="MIT">
 	<user name="massive"/>
-	<tag v="neko" />
 	<tag v="sys" />
 	<tag v="haxelib" />
 	<tag v="massive" />

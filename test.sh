@@ -1,7 +1,10 @@
 #!/bin/bash
 set -e
 
-cd haxe
+cd test/haxe
 haxelib run munit test -coverage
+
 cd ../sys
-haxelib run munit test -neko -coverage
+haxelib run munit test -coverage
+
+cd ../../

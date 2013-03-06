@@ -27,26 +27,36 @@
 * 
 ****/
 
-package massive.mlib;
+package massive.mlib.cmd;
 
-import massive.mlib.cmd.ConfigMlibCommand;
-import massive.mlib.cmd.GenerateAllClassesCommand;
-import massive.mlib.cmd.IncrementHaxelibVersionCommand;
-import massive.mlib.cmd.InstallToHaxelibCommand;
-import massive.mlib.cmd.MlibCommand;
-import massive.mlib.cmd.PackageForHaxelibCommand;
-import massive.mlib.cmd.PreProcessHxmlCommand;
-import massive.mlib.cmd.SubmitToHaxelibCommand;
-import massive.mlib.cmd.UpdateSourceLicenseCommand;
-import massive.mlib.Mlib;
+import massive.haxe.util.RegExpUtil;
+import massive.sys.io.File;
+import massive.haxe.log.Log;
+import massive.sys.util.PathUtil;
 import massive.mlib.MlibSettings;
 
-@IgnoreCover
-class AllClasses
+class GenerateAllClassesCommand extends MlibCommand
 {
-@IgnoreCover
-	public static function main():AllClasses {return new AllClasses();}
-@IgnoreCover
-	public function new(){trace('This is a generated main class');}
-}
+	public function new():Void
+	{
+		super();
+	}
 
+	override public function execute():Void
+	{
+		print("Error: allClasses command has been removed");
+		print("    ");
+		print("    This command was intended as a catch all to ensure all classes within");
+		print("    a lib were compilable prior to release.");
+		print("    ");
+		print("    The same result can be achieved using munit and mcover.");
+		print("    ");
+		print("        munit test -coverage");
+		print("    ");
+		print("    To only test a specific package or src update munit config in the project");
+		print("    ");
+		print("        coveragePackages=foo.bar");
+		print("    ");
+	}
+	
+}

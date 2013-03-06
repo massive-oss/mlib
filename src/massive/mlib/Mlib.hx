@@ -62,7 +62,12 @@ class Mlib extends CommandLineRunner
 	{
 		super();
 		
-		haxelib = new Haxelib(console.dir.resolveFile("haxelib.xml"));
+		var haxelibFile = console.dir.resolveFile("src/haxelib.xml");
+		if(!haxelibFile.exists)
+			haxelibFile = console.dir.resolveFile("haxelib.xml");
+		
+		haxelib = new Haxelib(haxelibFile);
+		
 		settings = new MlibSettings(console.dir.resolveFile(".mlib"));
 		
 		if(settings.file.exists)
@@ -71,7 +76,7 @@ class Mlib extends CommandLineRunner
 		}
 	
 		mapCommand(ConfigMlibCommand, "config", ["c"], "Creates a .mlib config and haxelib.xml file in the current directory", TemplateUtil.getTemplate("help_config"));
-		mapCommand(GenerateAllClassesCommand, "allClasses", ["all"], "Imports all classes within a src package into a central 'AllClasses.hx' class", TemplateUtil.getTemplate("help_allClasses"));
+		mapCommand(GenerateAllClassesCommand, "allClasses", ["all"], "Imports all classes within a src package into a central 'AllClasses.hx' class", TemplateUtil.getTemplate("help_allClasses"),true);
 		
 		mapCommand(UpdateSourceLicenseCommand, "license", ["l"], "Replaces the license text in the header of all hx files within a src directory", TemplateUtil.getTemplate("help_license"));
 		mapCommand(IncrementHaxelibVersionCommand, "incrementVersion", ["v"], "Increments the version number in the haxleib manifest (haxelib.xml)", TemplateUtil.getTemplate("help_version"));
