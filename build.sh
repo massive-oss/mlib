@@ -11,7 +11,13 @@ haxe build.hxml
 cp mlib.n src/run.n
 
 ## run tests
-bash test.sh
+cd test/haxe
+haxelib run munit test -coverage
+
+cd ../sys
+haxelib run munit test -coverage
+
+cd ../../
 
 ## package up and install over current version
 neko mlib.n install
