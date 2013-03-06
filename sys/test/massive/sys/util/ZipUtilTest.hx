@@ -86,8 +86,13 @@ class ZipUtilTest
 		{
 			var zipFile:File = current.resolvePath("tmp.zip");
 			var zip = sys.io.File.write(zipFile.nativePath, true);
+
+			#if haxe3
 			var writer = new Writer(zip);
 			writer.write(files);
+			#else
+			Writer.writeZip(zip, files);
+			#end
 			zip.close();
 			Assert.isTrue(zipFile.exists);
 		}

@@ -38,6 +38,7 @@ import sys.FileSystem;
 #if haxe3
 import haxe.zip.Reader;
 import haxe.zip.Writer;
+import haxe.zip.Entry;
 #else
 import neko.zip.Reader;
 import neko.zip.Writer;
