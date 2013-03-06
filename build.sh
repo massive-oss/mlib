@@ -25,10 +25,10 @@ haxe build.hxml
 
 cd ../
 
-#run tests
-bash test.sh
-
 #package up and install over current version
 neko mlib.n install
+
+#run tests
+bash test.sh
 
 #neko mlib.n submit
