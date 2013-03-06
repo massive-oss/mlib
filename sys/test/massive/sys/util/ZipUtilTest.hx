@@ -7,9 +7,15 @@ import massive.sys.io.File;
 import massive.sys.util.ZipUtil;
 import massive.sys.cmd.Console;
 
+#if haxe3
 import haxe.zip.Writer;
 import haxe.zip.Reader;
 import haxe.zip.Entry;
+#else
+import neko.zip.Writer;
+import neko.zip.Reader;
+typedef Entry = neko.zip.Reader.ZipEntry
+#end
 
 class ZipUtilTest 
 {
