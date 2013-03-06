@@ -4,9 +4,11 @@ MassiveLib
 Summary
 ---------------------
 
-Massive Interactive public haXe libraries containing utilities and tools for developing simple command line driven neko and haxelib tools.
+MLib is a collection of commandline and system utilities for developing simple command line driven neko and haxelib tools.
 
-mlib provides a lightweight command based structure for rapidly developing command line tools in neko. It's used to to develop and deploy various haxelib projects including mlib itself!
+mlib provides a lightweight command based structure for rapidly developing command line tools in neko. It's used to to develop and deploy various haxelib projects including mlib and munit.
+
+MLib supports Haxe 2.10 and Haxe 3 RC
 
 
 ### Installing
