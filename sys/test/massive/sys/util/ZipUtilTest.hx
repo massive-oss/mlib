@@ -91,7 +91,7 @@ class ZipUtilTest
 			var writer = new Writer(zip);
 			writer.write(files);
 			#else
-			Writer.writeZip(zip, files);
+			neko.zip.Writer.writeZip(zip, files, -1);
 			#end
 			zip.close();
 			Assert.isTrue(zipFile.exists);

@@ -75,7 +75,7 @@ class ZipUtil
 		var writer = new Writer(zip);
 		writer.write(entries);
 		#else
-		Writer.writeZip(zip, entries, 1);
+		Writer.writeZip(zip, entries, -1);
 		#end
 		zip.close();
 		
