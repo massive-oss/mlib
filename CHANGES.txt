@@ -1,0 +1,10 @@
+### 2.0.0
+
+Change List
+
+- Added Haxe3 support
+- renamed massive.neko to massive.sys
+- Reorganised src structure to support haxelib dev path
+- Removed allClasses command
+- added "MIT" to license types in massive.sys.haxelib
+- added support for haxelib.xml file inside src directory

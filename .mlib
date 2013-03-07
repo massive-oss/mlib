@@ -1,8 +1,6 @@
 <mlib bin="bin">
 	<resources>
-		<resource type="src" path="haxe/src" dest="" />
-		<resource type="src" path="neko/src" dest="" />
-		<resource type="src" path="tool/src" dest="" />
+		<resource type="src" path="src" dest="" />
 		<resource type="run" path="mlib.n" />
 		<resource type="license" path="resource/license.mtt" />
 	</resources>	

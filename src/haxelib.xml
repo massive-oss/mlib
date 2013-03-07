@@ -1,0 +1,8 @@
+<project name="mlib" url="https://github.com/massiveinteractive/MassiveLib" license="MIT">
+	<user name="massive"/>
+	<tag v="sys" />
+	<tag v="haxelib" />
+	<tag v="massive" />
+	<description>Lightweight framework for implementing command line driven haxelib (and neko) tools, and for automating the packaging/management of Haxelib libraries.</description>
+	<version name="2.0.0">Updated for Haxe 3.</version>
+</project>

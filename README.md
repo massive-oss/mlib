@@ -4,9 +4,11 @@ MassiveLib
 Summary
 ---------------------
 
-Massive Interactive public haXe libraries containing utilities and tools for developing simple command line driven neko and haxelib tools.
+MLib is a collection of commandline and system utilities for developing simple command line driven neko and haxelib tools.
 
-mlib provides a lightweight command based structure for rapidly developing command line tools in neko. It's used to to develop and deploy various haxelib projects including mlib itself!
+mlib provides a lightweight command based structure for rapidly developing command line tools in neko. It's used to to develop and deploy various haxelib projects including mlib and munit.
+
+MLib supports Haxe 2.10 and Haxe 3 RC
 
 
 ### Installing
@@ -18,7 +20,7 @@ mlib provides a lightweight command based structure for rapidly developing comma
 Mlib includes several haxe and neko src packages:
 
 *	massive.haxe (cross platform haxe APIs)
-*	massive.neko (neko specific APIs for file access, command line, haxe and haxelib integration)
+*	massive.sys (neko specific APIs for file access, command line, haxe and haxelib integration)
 *	massive.mlib (command line tool (mlib) for managing development and deployment of haxelib projects)
 
 
@@ -26,7 +28,7 @@ Mlib includes several haxe and neko src packages:
 
 **Expanded File APIs**
 
-See [massive.neko.io.File](https://github.com/massiveinteractive/MassiveLib/blob/master/neko/src/massive/neko/io/File.hx)
+See [massive.sys.io.File](https://github.com/massiveinteractive/MassiveLib/blob/master/src/massive/sys/io/File.hx)
 
 *	recursive dir copy/move/delete
 *	platform safe resolution of file paths
@@ -34,14 +36,14 @@ See [massive.neko.io.File](https://github.com/massiveinteractive/MassiveLib/blob
 
 **Simplified access to command line**
 
-See  [massive.neko.cmd.Console](https://github.com/massiveinteractive/MassiveLib/blob/master/neko/src/massive/neko/cmd/Console.hx)
+See  [massive.sys.cmd.Console](https://github.com/massiveinteractive/MassiveLib/blob/master/src/massive/sys/cmd/Console.hx)
 
 *	separation of raw system arg into arguments ('foo') and options (-foo bar)
 *	automatic detection and updating of working directory when running in haxelib libraries
 *	convenience methods for prompting user input
 
 **Command line tool runner**
-See [massive.neko.cmd.CommandLineRunner](https://github.com/massiveinteractive/MassiveLib/blob/master/neko/src/massive/neko/cmd/CommandLineRunner.hx)
+See [massive.sys.cmd.CommandLineRunner](https://github.com/massiveinteractive/MassiveLib/blob/master/src/massive/sys/cmd/CommandLineRunner.hx)
 
 *	lightweight interface for mapping command line arguments to Command classes
 *	automatic generation of command line *help* and command and  
@@ -69,7 +71,6 @@ It provides utility functions for the following:
 ### Available commands
 
 	config (c) : Creates a .mlib config and haxelib.xml file in the current directory
-	allClasses (all) : Imports all classes within a src package into a central 'AllClasses.hx' class
 	license (l) : Replaces the license text in the header of all hx files within a src directory
 	incrementVersion (v) : Increments the version number in the haxleib manifest (haxelib.xml)
 	package (p) : Packages and zips up the current project for haxelib
@@ -115,6 +116,35 @@ resource **type** is an optional attribute to indicate a special type of resourc
 *	**license**: a text file to use to generate copyright/license info across all classes in src packages. This type is used as the default location by the 'license' command  
 
 
+## Building From Source
 
 
-More documentation to come...
+1. run the build.hxml file to compile the test runner
+		haxe build.hxml
+2. copy mlib.n to src/run.n
+		cp mlib src/run.n
+3. Set haxelib dev path to src directory
+		haxelib dev mlib `pwd`/src
+
+
+## Changes
+
+
+### 2.0.0
+
+This release adds support for Haxe 3.
+
+It includes no major feature changes.
+
+Upgrading
+
+- update references to `massive.neko` to `massive.sys`
+
+Change List
+
+- Added Haxe3 support
+	- renamed massive.neko to massive.sys
+- Reorganised src structure to support haxelib dev path
+- Removed allClasses command
+
+
