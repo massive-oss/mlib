@@ -4,6 +4,6 @@
 	"id":"mlib",
 	"dependencies": 
 	{
-
+		"mtask":"1.x"
 	}
 }
