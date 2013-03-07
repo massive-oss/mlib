@@ -4,6 +4,8 @@
 	"id":"mlib",
 	"dependencies": 
 	{
-		"mtask":"1.x"
+		"mtask":"1.x",
+		"munit":"2.x",
+		"mcover":"2.x"
 	}
 }
