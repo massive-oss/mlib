@@ -7,9 +7,6 @@ mkdir -p bin
 ## build tool
 haxe build.hxml
 
-## copy runner into src directory
-cp mlib.n src/run.n
-
 ## run tests
 cd test/haxe
 haxelib run munit test -coverage
