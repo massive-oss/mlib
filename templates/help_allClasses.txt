@@ -1,0 +1,14 @@
+Error: allClasses has been removed
+
+    This command was intended as a catch all to ensure all classes within
+    a lib were compilable prior to release.
+
+    The same result can be achieved using munit and mcover.
+        
+        munit test -coverage
+
+    To only test a specific package or src update munit config in the project
+
+        coveragePackages=foo.bar
+
+

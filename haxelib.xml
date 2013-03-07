@@ -1,9 +1,0 @@
-<project name="mlib" url="https://github.com/massiveinteractive/MassiveLib" license="BSD">
-	<user name="massive"/>
-	<tag v="neko" />
-	<tag v="sys" />
-	<tag v="haxelib" />
-	<tag v="massive" />
-	<description>Lightwieght framework for implementing command line driven haxelib (and neko) tools, and for automating the packaging/management of Haxelib libraries.</description>
-	<version name="0.4.3">Fix for HaxeWrapper and hxcpp errors (bug in nekovm)</version>
-</project>

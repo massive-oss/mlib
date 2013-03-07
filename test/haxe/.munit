@@ -1,0 +1,7 @@
+version=2.0
+src=test
+bin=../../bin
+report=../../report/haxe
+hxml=test.hxml
+classPaths=../../src
+coveragePackages=massive.haxe
