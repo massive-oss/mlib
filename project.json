@@ -1,11 +1,14 @@
 {
-	"name":"MassiveLib",
-	"version":"2.0.0",
-	"id":"mlib",
-	"dependencies": 
+	"project":
 	{
-		"mtask":"1.x",
-		"munit":"2.x",
-		"mcover":"2.x"
+		"name":"MassiveLib",
+		"version":"2.0.1",
+		"id":"mlib",
+		"devDependencies": 
+		{
+			"mtask":">=1.4 <2",
+			"munit":"2.x",
+			"mcover":"2.x"
+		}
 	}
 }
