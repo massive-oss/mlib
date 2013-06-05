@@ -1,0 +1,14 @@
+{
+	"name": "mlib",
+	"license": "MIT",
+	"tags": ["cross","utility","tools","massive"],
+	"description": "A cross platform unit testing framework for Haxe with metadata test markup and tools for generating, compiling and running tests from the command line.",
+	"contributors": ["massive"],
+	"releasenote": "Add haxelib.json ready to release to new haxelib.",
+	"version": "2.0.2",
+	"url": "http://github.com/massiveinteractive/MassiveUnit",
+	"dependencies": 
+	{
+
+	}
+}
