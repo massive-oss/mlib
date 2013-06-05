@@ -2,11 +2,11 @@
 	"project":
 	{
 		"name":"MassiveLib",
-		"version":"2.0.1",
+		"version":"2.0.2",
 		"id":"mlib",
 		"devDependencies": 
 		{
-			"mtask":">=1.4 <2",
+			"mtask":"2.x",
 			"munit":"2.x",
 			"mcover":"2.x"
 		}
