@@ -60,9 +60,9 @@ class Mlib extends CommandLineRunner
 	{
 		super();
 		
-		var haxelibFile = console.dir.resolveFile("src/haxelib.xml");
+		var haxelibFile = console.dir.resolveFile("src/haxelib.json");
 		if(!haxelibFile.exists)
-			haxelibFile = console.dir.resolveFile("haxelib.xml");
+			haxelibFile = console.dir.resolveFile("haxelib.json");
 		
 		haxelib = new Haxelib(haxelibFile);
 		

@@ -202,9 +202,28 @@ class Haxelib
 		
 		if(file == null || !file.exists) return;
 		
-		var xml:Xml = Xml.parse(file.readString()).firstChild();	
-		parseFromXml(xml);
+		parseFromJson(file.readString());
+		//var xml:Xml = Xml.parse(file.readString()).firstChild();	
+		//parseFromXml(xml);
 	}
+
+	private function parseFromJson(json : String) : Void
+    {
+        var data = haxe.Json.parse(json);
+        name = data.name;
+        url = data.url;
+        license = data.license;
+
+        description = data.description;
+        version = data.version;
+        tags = data.tags;
+
+        dependencies = new StringMap();
+        for(libName in Reflect.fields(data.dependencies)){
+            var version = Reflect.field(data.dependencies,libName);
+            dependencies.set(libName,version);
+        }
+    }
 	
 	
 	

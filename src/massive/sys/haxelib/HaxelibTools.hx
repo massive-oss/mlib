@@ -104,7 +104,7 @@ class HaxelibTools
 	{
 		Sys.println("Installing to haxelib...");
 		
-		if(Sys.command("haxelib test " + zip) > 0)
+		if(Sys.command("haxelib local " + zip) > 0)
 		{
 			throw "Failed to install package to haxelib " + zip;
 		}
