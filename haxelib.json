@@ -1,0 +1,14 @@
+{
+	"name": "mlib-wighawag",
+	"license": "MIT",
+	"tags": ["cross","utility","tools","massive"],
+	"description": "A cross platform tool to deal with haxelib libraries",
+	"contributors": ["wighawag"],
+	"releasenote": "Add haxelib.json ready to release to new haxelib with new haxelib fixes .",
+	"version": "2.0.2-wighawag",
+	"url": "http://github.com/wighawag/MassiveLib",
+	"dependencies": 
+	{
+
+	}
+}
