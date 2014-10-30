@@ -1,5 +1,5 @@
 /****
-* Copyright 2013 Massive Interactive. All rights reserved.
+* Copyright 2014 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -26,6 +26,18 @@
 * or implied, of Massive Interactive.
 * 
 ****/
+
+
+
+
+
+
+
+
+
+
+
+
 
 package massive.sys.util;
 
@@ -94,6 +106,12 @@ class ZipUtil
 			
 		for (file in files)
 		{
+			// The sys.FileSystem.stat throws an error (std@sys_stat) if called with a directory as argument.
+			// So skip entries that are directories.
+			if (file.isDirectory)
+			{
+				continue;
+			}
 			var stat = sys.FileSystem.stat(file.nativePath);
 
 			var bytes:Bytes = file.isDirectory ? null: sys.io.File.getBytes(file.nativePath);
