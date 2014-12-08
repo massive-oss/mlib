@@ -1,5 +1,5 @@
 /****
-* Copyright 2013 Massive Interactive. All rights reserved.
+* Copyright 2015 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -29,6 +29,7 @@
 
 package massive.sys.haxelib;
 
+import haxe.Json;
 import haxe.xml.Fast;
 import massive.sys.io.File;
 
@@ -39,15 +40,20 @@ private typedef StringMap<T> = Hash<T>;
 #end
 
 class Haxelib
-{	
+{
+    public static inline var MAJOR:String = "major";
+    public static inline var MINOR:String = "minor";
+    public static inline var PATCH:String = "patch";
+    public static inline var BUILD:String = "build";
+
 	public var file(default, set_file):File;
 	
 	public var name(default, set_name):String;
 	public var url:String;
 	public var license(default, set_license):String;
 	
-	public var user:String;
-	
+	public var contributors:Array<String>;
+
 	public var tags:Array<String>;
 	public var dependencies:StringMap<String>;
 	
@@ -68,8 +74,9 @@ class Haxelib
 		url = "";
 		license = "";
 		
-		user = "";
+        contributors = [];
 		tags = [];
+
 		dependencies = new StringMap();
 		description = "";
 		versionDescription = "";
@@ -77,78 +84,101 @@ class Haxelib
 		versionMajor = 0;
 		versionMinor = 0;
 		versionPatch = 0;
-		versionBuild = 0;
+		//versionBuild = 0;
 		
 		if(file != null && file.exists)
 		{
 			load();
 		}
 	}
-	
-	
+
 	public static function fromString(str:String):Haxelib
 	{
-		var xml:Xml = Xml.parse(str).firstChild();
-		return fromXml(xml);
+		return fromJson(str);
 	}	
 
-	public static function fromXml(xml:Xml):Haxelib
+	public static function fromJson(json:String):Haxelib
 	{
 		var haxelib:Haxelib = new Haxelib();
-		haxelib.parseFromXml(xml);
+		haxelib.parseFromJson(json);
 		return haxelib;
 	}
-	
-	
-	public function toString():String
-	{
-		var str:String = "";
-		str += "<project name=\"" + name + "\" url=\"" + url + "\" license=\"" + license + "\">";
-		str += "\n	<user name=\"" + user + "\"/>";
-		
-		for(tag in tags)
-		{
-			str += "\n	<tag v=\"" + tag + "\" />";
-		}
 
-		str += "\n	<description>" + description + "</description>";
-		str += "\n	<version name=\"" + version + "\">" + versionDescription + "</version>";
-		
-		for(key in dependencies.keys())
-		{		
-			str += "\n	<depends name=\"" + key + "\"" + (dependencies.get(key)!=null? " version=\"" + dependencies.get(key) + "\"" : "") +  "/>";
-		}
-		
-		str += "\n</project>";
-			
-		return str;
-	}
-	
-	public function toXml():Xml
+	public function toString():String
+    {
+        var str:String = "";
+        str += "{";
+        str += "\n\t\"name\": \"" + name + "\",";
+        str += "\n\t\"url\": \"" + url + "\",";
+        str += "\n\t\"license\": \"" + license + "\",";
+        str += "\n\t\"description\": \"" + description + "\",";
+        str += "\n\t\"version\": \"" + version + "\",";
+        str += "\n\t\"releasenote\": \"" + versionDescription + "\",";
+
+        str += "\n\t\"tags\": [";
+        var first:Bool = true;
+        for(tag in tags)
+        {
+            str += (first) ? "" : ",";
+            str += "\"" + tag + "\"";
+            first = false;
+        }
+        str += "],";
+
+        str += "\n\t\"contributors\": [";
+        first = true;
+        for(contributor in contributors)
+        {
+            str += (first) ? "" : ",";
+            str += "\"" + contributor + "\"";
+            first = false;
+        }
+        str += "],";
+
+        str += "\n\t\"dependencies\":\n\t{";
+        first = true;
+        for(key in dependencies.keys())
+        {
+            str += (first) ? "" : ",";
+            str += "\n\t\"" + key + "\": " + ((dependencies.get(key) != null) ? "\"" + dependencies.get(key) + "\"" : "\"\"");
+            first = false;
+        }
+        str += "\n\t}";
+        str += "\n}";
+        return str;
+    }
+
+	public function toJson():String
 	{
 		var str:String = toString();
-		var xml:Xml = Xml.parse(str);
-		return xml;
-
+		var json:String = haxe.Json.stringify(str);
+        return json;
 	}
-	
-	public function incrementVersion(type:String, ?newVersionDescription:String=null):Void
+
+    public function incrementVersion(type:String, ?newVersionDescription:String=null):Void
 	{
 		switch(type)
 		{
-			case "major":
+			case MAJOR:
 				versionMajor ++;
 				versionMinor = 0;
 				versionPatch = 0;
-				versionBuild = 0;
-			case "minor":
+                if(versionBuild != null) {
+                    versionBuild = 0;
+                }
+			case MINOR:
 				versionMinor ++;
 				versionPatch = 0;
-				versionBuild = 0;
-			case "patch":
+                if(versionBuild != null) {
+                    versionBuild = 0;
+                }
+			case PATCH:
 				versionPatch ++;
-			case "build":
-				versionBuild ++;
+			case BUILD:
+                if(versionBuild == null) {
+                    versionBuild = 0;
+                }
+                versionBuild ++;
 			default:
 				//do nothing;
 		}
@@ -158,8 +188,7 @@ class Haxelib
 			versionDescription = newVersionDescription;
 		}
 	}
-	
-	
+
 	public function setDependency(name:String, ?version:String=null):Void
 	{
 		dependencies.set(name, version);
@@ -169,14 +198,12 @@ class Haxelib
 	{
 		dependencies.remove(name);
 	}
-	
-	
+
 	public function getDependency(name:String):String
 	{
 		return dependencies.get(name);
 	}
-	
-	
+
 	public function save(?newFile=null):Void
 	{
 		if(newFile != null)
@@ -189,8 +216,7 @@ class Haxelib
 			file.writeString(toString());
 		}
 	}
-	
-	
+
 	public function load(?newFile=null):Void
 	{
 		if(newFile != null)
@@ -201,71 +227,63 @@ class Haxelib
 		}
 		
 		if(file == null || !file.exists) return;
-		
-		var xml:Xml = Xml.parse(file.readString()).firstChild();	
-		parseFromXml(xml);
-	}
-	
-	
-	
-	/** parses a haxelib xml file into haxelib properties**/ 
-	private function parseFromXml(xml:Xml):Void
-	{
-		var project:Fast = new Fast(xml);
-		
-		if(project.name != "project")
-		{
-			throw "Invalid haxelib.xml file!";
-		}
-		
-		if(project.has.name) name = project.att.name;
-		if(project.has.url) url = project.att.url;
-		if(project.has.license) license = project.att.license;
-		
-		var node:Fast;
-		
-		if(project.hasNode.user)
-		{
-			node = project.node.user;
-			if(node.has.name) user = node.att.name;
-		}
-		
-		if(project.hasNode.description)
-		{
-			description = project.node.description.innerData;
-		}
-		
-		if(project.hasNode.version)
-		{
-			node = project.node.version;
-			if(node.has.name)
-			{	
-				version = node.att.name;
-			}
-			
-			if(node.innerData != null) versionDescription = node.innerData;
-		}	
-		
-		
-		
-		if(project.hasNode.tag)
-		{
-			for(node in project.nodes.tag)
-			{
-				tags.push(node.att.v);
-			}
-		}
-		
-		if(project.hasNode.depends)
-		{
-			for(node in project.nodes.depends)
-			{
-				setDependency(node.att.name, node.has.version ? node.att.version : null);
-			}
-		}
 
+        parseFromJson(file.readString());
 	}
-	
+
+    /** parses a haxelib json file into haxelib properties**/
+    public function parseFromJson(json:String):Void
+    {
+        var project = Json.parse(json);
+
+        if(!validateProject(project))
+        {
+            throw "Invalid haxelib.json file!";
+        }
+
+        if(Reflect.hasField(project, "name")) name = Reflect.field(project, "name");
+        if(Reflect.hasField(project, "url")) url = Reflect.field(project, "url");
+        if(Reflect.hasField(project, "license")) license = Reflect.field(project, "license");
+        if(Reflect.hasField(project, "description")) description = Reflect.field(project, "description");
+        if(Reflect.hasField(project, "version")) version = Reflect.field(project, "version");
+        if(Reflect.hasField(project, "releasenote")) versionDescription = Reflect.field(project, "releasenote");
+
+        if(Reflect.hasField(project, "tags"))
+        {
+            var tagz:Array<String> = Reflect.field(project, "tags");
+            for (item in tagz) {
+                tags.push(item);
+            }
+        }
+
+        if(Reflect.hasField(project, "contributors"))
+        {
+            var contributorz:Array<String> = Reflect.field(project, "contributors");
+            for (contributor in contributorz) {
+                contributors.push(contributor);
+            }
+        }
+
+        if(Reflect.hasField(project, "dependencies"))
+        {
+            for (dependency in Reflect.fields(project.dependencies))
+            {
+                var version = Reflect.field(project.dependencies, dependency);
+                setDependency(dependency, version);
+            }
+        }
+    }
+
+    /** validate that project data **/
+    private function validateProject(projectData:Dynamic):Bool
+    {
+        var isValid:Bool = true;
+        if(projectData == null) {
+            isValid = false;
+        }
+        return isValid;
+    }
+
 	/**
 	* format 0.0.0.0 (MAJOR.MINOR.PATCH.BUILD)
 	*/
@@ -276,15 +294,17 @@ class Haxelib
 		versionMinor = Std.parseInt(a[1]);
 		versionPatch = Std.parseInt(a[2]);
 		versionBuild = Std.parseInt(a[3]);
-		
+
 		return get_version();
-	
 	}
-	
 
 	private function get_version():String
 	{
-		return versionMajor + "." + versionMinor + "." + versionPatch + "." + versionBuild;
+        var output:String = versionMajor + "." + versionMinor + "." + versionPatch;
+        if(versionBuild != null) {
+            output += "." + versionBuild;
+        }
+		return output;
 	}
 	
 	private function set_file(value:File):File
@@ -305,8 +325,7 @@ class Haxelib
 		
 		return name;
 	}
-	
-	
+
 	private function set_license(value:String):String
 	{
 		var types:Array<String> = ["MIT","GPL", "LGPL", "BSD", "Public"];
@@ -321,7 +340,6 @@ class Haxelib
 		if(license != value) license = "";
 		
 		return license;
-		
 	}
 }
 

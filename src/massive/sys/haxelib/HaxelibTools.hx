@@ -1,5 +1,5 @@
 /****
-* Copyright 2013 Massive Interactive. All rights reserved.
+* Copyright 2015 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -28,10 +28,12 @@
 ****/
 
 package massive.sys.haxelib;
+
 import sys.io.Process;
 import massive.sys.io.File;
 import massive.sys.util.ZipUtil;
 import massive.haxe.util.RegExpUtil;
+
 class HaxelibTools
 {
 	function new():Void{}
@@ -43,7 +45,6 @@ class HaxelibTools
 		if(path == null) return false;
 		
 		if(minVersion == null) return true;
-		
 
 		//path will be something like /usr/lib/haxe/lib/munit\0,1,0,7\
 		var a:Array<String> = path.split(name);
@@ -57,7 +58,6 @@ class HaxelibTools
 		
 		//return true if minVersion is greater than installed version
 		return getGreaterVersion(minVersion, version) == version;
-
 	}
 	
 	public static function getLibraryPath(name:String):String
@@ -75,20 +75,17 @@ class HaxelibTools
 		}
 
 		return path;
-		
-
 	}
+
 	public static function install(name:String, ?minVersion:String=null):Bool
 	{
 		if(isLibraryInstalled(name, minVersion)) return true;
-		
-		
+
 		var params:Array<String> = [];
 		
 		params.push("install " + name);
 		if(minVersion != null) params.push(minVersion);
-		
-		
+
 		var process:Process = new Process('haxelib', params);
 		var path:String = process.stdout.readLine();
 
@@ -97,14 +94,13 @@ class HaxelibTools
 		if(exitCode > 0) return false;
 		
 		return true;
-		
 	}
 	
 	public static function installZip(zip:File):Void
 	{
 		Sys.println("Installing to haxelib...");
-		
-		if(Sys.command("haxelib test " + zip) > 0)
+
+        if(Sys.command("haxelib local " + zip) > 0)
 		{
 			throw "Failed to install package to haxelib " + zip;
 		}
@@ -119,14 +115,10 @@ class HaxelibTools
 			throw "Failed to submit package to haxelib " + zip;
 		}
 	}
-	
 
-	
-	
 	private static function getGreaterVersion(v1:String, v2:String):String
 	{
 		var a:Array<String>;
-
 		var array1:Array<Int> = [];
 		var array2:Array<Int> = [];
 		
@@ -141,8 +133,7 @@ class HaxelibTools
 		{
 			array2.push(Std.parseInt(num));
 		}
-		
-		
+
 		for(i in 0...array1.length)
 		{
 			if(array1[i] > array2[i])
@@ -152,6 +143,5 @@ class HaxelibTools
 		}
 		
 		return v2;
-
 	}
 }

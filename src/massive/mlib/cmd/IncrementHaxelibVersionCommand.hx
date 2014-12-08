@@ -1,5 +1,5 @@
 /****
-* Copyright 2013 Massive Interactive. All rights reserved.
+* Copyright 2015 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -62,11 +62,11 @@ class IncrementHaxelibVersionCommand extends MlibCommand
 			haxelib.incrementVersion(type, comment);		
 			haxelib.save();	
 
-			Log.console("Updating " + haxelib.name + " haxelib.xml version to " + haxelib.version);
+			Log.console("Updating " + haxelib.name + " haxelib.json version to " + haxelib.version);
 		}
 	
 		
-		Log.console("Not updating " + haxelib.name + " haxelib.xml. Current version is " + haxelib.version);
+		Log.console("Not updating " + haxelib.name + " haxelib.json. Current version is " + haxelib.version);
 		
 		
 	

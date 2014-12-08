@@ -70,9 +70,9 @@ It provides utility functions for the following:
 
 ### Available commands
 
-	config (c) : Creates a .mlib config and haxelib.xml file in the current directory
+	config (c) : Creates a .mlib config and haxelib.json file in the current directory
 	license (l) : Replaces the license text in the header of all hx files within a src directory
-	incrementVersion (v) : Increments the version number in the haxleib manifest (haxelib.xml)
+	incrementVersion (v) : Increments the version number in the haxleib manifest (haxelib.json)
 	package (p) : Packages and zips up the current project for haxelib
 	install (i) : Installs local version of project to haxelib
 	submit : Submits project to haxelib server
@@ -83,7 +83,7 @@ It provides utility functions for the following:
 
 	haxelib run mlib config
 	
-This command generates a stub *.mlib* settings file in the current directory (and a haxelib.xml file if it doesn't exist already).
+This command generates a stub *.mlib* settings file in the current directory (and a haxelib.json file if it doesn't exist already).
 
 To see an example of the settings file is in this repository [.mlib](https://github.com/massiveinteractive/MassiveLib/blob/master/.mlib) 
 
@@ -125,26 +125,3 @@ resource **type** is an optional attribute to indicate a special type of resourc
 		cp mlib src/run.n
 3. Set haxelib dev path to src directory
 		haxelib dev mlib `pwd`/src
-
-
-## Changes
-
-
-### 2.0.0
-
-This release adds support for Haxe 3.
-
-It includes no major feature changes.
-
-Upgrading
-
-- update references to `massive.neko` to `massive.sys`
-
-Change List
-
-- Added Haxe3 support
-	- renamed massive.neko to massive.sys
-- Reorganised src structure to support haxelib dev path
-- Removed allClasses command
-
-
