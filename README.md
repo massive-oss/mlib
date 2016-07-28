@@ -8,7 +8,7 @@ MLib is a collection of commandline and system utilities for developing simple c
 
 mlib provides a lightweight command based structure for rapidly developing command line tools in neko. It's used to to develop and deploy various haxelib projects including mlib and munit.
 
-MLib supports Haxe 2.10 and Haxe 3 RC
+MLib supports Haxe 2.10 and Haxe 3
 
 
 ### Installing
