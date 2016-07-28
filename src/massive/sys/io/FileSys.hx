@@ -38,37 +38,41 @@ import sys.FileSystem;
 
 class FileSys
 {
+	static var _isWindows:Null<Bool>;
 	public static var isWindows(get_isWindows, null):Bool;
+	
+	static var _isMac:Null<Bool>;
 	public static var isMac(get_isMac, null):Bool;
+	
+	static var _isLinux:Null<Bool>;
 	public static var isLinux(get_isLinux, null):Bool;
 	
 	private static function get_isWindows():Bool
 	{
-		if(isWindows == null)
+		if(_isWindows == null)
 		{
-			isWindows = Sys.systemName().indexOf("Win") == 0;
+			_isWindows = Sys.systemName().indexOf("Win") == 0;
 		}
-		return isWindows;
+		return _isWindows;
 	}
 	
 	private static function get_isMac():Bool
 	{
-		if(isMac == null)
+		if(_isMac == null)
 		{
-			isMac = Sys.systemName().indexOf("Mac") == 0;
+			_isMac = Sys.systemName().indexOf("Mac") == 0;
 		}
-		return isMac;
+		return _isMac;
 	}
 	
 	private static function get_isLinux():Bool
 	{
-		if(isLinux == null)
+		if(_isLinux == null)
 		{
-			isLinux = Sys.systemName().indexOf("Linux") == 0;
+			_isLinux = Sys.systemName().indexOf("Linux") == 0;
 		}
-		return isLinux;
+		return _isLinux;
 	}
-	
 	
 	/**
 	*  Fix to remove trailing slash from directories in windows (throws errors on FileSystem methods)
