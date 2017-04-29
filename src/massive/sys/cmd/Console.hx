@@ -29,14 +29,11 @@
 
 package massive.sys.cmd;
 
+import Sys;
+import massive.haxe.log.Log;
 import massive.sys.io.File;
 import massive.sys.io.FileException;
 import massive.sys.io.FileSys;
-import sys.FileSystem;
-import neko.vm.Thread;
-import Sys;
-import massive.haxe.log.Log;
-import sys.io.Process;
 
 #if haxe3
 import haxe.ds.StringMap;
