@@ -101,7 +101,7 @@ The settings file has the following xml format:
 	</mlib>
 
 
-mlib **bin** is a mandatory attribute specifying the the relative path to the bin directory (defaults to 'bin'). This is the location where the haxelib project and zip package will be generated.
+mlib **bin** is a mandatory attribute specifying the relative path to the bin directory (defaults to 'bin'). This is the location where the haxelib project and zip package will be generated.
 
 **Resources** a list of resources to include in the haxelib package
 
