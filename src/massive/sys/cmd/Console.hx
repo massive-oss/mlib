@@ -60,7 +60,7 @@ private typedef StringMap<T> = Hash<T>;
 *  */
 class Console
 {
-	public var systemArgs(get_systemArgs, null):Array<String>;
+	public var systemArgs(get, null):Array<String>;
 	
 	/** directory where tool was called from (defaults to haxelib lib path) **/
 	public var originalDir(default, null):File;

@@ -39,13 +39,13 @@ import sys.FileSystem;
 class FileSys
 {
 	static var _isWindows:Null<Bool>;
-	public static var isWindows(get_isWindows, null):Bool;
+	public static var isWindows(get, null):Bool;
 	
 	static var _isMac:Null<Bool>;
-	public static var isMac(get_isMac, null):Bool;
+	public static var isMac(get, null):Bool;
 	
 	static var _isLinux:Null<Bool>;
-	public static var isLinux(get_isLinux, null):Bool;
+	public static var isLinux(get, null):Bool;
 	
 	private static function get_isWindows():Bool
 	{

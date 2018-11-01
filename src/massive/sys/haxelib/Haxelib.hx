@@ -40,11 +40,11 @@ private typedef StringMap<T> = Hash<T>;
 
 class Haxelib
 {	
-	public var file(default, set_file):File;
+	public var file(default, set):File;
 	
-	public var name(default, set_name):String;
+	public var name(default, set):String;
 	public var url:String;
-	public var license(default, set_license):String;
+	public var license(default, set):String;
 	
 	public var user:String;
 	
@@ -52,7 +52,7 @@ class Haxelib
 	public var dependencies:StringMap<String>;
 	
 	public var description:String;
-	public var version(get_version, set_version):String;
+	public var version(get, set):String;
 	public var versionDescription:String;
 	
 	public var versionMajor:Int;
