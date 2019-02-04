@@ -46,7 +46,7 @@ See  [massive.sys.cmd.Console](https://github.com/massiveinteractive/MassiveLib/
 See [massive.sys.cmd.CommandLineRunner](https://github.com/massiveinteractive/MassiveLib/blob/master/src/massive/sys/cmd/CommandLineRunner.hx)
 
 *	lightweight interface for mapping command line arguments to Command classes
-*	automatic generation of command line *help* and command and  
+*	automatic generation of command line *help* and command and
 *	enabling of logging through -debug option
 
 
@@ -60,7 +60,7 @@ mlib is also a command line tool provided for working with haxelib projects buil
 To see a full list of available commands run mlib from the command line:
 
 	haxelib run mlib
-	
+
 It provides utility functions for the following:
 
 *	Incrementing haxelib lib version
@@ -70,22 +70,22 @@ It provides utility functions for the following:
 
 ### Available commands
 
-	config (c) : Creates a .mlib config and haxelib.xml file in the current directory
+	config (c) : Creates a .mlib config and haxelib.json file in the current directory
 	license (l) : Replaces the license text in the header of all hx files within a src directory
-	incrementVersion (v) : Increments the version number in the haxleib manifest (haxelib.xml)
+	incrementVersion (v) : Increments the version number in the haxleib manifest (haxelib.json)
 	package (p) : Packages and zips up the current project for haxelib
 	install (i) : Installs local version of project to haxelib
 	submit : Submits project to haxelib server
 
-   
+
 
 ### Creating a mlib project.
 
 	haxelib run mlib config
-	
-This command generates a stub *.mlib* settings file in the current directory (and a haxelib.xml file if it doesn't exist already).
 
-To see an example of the settings file is in this repository [.mlib](https://github.com/massiveinteractive/MassiveLib/blob/master/.mlib) 
+This command generates a stub *.mlib* settings file in the current directory (and a haxelib.json file if it doesn't exist already).
+
+To see an example of the settings file is in this repository [.mlib](https://github.com/massiveinteractive/MassiveLib/blob/master/.mlib)
 
 The settings file has the following xml format:
 
@@ -97,7 +97,7 @@ The settings file has the following xml format:
 			<resource type="run" path="mlib.n" />
 			<resource type="license" path="resource/license.mtt" />
 			<resource path="file.txt" dest="dir/foo.bar" />
-		</resources>	
+		</resources>
 	</mlib>
 
 
@@ -111,9 +111,9 @@ resource **dest** is an optional attribute to specify a specific path within the
 
 resource **type** is an optional attribute to indicate a special type of resource:
 
-*	**src**: a src path to copy to the top level directory of the haxelib package (as recommended in the haxexlib documentation). This type is also used as default locations by the 'license' and 'allClasses' commands  
+*	**src**: a src path to copy to the top level directory of the haxelib package (as recommended in the haxexlib documentation). This type is also used as default locations by the 'license' and 'allClasses' commands
 *	**run**: a neko binary to use as the 'run.n' file within the haxelib package
-*	**license**: a text file to use to generate copyright/license info across all classes in src packages. This type is used as the default location by the 'license' command  
+*	**license**: a text file to use to generate copyright/license info across all classes in src packages. This type is used as the default location by the 'license' command
 
 
 ## Building From Source
@@ -125,26 +125,3 @@ resource **type** is an optional attribute to indicate a special type of resourc
 		cp mlib src/run.n
 3. Set haxelib dev path to src directory
 		haxelib dev mlib `pwd`/src
-
-
-## Changes
-
-
-### 2.0.0
-
-This release adds support for Haxe 3.
-
-It includes no major feature changes.
-
-Upgrading
-
-- update references to `massive.neko` to `massive.sys`
-
-Change List
-
-- Added Haxe3 support
-	- renamed massive.neko to massive.sys
-- Reorganised src structure to support haxelib dev path
-- Removed allClasses command
-
-

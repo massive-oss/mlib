@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+## set dev mode
+haxelib dev mlib src
+
 ## clear bin directory
 mkdir -p bin
 
@@ -16,7 +19,11 @@ haxelib run munit test -coverage
 
 cd ../../
 
+## unset dev mode
+haxelib dev mlib
+
 ## package up and install over current version
+cp src/run.n mlib.n
 neko mlib.n install
 
 
