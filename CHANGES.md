@@ -2,13 +2,14 @@
 
 ### 2.0.3
 
-Change List
-
+- Added Haxe4 support
+- Fixed imports for C++ target
+- Fixes for static platform
 - added support for haxelib.json
 - removed support for haxelib.xml
 - added support for 3 part build numbers, e.g. 3.0.2
 
-### 2.0.2 
+### 2.0.2
 
 - Add haxelib.json ready to release to new haxelib.
 
