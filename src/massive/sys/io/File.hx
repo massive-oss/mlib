@@ -43,8 +43,8 @@ private typedef StringMap<T> = Hash<T>;
 #end
 class File
 {	
-	public static var seperator(get_seperator, null):String;
-	public static var current(get_current, null):File;
+	public static var seperator(get, null):String;
+	public static var current(get, null):File;
 
 	private static var tempCount:Int = 0;
 	private static var temp:StringMap<File> = new StringMap();
@@ -165,45 +165,45 @@ class File
 	/**
 	*  @return true if file exists.
 	*/
-	public var exists(get_exists, null):Bool;
+	public var exists(get, null):Bool;
 	
 	/**
 	*  @return true if it is a valid directory path. This is different from sys.FileSystem.isDirectory() that throws error if the path doesn't exist.
 	*/
-	public var isDirectory(get_isDirectory, null):Bool;
+	public var isDirectory(get, null):Bool;
 	
-	public var isFile(get_isFile, null):Bool;
-	public var isUnknown(get_isUnknown, null):Bool;
+	public var isFile(get, null):Bool;
+	public var isUnknown(get, null):Bool;
 
 	
-	public var isNativeDirectory(get_isNativeDirectory, null):Bool;
+	public var isNativeDirectory(get, null):Bool;
 	
 	/**
 	*  @return full native os path
 	*/
-	public var nativePath(get_nativePath, null):String;
+	public var nativePath(get, null):String;
 	
 	/**
 	*  @return filename.ext if a file, returns null if a directory
 	*/
-	public var fileName(get_fileName, null):String;
+	public var fileName(get, null):String;
 	
 	/**
 	*  @return name of file without extension (if a file) and directory name if a directory
 	*/
-	public var name(get_name, null):String;
+	public var name(get, null):String;
 	
 	/**
 	*  @return the file extension or null if a directory
 	*/
-	public var extension(get_extension, null):String;
+	public var extension(get, null):String;
 	
 	
 
 	/**
 	*  @return the directory of file, or the parent directory of a directory.
 	*/
-	public var parent(get_parent, null):File;
+	public var parent(get, null):File;
 	
 	
 	/**
@@ -219,7 +219,7 @@ class File
 	/**
 	*  @return true if directory  is empty (or if it is a file);
 	*/
-	public var isEmpty(get_isEmpty, null):Bool;
+	public var isEmpty(get, null):Bool;
 	
 	
 	private var type:FileType;

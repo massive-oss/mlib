@@ -43,7 +43,7 @@ private typedef StringMap<T> = Hash<T>;
 
 class MlibSettings
 {
-	public var file(default, set_file):File;
+	public var file(default, set):File;
 	public var dir:File;
 	
 	public var resources:Array<Resource>;

@@ -48,7 +48,7 @@ import sys.io.Process;
 class CommandLineRunner
 {
 
-	public var console(default, set_console):Console;
+	public var console(default, set):Console;
 
 	public var commands:Array<CommandDef>;
 		
