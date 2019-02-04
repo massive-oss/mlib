@@ -1,6 +1,10 @@
-### 2.0.0
+### 2.1.0
 
-Change List
+- Added Haxe4 support
+- Fixed imports for C++ target
+- Fixes for static platform
+
+### 2.0.0
 
 - Added Haxe3 support
 - renamed massive.neko to massive.sys
