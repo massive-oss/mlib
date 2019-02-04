@@ -1,5 +1,5 @@
 /****
-* Copyright 2013 Massive Interactive. All rights reserved.
+* Copyright 2019 Massive Interactive. All rights reserved.
 * 
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -47,8 +47,6 @@ import massive.mlib.cmd.InstallToHaxelibCommand;
 import massive.mlib.cmd.SubmitToHaxelibCommand;
 import massive.mlib.cmd.PreProcessHxmlCommand;
 
-
-
 class Mlib extends CommandLineRunner
 {
 	static public function main():Mlib{return new Mlib();}
@@ -60,9 +58,9 @@ class Mlib extends CommandLineRunner
 	{
 		super();
 		
-		var haxelibFile = console.dir.resolveFile("src/haxelib.xml");
+		var haxelibFile = console.dir.resolveFile("src/haxelib.json");
 		if(!haxelibFile.exists)
-			haxelibFile = console.dir.resolveFile("haxelib.xml");
+			haxelibFile = console.dir.resolveFile("haxelib.json");
 		
 		haxelib = new Haxelib(haxelibFile);
 		
@@ -73,11 +71,11 @@ class Mlib extends CommandLineRunner
 			Log.debug(settings);
 		}
 	
-		mapCommand(ConfigMlibCommand, "config", ["c"], "Creates a .mlib config and haxelib.xml file in the current directory", TemplateUtil.getTemplate("help_config"));
+		mapCommand(ConfigMlibCommand, "config", ["c"], "Creates a .mlib config and haxelib.json file in the current directory", TemplateUtil.getTemplate("help_config"));
 		mapCommand(GenerateAllClassesCommand, "allClasses", ["all"], "Imports all classes within a src package into a central 'AllClasses.hx' class", TemplateUtil.getTemplate("help_allClasses"),true);
 		
 		mapCommand(UpdateSourceLicenseCommand, "license", ["l"], "Replaces the license text in the header of all hx files within a src directory", TemplateUtil.getTemplate("help_license"));
-		mapCommand(IncrementHaxelibVersionCommand, "incrementVersion", ["v"], "Increments the version number in the haxleib manifest (haxelib.xml)", TemplateUtil.getTemplate("help_version"));
+		mapCommand(IncrementHaxelibVersionCommand, "incrementVersion", ["v"], "Increments the version number in the haxleib manifest (haxelib.json)", TemplateUtil.getTemplate("help_version"));
 		
 		mapCommand(PackageForHaxelibCommand, "package", ["p"], "Packages and zips up the current project for haxelib", TemplateUtil.getTemplate("help_package"));
 		
@@ -89,8 +87,7 @@ class Mlib extends CommandLineRunner
 		
 		run();
 	}
-	
-	
+
 	override private function createCommandInstance(commandClass:Class<ICommand>):ICommand
 	{
 		var command:ICommand = super.createCommandInstance(commandClass);
@@ -99,7 +96,7 @@ class Mlib extends CommandLineRunner
 		
 		if(cmd.requiresHaxelib && (!haxelib.file.exists))
 		{
-			error("Command requires a valid haxelib.xml file in the current directory:\n   " + console.dir);
+			error("Command requires a valid haxelib.json file in the current directory:\n   " + console.dir);
 			
 		}
 		
@@ -107,5 +104,4 @@ class Mlib extends CommandLineRunner
 		cmd.settings = settings;
 		return cmd;
 	}
-	
 }

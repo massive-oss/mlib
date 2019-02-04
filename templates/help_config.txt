@@ -1,7 +1,7 @@
 usage: config
 
 	Configures the working directory for working with mlib.
-	This command creates a stub '.mlib' settings file and 'haxelib.xml'
+	This command creates a stub '.mlib' settings file and 'haxelib.json'
     in the current directory.
 
 Optional flags:

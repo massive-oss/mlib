@@ -1,6 +1,6 @@
 usage: version [type]
 
-	Increments the version number in the haxelib manifest (haxelib.xml)
+	Increments the version number in the haxelib manifest (haxelib.json)
 	
 	Versions follow the following format: MAJOR.MINOR.PATCH.BUILD.
     Valid options are 'major', 'minor', 'patch', 'build', and 'none'.
