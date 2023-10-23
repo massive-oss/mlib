@@ -60,7 +60,8 @@ class CommandLineRunner
 	
 	private function createConsole():Console
 	{
-		return new Console(true);
+		var isHaxelibRun = Sys.getEnv('HAXELIB_RUN') != null;
+		return new Console(isHaxelibRun);
 	}
 	
 	private function set_console(value:Console):Console
