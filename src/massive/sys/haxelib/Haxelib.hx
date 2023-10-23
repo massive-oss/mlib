@@ -46,7 +46,7 @@ class Haxelib
 	public static inline var PATCH:String = "patch";
 	public static inline var BUILD:String = "build";
 
-	public var file(default, set_file):File;
+	public var file(default, set):File;
 
 	public var name(default, set):String;
 	public var url:String;
