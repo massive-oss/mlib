@@ -49,7 +49,7 @@ import massive.mlib.cmd.PreProcessHxmlCommand;
 
 class Mlib extends CommandLineRunner
 {
-	static public function main():Mlib{return new Mlib();}
+	static public function main():Void{ new Mlib(); }
 	
 	private var settings:MlibSettings;
 	private var haxelib:Haxelib;
